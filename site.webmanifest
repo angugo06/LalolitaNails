@@ -1,0 +1,12 @@
+{
+  "short_name": "Lalolita",
+  "name": "Lalolita Nail Atelier",
+  "icons": [{
+    "src": "icon.png",
+    "type": "image/png",
+    "sizes": "192x192"
+  }],
+  "start_url": "/",
+  "background_color": "#f3efe7",
+  "theme_color": "#f3efe7"
+}

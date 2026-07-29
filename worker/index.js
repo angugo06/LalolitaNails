@@ -1,5 +1,16 @@
 export default {
   async fetch(request, env) {
-    return env.ASSETS.fetch(request);
+    const response = await env.ASSETS.fetch(request);
+    if (response.status !== 404) {
+      return response;
+    }
+
+    const url = new URL(request.url);
+    if (url.pathname === "/" || request.headers.get("accept")?.includes("text/html")) {
+      url.pathname = "/index.html";
+      return env.ASSETS.fetch(new Request(url, request));
+    }
+
+    return response;
   },
 };

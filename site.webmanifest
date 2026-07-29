@@ -1,12 +1,12 @@
 {
   "short_name": "Lalolita",
-  "name": "Lalolita Nail Atelier",
+  "name": "Lalolita Nails por Eduardo Vázquez",
   "icons": [{
     "src": "icon.png",
     "type": "image/png",
     "sizes": "192x192"
   }],
   "start_url": "/",
-  "background_color": "#f3efe7",
-  "theme_color": "#f3efe7"
+  "background_color": "#fffdf8",
+  "theme_color": "#fffdf8"
 }

@@ -1,0 +1,308 @@
+/* Lalolita Nails — interactions */
+document.documentElement.classList.remove("no-js");
+
+/* Idioma actual (es por defecto); las cadenas del formulario dependen de esto */
+const LANG = document.documentElement.lang.startsWith("en") ? "en" : "es";
+const T = {
+  es: {
+    locale: "es-MX",
+    sundayHint: "Los domingos descansamos, elige otro día porfa.",
+    sundayInvalid: "Cerrado los domingos",
+    greeting: (branch, name) => `Hola Lalolita ${branch}, soy ${name}.`,
+    service: (s) => `Quiero agendar: ${s}.`,
+    when: (d, t) => `Fecha: ${d} - ${t}.`,
+    idea: (i) => `Idea: ${i}`,
+    from: "(Enviado desde el sitio web)",
+    testimonial: (n) => `Testimonio ${n}`,
+  },
+  en: {
+    locale: "en-US",
+    sundayHint: "We're closed on Sundays — please pick another day.",
+    sundayInvalid: "Closed on Sundays",
+    greeting: (branch, name) => `Hi Lalolita ${branch}, I'm ${name}.`,
+    service: (s) => `I'd like to book: ${s}.`,
+    when: (d, t) => `Date: ${d} - ${t}.`,
+    idea: (i) => `Idea: ${i}`,
+    from: "(Sent from the website)",
+    testimonial: (n) => `Testimonial ${n}`,
+  },
+}[LANG];
+
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+/* ---------- Header: blur on scroll, hide on scroll down ---------- */
+const header = document.querySelector("[data-header]");
+let lastScrollY = window.scrollY;
+
+const syncHeader = () => {
+  const y = window.scrollY;
+  header?.classList.toggle("is-scrolled", y > 24);
+  if (!document.body.classList.contains("menu-open")) {
+    header?.classList.toggle("is-hidden", y > 420 && y > lastScrollY);
+  }
+  lastScrollY = y;
+};
+window.addEventListener("scroll", syncHeader, { passive: true });
+syncHeader();
+
+/* ---------- Fullscreen menu ---------- */
+const menuToggle = document.querySelector("[data-menu-toggle]");
+const menuOverlay = document.querySelector("[data-menu-overlay]");
+
+const setMenu = (open) => {
+  menuToggle?.setAttribute("aria-expanded", String(open));
+  menuOverlay?.classList.toggle("is-open", open);
+  document.body.classList.toggle("menu-open", open);
+  if (open) header?.classList.remove("is-hidden");
+};
+
+menuToggle?.addEventListener("click", () => {
+  setMenu(menuToggle.getAttribute("aria-expanded") !== "true");
+});
+menuOverlay?.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && menuOverlay?.classList.contains("is-open")) setMenu(false);
+});
+
+/* ---------- Reveal on scroll ---------- */
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+);
+document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
+/* ---------- Magnetic buttons ---------- */
+if (finePointer && !prefersReducedMotion) {
+  document.querySelectorAll(".magnetic").forEach((el) => {
+    const strength = 0.32;
+    el.addEventListener("pointermove", (e) => {
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) * strength;
+      const y = (e.clientY - r.top - r.height / 2) * strength;
+      el.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    el.addEventListener("pointerleave", () => {
+      el.style.transform = "";
+    });
+  });
+}
+
+/* ---------- Tilt cards ---------- */
+if (finePointer && !prefersReducedMotion) {
+  document.querySelectorAll(".tilt").forEach((card) => {
+    card.addEventListener("pointermove", (e) => {
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(800px) rotateY(${px * 7}deg) rotateX(${py * -7}deg)`;
+    });
+    card.addEventListener("pointerleave", () => {
+      card.style.transform = "";
+    });
+  });
+}
+
+/* ---------- Polish try-on ---------- */
+const tryonStage = document.querySelector("[data-tryon-stage]");
+if (tryonStage) {
+  const label = document.querySelector("[data-tryon-label]");
+  const swatches = document.querySelectorAll(".swatch");
+  swatches.forEach((sw) => {
+    sw.addEventListener("click", () => {
+      swatches.forEach((s) => s.setAttribute("aria-pressed", "false"));
+      sw.setAttribute("aria-pressed", "true");
+      tryonStage.style.setProperty("--polish", sw.dataset.polish);
+      if (label) {
+        label.innerHTML = `<strong>${sw.dataset.name}</strong><span>${sw.dataset.desc}</span>`;
+      }
+      tryonStage.classList.remove("is-swiped");
+      void tryonStage.offsetWidth; /* restart the shine animation */
+      tryonStage.classList.add("is-swiped");
+    });
+  });
+}
+
+/* ---------- Animated counters ---------- */
+const counters = document.querySelectorAll("[data-count]");
+if (counters.length) {
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      countObserver.unobserve(entry.target);
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      if (prefersReducedMotion) {
+        el.textContent = target;
+        return;
+      }
+      const duration = 1400;
+      const start = performance.now();
+      const tick = (now) => {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased);
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.6 });
+  counters.forEach((el) => countObserver.observe(el));
+}
+
+/* ---------- Testimonials rotator ---------- */
+const quoteStage = document.querySelector("[data-quotes]");
+if (quoteStage) {
+  const items = Array.from(quoteStage.querySelectorAll(".quote-item"));
+  const dotsWrap = document.querySelector("[data-quote-dots]");
+  let index = 0;
+  let timer = null;
+
+  const dots = items.map((_, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("role", "tab");
+    b.setAttribute("aria-label", T.testimonial(i + 1));
+    b.addEventListener("click", () => { show(i); restart(); });
+    dotsWrap?.append(b);
+    return b;
+  });
+
+  const show = (i) => {
+    index = i;
+    items.forEach((item, j) => item.classList.toggle("is-active", j === i));
+    dots.forEach((d, j) => d.setAttribute("aria-selected", String(j === i)));
+  };
+
+  const restart = () => {
+    if (timer) clearInterval(timer);
+    if (!prefersReducedMotion) {
+      timer = setInterval(() => show((index + 1) % items.length), 6000);
+    }
+  };
+
+  quoteStage.addEventListener("pointerenter", () => timer && clearInterval(timer));
+  quoteStage.addEventListener("pointerleave", restart);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) { if (timer) clearInterval(timer); } else restart();
+  });
+
+  show(0);
+  restart();
+}
+
+/* ---------- Gallery drag-to-scroll ---------- */
+const gallery = document.querySelector("[data-gallery]");
+if (gallery && finePointer) {
+  let isDown = false;
+  let startX = 0;
+  let startScroll = 0;
+
+  gallery.addEventListener("pointerdown", (e) => {
+    isDown = true;
+    startX = e.clientX;
+    startScroll = gallery.scrollLeft;
+    gallery.setPointerCapture(e.pointerId);
+    gallery.classList.add("is-dragging");
+  });
+  gallery.addEventListener("pointermove", (e) => {
+    if (!isDown) return;
+    gallery.scrollLeft = startScroll - (e.clientX - startX);
+  });
+  const endDrag = () => {
+    isDown = false;
+    gallery.classList.remove("is-dragging");
+  };
+  gallery.addEventListener("pointerup", endDrag);
+  gallery.addEventListener("pointercancel", endDrag);
+}
+
+/* ---------- Services filter ---------- */
+const filterBar = document.querySelector("[data-filter-bar]");
+if (filterBar) {
+  const buttons = filterBar.querySelectorAll(".filter-btn");
+  const groups = document.querySelectorAll(".svc-group");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+      const filter = btn.dataset.filter;
+      groups.forEach((group) => {
+        const match = filter === "all" || group.dataset.cat === filter;
+        group.classList.toggle("is-filtered-out", !match);
+        if (match) {
+          group.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+        }
+      });
+    });
+  });
+
+  /* Arriving via anchor (e.g. servicios.html#g-cabello): make sure reveals fire */
+  if (location.hash) {
+    document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+  }
+}
+
+/* ---------- Today highlight on every hours table (one per branch) ---------- */
+const today = String(new Date().getDay());
+document.querySelectorAll("[data-hours] .hours-row").forEach((row) => {
+  const days = (row.dataset.day || "").split(/\s+/);
+  row.classList.toggle("is-today", days.includes(today));
+});
+
+/* ---------- Booking form → WhatsApp (per branch) ---------- */
+const bookingForm = document.querySelector("[data-booking-form]");
+if (bookingForm) {
+  /* Sucursal elegida define el número; fallback = San Rafael */
+  const branchNumber = () =>
+    bookingForm.querySelector("input[name='sucursal']:checked")?.dataset.wa || "525568856070";
+  const dateInput = bookingForm.querySelector("[data-date-input]");
+  const dateHint = bookingForm.querySelector("[data-date-hint]");
+  const success = bookingForm.querySelector("[data-booking-success]");
+
+  if (dateInput) {
+    const now = new Date();
+    dateInput.min = now.toISOString().split("T")[0];
+    dateInput.addEventListener("input", () => {
+      if (!dateInput.value) { if (dateHint) dateHint.textContent = ""; return; }
+      const day = new Date(`${dateInput.value}T12:00:00`).getDay();
+      if (dateHint) {
+        dateHint.textContent = day === 0 ? T.sundayHint : "";
+      }
+      dateInput.setCustomValidity(day === 0 ? T.sundayInvalid : "");
+    });
+  }
+
+  bookingForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!bookingForm.reportValidity()) return;
+
+    const data = new FormData(bookingForm);
+    const fecha = new Date(`${data.get("fecha")}T12:00:00`).toLocaleDateString(T.locale, {
+      weekday: "long", day: "numeric", month: "long",
+    });
+    const detalle = String(data.get("detalle") || "").trim();
+    /* Sin emoji: algunos clientes de WhatsApp los rompen al llegar por URL. */
+    const message = [
+      T.greeting(data.get("sucursal"), data.get("nombre")),
+      T.service(data.get("servicio")),
+      T.when(fecha, data.get("hora")),
+      detalle ? T.idea(detalle) : null,
+      T.from,
+    ].filter(Boolean).join("\n");
+
+    const url = `https://wa.me/${branchNumber()}?text=${encodeURIComponent(message)}`;
+    if (success) {
+      const fallback = success.querySelector("[data-wa-fallback]");
+      if (fallback) fallback.href = url;
+      success.hidden = false;
+    }
+    window.open(url, "_blank", "noopener");
+  });
+}

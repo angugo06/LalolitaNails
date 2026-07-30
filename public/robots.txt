@@ -1,0 +1,6 @@
+# www.robotstxt.org/
+
+User-agent: *
+Allow: /
+
+Sitemap: https://lalolita-nail-atelier.angugo06.chatgpt.site/sitemap.xml

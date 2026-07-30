@@ -1,12 +1,12 @@
 {
   "short_name": "Lalolita",
-  "name": "Lalolita Nails por Eduardo Vázquez",
+  "name": "Lalolita Nails · San Rafael, CDMX",
   "icons": [{
     "src": "icon.png",
     "type": "image/png",
     "sizes": "192x192"
   }],
   "start_url": "/",
-  "background_color": "#fffdf8",
-  "theme_color": "#fffdf8"
+  "background_color": "#fdf6fa",
+  "theme_color": "#fdf6fa"
 }

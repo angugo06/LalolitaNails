@@ -3,4 +3,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lalolita-nail-atelier.angugo06.chatgpt.site/sitemap.xml
+Sitemap: %SITE_URL%/sitemap.xml

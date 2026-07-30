@@ -1,19 +1,31 @@
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const CopyPlugin = require('copy-webpack-plugin');
+const { siteUrl, basePath } = require('./site.config.js');
+
+/** Inyecta el dominio/base al copiar. Ver site.config.js. */
+const injectSite = (content) =>
+  content.toString().split('%SITE_URL%').join(siteUrl).split('%BASE%').join(basePath);
 
 module.exports = merge(common, {
   mode: 'production',
   plugins: [
     new CopyPlugin({
       patterns: [
-        { from: 'src/*.html', to: 'client/[name][ext]' },
-        { from: 'src/en/*.html', to: 'client/en/[name][ext]' },
-        { from: 'src/img', to: 'client/img' },
-        { from: 'src/css', to: 'client/css' },
-        { from: 'public', to: 'client' },
-        { from: 'worker/index.js', to: 'server/index.js' },
-        { from: '.openai/hosting.json', to: '.openai/hosting.json' },
+        { from: 'src/*.html', to: '[name][ext]', transform: injectSite },
+        { from: 'src/en/*.html', to: 'en/[name][ext]', transform: injectSite },
+        { from: 'public/sitemap.xml', to: 'sitemap.xml', transform: injectSite },
+        { from: 'public/robots.txt', to: 'robots.txt', transform: injectSite },
+        { from: 'public/site.webmanifest', to: 'site.webmanifest', transform: injectSite },
+        { from: 'src/img', to: 'img' },
+        { from: 'src/css', to: 'css' },
+        {
+          from: 'public',
+          to: '.',
+          globOptions: {
+            ignore: ['**/sitemap.xml', '**/robots.txt', '**/site.webmanifest'],
+          },
+        },
       ],
     }),
   ],

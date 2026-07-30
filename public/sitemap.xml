@@ -2,53 +2,53 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://lalolita-nail-atelier.angugo06.chatgpt.site/</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://lalolita-nail-atelier.angugo06.chatgpt.site/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://lalolita-nail-atelier.angugo06.chatgpt.site/en/index.html"/>
+    <loc>%SITE_URL%/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="%SITE_URL%/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="%SITE_URL%/en/index.html"/>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://lalolita-nail-atelier.angugo06.chatgpt.site/servicios.html</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://lalolita-nail-atelier.angugo06.chatgpt.site/servicios.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://lalolita-nail-atelier.angugo06.chatgpt.site/en/services.html"/>
+    <loc>%SITE_URL%/servicios.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="%SITE_URL%/servicios.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="%SITE_URL%/en/services.html"/>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://lalolita-nail-atelier.angugo06.chatgpt.site/reservar.html</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://lalolita-nail-atelier.angugo06.chatgpt.site/reservar.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://lalolita-nail-atelier.angugo06.chatgpt.site/en/book.html"/>
+    <loc>%SITE_URL%/reservar.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="%SITE_URL%/reservar.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="%SITE_URL%/en/book.html"/>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://lalolita-nail-atelier.angugo06.chatgpt.site/ubicacion.html</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://lalolita-nail-atelier.angugo06.chatgpt.site/ubicacion.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://lalolita-nail-atelier.angugo06.chatgpt.site/en/locations.html"/>
+    <loc>%SITE_URL%/ubicacion.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="%SITE_URL%/ubicacion.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="%SITE_URL%/en/locations.html"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lalolita-nail-atelier.angugo06.chatgpt.site/nosotros.html</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://lalolita-nail-atelier.angugo06.chatgpt.site/nosotros.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://lalolita-nail-atelier.angugo06.chatgpt.site/en/about.html"/>
+    <loc>%SITE_URL%/nosotros.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="%SITE_URL%/nosotros.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="%SITE_URL%/en/about.html"/>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lalolita-nail-atelier.angugo06.chatgpt.site/en/index.html</loc>
+    <loc>%SITE_URL%/en/index.html</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://lalolita-nail-atelier.angugo06.chatgpt.site/en/services.html</loc>
+    <loc>%SITE_URL%/en/services.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lalolita-nail-atelier.angugo06.chatgpt.site/en/book.html</loc>
+    <loc>%SITE_URL%/en/book.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lalolita-nail-atelier.angugo06.chatgpt.site/en/locations.html</loc>
+    <loc>%SITE_URL%/en/locations.html</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lalolita-nail-atelier.angugo06.chatgpt.site/en/about.html</loc>
+    <loc>%SITE_URL%/en/about.html</loc>
     <priority>0.6</priority>
   </url>
 </urlset>

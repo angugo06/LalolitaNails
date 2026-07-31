@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LALOLITA NAILS — Design System
+   LALOLITA BEAUTY — Design System
    Uñas · Cabello · Cejas · Maquillaje — San Rafael, CDMX
    ========================================================================== */
 
@@ -2305,6 +2305,74 @@ body.menu-open .header-actions .btn-ink:hover {
 
 @keyframes pop {
   from { scale: 0; }
+}
+
+/* ---------- 18b. Facturación (CFDI) ---------- */
+.form-section {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-inline-size: 0;
+  display: grid;
+  gap: 1.4rem;
+}
+
+.form-section > legend {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 0;
+  margin-bottom: 0.2rem;
+}
+
+.form-section + .form-section {
+  margin-top: 0.6rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line);
+}
+
+.field-note {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.field input[type="text"].mono {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* pasos numerados de la barra lateral */
+.steps {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+  counter-reset: step;
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: start;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  width: 1.55rem;
+  height: 1.55rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--cherry);
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 
 /* ---------- 19. 404 ---------- */

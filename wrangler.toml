@@ -1,0 +1,25 @@
+# Endpoint de facturación CFDI (Cloudflare Workers)
+# El sitio vive en GitHub Pages; esto es SOLO el endpoint que timbra.
+#
+#   npm i -D wrangler
+#   npx wrangler login
+#   npx wrangler secret put FACTURAPI_KEY     # sk_test_… para pruebas
+#   npx wrangler deploy
+#
+# La URL que imprime el deploy se pega en site.config.js → facturaEndpoint
+
+name = "lalolita-factura"
+main = "worker/factura.js"
+compatibility_date = "2026-07-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://angugo06.github.io"
+MAX_AMOUNT = "20000"
+# ClaveProdServ / ClaveUnidad del SAT — confirmar con el contador del salón
+PRODUCT_KEY = "90121800"   # Servicios de belleza
+UNIT_KEY = "E48"           # Unidad de servicio
+
+# Opcional: límite de intentos por IP
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT"
+# id = "…"

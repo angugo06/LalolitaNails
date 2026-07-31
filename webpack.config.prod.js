@@ -1,11 +1,15 @@
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const CopyPlugin = require('copy-webpack-plugin');
-const { siteUrl, basePath } = require('./site.config.js');
+const { siteUrl, basePath, facturaEndpoint } = require('./site.config.js');
 
-/** Inyecta el dominio/base al copiar. Ver site.config.js. */
+/** Inyecta dominio/base/endpoint al copiar. Ver site.config.js. */
 const injectSite = (content) =>
-  content.toString().split('%SITE_URL%').join(siteUrl).split('%BASE%').join(basePath);
+  content
+    .toString()
+    .split('%SITE_URL%').join(siteUrl)
+    .split('%BASE%').join(basePath)
+    .split('%FACTURA_ENDPOINT%').join(facturaEndpoint);
 
 module.exports = merge(common, {
   mode: 'production',

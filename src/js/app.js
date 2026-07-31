@@ -1,4 +1,4 @@
-/* Lalolita Nails — interactions */
+/* Lalolita Beauty — interactions */
 document.documentElement.classList.remove("no-js");
 
 /* Idioma actual (es por defecto); las cadenas del formulario dependen de esto */
@@ -8,23 +8,61 @@ const T = {
     locale: "es-MX",
     sundayHint: "Los domingos descansamos, elige otro día porfa.",
     sundayInvalid: "Cerrado los domingos",
-    greeting: (branch, name) => `Hola Lalolita ${branch}, soy ${name}.`,
+    greeting: (branch, name) => `Hola Lalolita Beauty ${branch}, soy ${name}.`,
     service: (s) => `Quiero agendar: ${s}.`,
     when: (d, t) => `Fecha: ${d} - ${t}.`,
     idea: (i) => `Idea: ${i}`,
     from: "(Enviado desde el sitio web)",
     testimonial: (n) => `Testimonio ${n}`,
+    rfcInvalid: "Revisa el RFC: 13 caracteres para persona física, 12 para moral.",
+    cfdiTitle: (branch) => `Solicitud de factura (CFDI) - Lalolita Beauty ${branch}`,
+    cfdiLabels: {
+      fecha: "Fecha del servicio", folio: "Ticket", monto: "Monto",
+      formaPago: "Forma de pago", rfc: "RFC", razonSocial: "Razon social",
+      regimen: "Regimen fiscal", usoCfdi: "Uso del CFDI", cp: "CP fiscal",
+      correo: "Correo", comentarios: "Comentarios",
+    },
+    cfdiFooter: "Adjunto mi Constancia de Situacion Fiscal.",
+    cfdiSending: "Timbrando tu factura…",
+    cfdiSend: "Emitir mi factura",
+    cfdiOkTitle: "Factura <em>timbrada.</em>",
+    cfdiOkBody: (uuid, emailed, correo) =>
+      `Folio fiscal (UUID): <strong>${uuid}</strong>.` +
+      (emailed
+        ? ` Te enviamos el PDF y el XML a <strong>${correo}</strong>.`
+        : " Guarda este folio: te enviaremos el PDF y el XML en breve."),
+    cfdiFailTitle: "No pudimos timbrarla",
+    cfdiFailWa: "Enviar por WhatsApp",
   },
   en: {
     locale: "en-US",
     sundayHint: "We're closed on Sundays — please pick another day.",
     sundayInvalid: "Closed on Sundays",
-    greeting: (branch, name) => `Hi Lalolita ${branch}, I'm ${name}.`,
+    greeting: (branch, name) => `Hi Lalolita Beauty ${branch}, I'm ${name}.`,
     service: (s) => `I'd like to book: ${s}.`,
     when: (d, t) => `Date: ${d} - ${t}.`,
     idea: (i) => `Idea: ${i}`,
     from: "(Sent from the website)",
     testimonial: (n) => `Testimonial ${n}`,
+    rfcInvalid: "Check the RFC: 13 characters for individuals, 12 for companies.",
+    cfdiTitle: (branch) => `Invoice request (CFDI) - Lalolita Beauty ${branch}`,
+    cfdiLabels: {
+      fecha: "Service date", folio: "Ticket", monto: "Amount",
+      formaPago: "Payment method", rfc: "RFC", razonSocial: "Legal name",
+      regimen: "Tax regime", usoCfdi: "CFDI use", cp: "Fiscal postcode",
+      correo: "Email", comentarios: "Comments",
+    },
+    cfdiFooter: "I'm attaching my Constancia de Situacion Fiscal.",
+    cfdiSending: "Issuing your invoice…",
+    cfdiSend: "Issue my invoice",
+    cfdiOkTitle: "Invoice <em>issued.</em>",
+    cfdiOkBody: (uuid, emailed, correo) =>
+      `Fiscal folio (UUID): <strong>${uuid}</strong>.` +
+      (emailed
+        ? ` We've sent the PDF and XML to <strong>${correo}</strong>.`
+        : " Keep this folio: we'll email the PDF and XML shortly."),
+    cfdiFailTitle: "We couldn't issue it",
+    cfdiFailWa: "Send on WhatsApp",
   },
 }[LANG];
 
@@ -304,5 +342,142 @@ if (bookingForm) {
       success.hidden = false;
     }
     window.open(url, "_blank", "noopener");
+  });
+}
+
+/* ---------- Facturación CFDI → WhatsApp (por sucursal) ---------- */
+const cfdiForm = document.querySelector("[data-cfdi-form]");
+if (cfdiForm) {
+  /* Persona física: 4 letras + 6 dígitos + 3 (homoclave). Moral: 3 letras. */
+  const RFC_RE = /^[A-ZÑ&]{3,4}\d{6}[A-Z\d]{3}$/;
+  const rfc = cfdiForm.querySelector("[data-rfc]");
+  const rfcHint = cfdiForm.querySelector("[data-rfc-hint]");
+  const dateInput = cfdiForm.querySelector("[data-cfdi-date]");
+  const success = cfdiForm.querySelector("[data-cfdi-success]");
+  const branchNumber = () =>
+    cfdiForm.querySelector("input[name='sucursal']:checked")?.dataset.wa || "525568856070";
+
+  /* no se puede facturar un servicio futuro */
+  if (dateInput) dateInput.max = new Date().toISOString().split("T")[0];
+
+  rfc?.addEventListener("input", () => {
+    rfc.value = rfc.value.toUpperCase().replace(/[^A-ZÑ&\d]/g, "");
+    const bad = rfc.value.length > 0 && !RFC_RE.test(rfc.value);
+    rfc.setCustomValidity(bad ? T.rfcInvalid : "");
+    if (rfcHint) rfcHint.textContent = bad ? T.rfcInvalid : "";
+  });
+
+  /* Endpoint que timbra (Cloudflare Worker). Si viene vacío o sin sustituir,
+     el formulario cae al modo WhatsApp: solicitud manual. */
+  const rawEndpoint = cfdiForm.dataset.endpoint || "";
+  const endpoint = rawEndpoint.startsWith("http") ? rawEndpoint : "";
+  const submitBtn = cfdiForm.querySelector("button[type='submit']");
+
+  /* La copy de la página describe el flujo real: timbrado o solicitud */
+  document.querySelectorAll('[data-flow="wa"]').forEach((el) => (el.hidden = Boolean(endpoint)));
+  document.querySelectorAll('[data-flow="auto"]').forEach((el) => (el.hidden = !endpoint));
+
+  if (endpoint && submitBtn) submitBtn.innerHTML = `${T.cfdiSend} <span class="arrow">→</span>`;
+
+  cfdiForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!cfdiForm.reportValidity()) return;
+
+    const data = new FormData(cfdiForm);
+    const L = T.cfdiLabels;
+    const fecha = new Date(`${data.get("fecha")}T12:00:00`).toLocaleDateString(T.locale, {
+      day: "numeric", month: "long", year: "numeric",
+    });
+    const monto = Number(data.get("monto")).toLocaleString(T.locale, {
+      style: "currency", currency: "MXN",
+    });
+    const comentarios = String(data.get("comentarios") || "").trim();
+
+    const message = [
+      T.cfdiTitle(data.get("sucursal")),
+      "",
+      `${L.fecha}: ${fecha}`,
+      `${L.folio}: ${data.get("folio")}`,
+      `${L.monto}: ${monto}`,
+      `${L.formaPago}: ${data.get("formaPago")}`,
+      "",
+      `${L.rfc}: ${data.get("rfc")}`,
+      `${L.razonSocial}: ${data.get("razonSocial")}`,
+      `${L.regimen}: ${data.get("regimen")}`,
+      `${L.usoCfdi}: ${data.get("usoCfdi")}`,
+      `${L.cp}: ${data.get("cp")}`,
+      `${L.correo}: ${data.get("correo")}`,
+      comentarios ? `${L.comentarios}: ${comentarios}` : null,
+      "",
+      T.cfdiFooter,
+    ].filter((line) => line !== null).join("\n");
+
+    const waUrl = `https://wa.me/${branchNumber()}?text=${encodeURIComponent(message)}`;
+
+    /* Sin endpoint configurado: comportamiento anterior (solicitud) */
+    if (!endpoint) {
+      if (success) {
+        const fallback = success.querySelector("[data-wa-fallback]");
+        if (fallback) fallback.href = waUrl;
+        success.hidden = false;
+      }
+      window.open(waUrl, "_blank", "noopener");
+      return;
+    }
+
+    /* Con endpoint: se timbra de verdad contra el PAC */
+    const payload = Object.fromEntries(data.entries());
+    const original = submitBtn ? submitBtn.innerHTML : "";
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = T.cfdiSending;
+    }
+
+    fetch(endpoint, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+      .then(async (res) => ({ ok: res.ok, body: await res.json().catch(() => ({})) }))
+      .then(({ ok, body }) => {
+        if (ok && body.ok) {
+          cfdiForm.querySelectorAll("fieldset, .form-note").forEach((el) => (el.hidden = true));
+          if (submitBtn) submitBtn.hidden = true;
+          if (success) {
+            success.querySelector("h2").innerHTML = T.cfdiOkTitle;
+            success.querySelector("p").innerHTML = T.cfdiOkBody(
+              body.uuid,
+              body.emailed,
+              payload.correo
+            );
+            success.hidden = false;
+            success.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+          return;
+        }
+        /* Error del SAT/PAC: mostramos el motivo y ofrecemos WhatsApp */
+        if (success) {
+          success.querySelector("h2").innerHTML = T.cfdiFailTitle;
+          success.querySelector("p").innerHTML =
+            `${body.error || "Error desconocido."} <a href="${waUrl}" target="_blank" rel="noopener">${T.cfdiFailWa}</a>`;
+          success.hidden = false;
+        }
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = original;
+        }
+      })
+      .catch(() => {
+        if (success) {
+          success.querySelector("h2").innerHTML = T.cfdiFailTitle;
+          success.querySelector("p").innerHTML =
+            `<a href="${waUrl}" target="_blank" rel="noopener">${T.cfdiFailWa}</a>`;
+          success.hidden = false;
+        }
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = original;
+        }
+      });
   });
 }

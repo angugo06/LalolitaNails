@@ -1,6 +1,6 @@
-# Lalolita Nails — sitio web
+# Lalolita Beauty — sitio web
 
-Sitio multipágina y bilingüe del salón **Lalolita Nails** (San Rafael y Polanco, CDMX).
+Sitio multipágina y bilingüe del salón **Lalolita Beauty** (San Rafael y Polanco, CDMX).
 HTML/CSS/JS vanilla, sin frameworks ni dependencias en runtime. Webpack solo
 empaqueta el JS y copia archivos.
 
@@ -11,8 +11,10 @@ empaqueta el JS y copia archivos.
 │   ├── index.html        # Inicio (hero + probador de esmaltes)
 │   ├── servicios.html    # Menú de servicios con filtros y FAQ
 │   ├── nosotros.html     # Historia, línea de tiempo y valores
+│   ├── equipo.html       # Equipo (contenido provisional)
 │   ├── ubicacion.html    # Mapas, horarios y cómo llegar (2 sucursales)
 │   ├── reservar.html     # Formulario de reserva → WhatsApp
+│   ├── facturacion.html  # Solicitud de factura CFDI → WhatsApp
 │   ├── 404.html          # Página de error
 │   ├── en/               # Versión en inglés (mismas páginas)
 │   ├── css/style.css     # Sistema de diseño completo (tokens en :root)
@@ -78,8 +80,10 @@ y se enlaza con `hreflang` + el switcher `ES | EN` del header.
 | `index.html` | `en/index.html` |
 | `servicios.html` | `en/services.html` |
 | `nosotros.html` | `en/about.html` |
+| `equipo.html` | `en/team.html` |
 | `ubicacion.html` | `en/locations.html` |
 | `reservar.html` | `en/book.html` |
+| `facturacion.html` | `en/billing.html` |
 
 `src/js/app.js` detecta `<html lang>` y ajusta el idioma del mensaje de
 WhatsApp, el formato de fecha y los avisos del formulario.
@@ -100,6 +104,66 @@ seleccionada (radios `name="sucursal"`, número en `data-wa`).
 Pendiente: migrar a un **calendario de GoHighLevel (GHL)** como canal único de
 reservas. El punto de integración está marcado con un `TODO` dentro del
 `<form>` en `src/reservar.html` y en `src/en/book.html`.
+
+## Facturación (CFDI) — emisión real
+
+`facturacion.html` / `en/billing.html` tienen **dos modos**, según
+`facturaEndpoint` en `site.config.js`:
+
+| `facturaEndpoint` | Modo | Qué pasa |
+|---|---|---|
+| `""` (hoy) | Solicitud | Arma un WhatsApp con los datos; el salón factura a mano |
+| URL del Worker | **Timbrado** | Se emite el CFDI 4.0 al instante y llega por correo |
+
+La copy de la página, el texto del botón y los pasos cambian solos según el modo.
+
+### Activar el timbrado (una sola vez)
+
+1. **Cuenta con un PAC.** Está escrito contra [Facturapi](https://facturapi.io)
+   ($299 MXN/mes + ~$0.60 por timbre; hay modo de pruebas gratis).
+2. **Subir el CSD** (`.cer`, `.key` y contraseña) al panel del PAC.
+   *El CSD nunca toca este repo ni el navegador.*
+3. **Desplegar el Worker:**
+   ```bash
+   npm i -D wrangler
+   npx wrangler login
+   npx wrangler secret put FACTURAPI_KEY   # sk_test_… primero, sk_live_… en producción
+   npx wrangler deploy
+   ```
+4. Pegar la URL que imprime el deploy en `site.config.js` → `facturaEndpoint`
+   y hacer push. Listo.
+
+### Seguridad y límites
+
+- El único secreto es `FACTURAPI_KEY`, guardado como secreto de Cloudflare.
+  El sitio estático no conoce ninguna credencial.
+- CORS restringido a `ALLOWED_ORIGIN`; solo acepta `POST`.
+- El Worker **revalida todo** del lado servidor (RFC, CP, correo, folio, monto y
+  los catálogos del SAT); no confía en la validación del navegador.
+- `MAX_AMOUNT` (20 000 MXN por defecto) acota el daño de una solicitud falsa.
+- Límite opcional por IP si se conecta un KV llamado `RATE_LIMIT`.
+
+> ⚠️ **Riesgo real que hay que decidir:** el monto y el folio los escribe el
+> cliente y no se cotejan contra el punto de venta, así que alguien podría
+> facturar un servicio que no pagó. Lo correcto es validar el ticket contra el
+> POS antes de timbrar. Mientras eso no exista, conviene dejar `MAX_AMOUNT`
+> bajo y revisar los CFDI emitidos en el panel del PAC.
+
+### Claves del SAT usadas
+
+`PRODUCT_KEY=90121800` (servicios de belleza), `UNIT_KEY=E48` (unidad de
+servicio), IVA 16 % incluido en el precio, método de pago `PUE`.
+**Confirmar con el contador del salón** antes de pasar a producción.
+
+**Pendiente:** el plazo de facturación (hoy dice «dentro del mismo mes»),
+marcado con `TODO` en ambas páginas.
+
+## Equipo
+
+`equipo.html` / `en/team.html` están con **contenido provisional**: nombres,
+fotos y descripciones de ejemplo. El aviso amarillo y los comentarios en el
+HTML explican qué sustituir. Para las fotos, cambiar `<div class="team-avatar">`
+(iniciales sobre degradado) por `<img class="team-photo" …>`.
 
 ## Notas
 

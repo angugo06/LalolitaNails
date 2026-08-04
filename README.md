@@ -43,7 +43,11 @@ publica `dist/` en Pages. Para activarlo una sola vez:
 
 URL actual: `https://angugo06.github.io/LalolitaNails`
 
-### Cambiar de dominio (p. ej. al comprar lalolitanails.com)
+> **Migración a dominio propio:** ver [`DEPLOY.md`](DEPLOY.md) — guía completa
+> para pasar a Cloudflare Pages + dominio propio, con las instrucciones que hay
+> que mandarle al salón para que las cuentas queden a su nombre.
+
+### Cambiar de dominio (p. ej. al comprar lalolitabeauty.com)
 
 1. Editar `site.config.js`:
    ```js

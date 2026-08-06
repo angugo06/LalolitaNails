@@ -6,13 +6,6 @@ const LANG = document.documentElement.lang.startsWith("en") ? "en" : "es";
 const T = {
   es: {
     locale: "es-MX",
-    sundayHint: "Los domingos descansamos, elige otro día porfa.",
-    sundayInvalid: "Cerrado los domingos",
-    greeting: (branch, name) => `Hola Lalolita Beauty ${branch}, soy ${name}.`,
-    service: (s) => `Quiero agendar: ${s}.`,
-    when: (d, t) => `Fecha: ${d} - ${t}.`,
-    idea: (i) => `Idea: ${i}`,
-    from: "(Enviado desde el sitio web)",
     testimonial: (n) => `Testimonio ${n}`,
     rfcInvalid: "Revisa el RFC: 13 caracteres para persona física, 12 para moral.",
     cfdiTitle: (branch) => `Solicitud de factura (CFDI) - Lalolita Beauty ${branch}`,
@@ -36,13 +29,6 @@ const T = {
   },
   en: {
     locale: "en-US",
-    sundayHint: "We're closed on Sundays — please pick another day.",
-    sundayInvalid: "Closed on Sundays",
-    greeting: (branch, name) => `Hi Lalolita Beauty ${branch}, I'm ${name}.`,
-    service: (s) => `I'd like to book: ${s}.`,
-    when: (d, t) => `Date: ${d} - ${t}.`,
-    idea: (i) => `Idea: ${i}`,
-    from: "(Sent from the website)",
     testimonial: (n) => `Testimonial ${n}`,
     rfcInvalid: "Check the RFC: 13 characters for individuals, 12 for companies.",
     cfdiTitle: (branch) => `Invoice request (CFDI) - Lalolita Beauty ${branch}`,
@@ -293,57 +279,6 @@ document.querySelectorAll("[data-hours] .hours-row").forEach((row) => {
   const days = (row.dataset.day || "").split(/\s+/);
   row.classList.toggle("is-today", days.includes(today));
 });
-
-/* ---------- Booking form → WhatsApp (per branch) ---------- */
-const bookingForm = document.querySelector("[data-booking-form]");
-if (bookingForm) {
-  /* Sucursal elegida define el número; fallback = San Rafael */
-  const branchNumber = () =>
-    bookingForm.querySelector("input[name='sucursal']:checked")?.dataset.wa || "525568856070";
-  const dateInput = bookingForm.querySelector("[data-date-input]");
-  const dateHint = bookingForm.querySelector("[data-date-hint]");
-  const success = bookingForm.querySelector("[data-booking-success]");
-
-  if (dateInput) {
-    const now = new Date();
-    dateInput.min = now.toISOString().split("T")[0];
-    dateInput.addEventListener("input", () => {
-      if (!dateInput.value) { if (dateHint) dateHint.textContent = ""; return; }
-      const day = new Date(`${dateInput.value}T12:00:00`).getDay();
-      if (dateHint) {
-        dateHint.textContent = day === 0 ? T.sundayHint : "";
-      }
-      dateInput.setCustomValidity(day === 0 ? T.sundayInvalid : "");
-    });
-  }
-
-  bookingForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (!bookingForm.reportValidity()) return;
-
-    const data = new FormData(bookingForm);
-    const fecha = new Date(`${data.get("fecha")}T12:00:00`).toLocaleDateString(T.locale, {
-      weekday: "long", day: "numeric", month: "long",
-    });
-    const detalle = String(data.get("detalle") || "").trim();
-    /* Sin emoji: algunos clientes de WhatsApp los rompen al llegar por URL. */
-    const message = [
-      T.greeting(data.get("sucursal"), data.get("nombre")),
-      T.service(data.get("servicio")),
-      T.when(fecha, data.get("hora")),
-      detalle ? T.idea(detalle) : null,
-      T.from,
-    ].filter(Boolean).join("\n");
-
-    const url = `https://wa.me/${branchNumber()}?text=${encodeURIComponent(message)}`;
-    if (success) {
-      const fallback = success.querySelector("[data-wa-fallback]");
-      if (fallback) fallback.href = url;
-      success.hidden = false;
-    }
-    window.open(url, "_blank", "noopener");
-  });
-}
 
 /* ---------- Facturación CFDI → WhatsApp (por sucursal) ---------- */
 const cfdiForm = document.querySelector("[data-cfdi-form]");

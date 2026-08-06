@@ -73,6 +73,10 @@ No hay URLs del dominio escritas a mano en el HTML.
 | Sábado | 9:00–19:00 | 10:00–18:00 |
 | Domingo | Cerrado | Cerrado |
 | Google | 4.4 (96 reseñas) | 4.8 (22 reseñas) |
+| Coordenadas | 19.437349, -99.162505 | 19.438727, -99.193170 |
+
+Las coordenadas salen del perfil de Google Business y viven en el JSON-LD de
+`index.html`, `ubicacion.html`, `en/index.html` y `en/locations.html`.
 
 ## Idiomas
 
@@ -100,14 +104,27 @@ Para automatizarlas haría falta la **Google Places API**: la key no puede ir en
 el HTML, así que necesitaría una función serverless o un proxy — algo que
 GitHub Pages no ofrece por ser hosting estático.
 
-## Reservas
+## Reservas — calendario de GoHighLevel
 
-Hoy: el formulario de `reservar.html` arma un mensaje de WhatsApp a la sucursal
-seleccionada (radios `name="sucursal"`, número en `data-wa`).
+`reservar.html` / `en/book.html` embeben el calendario de GHL:
 
-Pendiente: migrar a un **calendario de GoHighLevel (GHL)** como canal único de
-reservas. El punto de integración está marcado con un `TODO` dentro del
-`<form>` en `src/reservar.html` y en `src/en/book.html`.
+```html
+<iframe src="https://link.locallign.com/booking/lalolita-beauty?heightMode=full&showHeader=true" …>
+<script src="https://link.locallign.com/js/form_embed.js"></script>
+```
+
+El widget maneja todo el flujo (sucursal → categoría → servicio → personal →
+fecha/hora → datos del cliente → cupón/pago), así que el formulario de WhatsApp
+que había antes se eliminó: era redundante y duplicaba la captura de datos.
+Las reservas caen directo en el CRM de GHL y disparan sus automatizaciones.
+
+- `form_embed.js` ajusta la altura del iframe solo; `.booking-embed` tiene un
+  `min-height` para que no salte al cargar.
+- WhatsApp queda como alternativa (enlace debajo del calendario), no como formulario.
+- El widget está en español. En la página en inglés se avisa y se ofrece
+  WhatsApp para atender en inglés.
+- Servicios y precios se administran **en GHL**, no en este repo. El menú de
+  `servicios.html` es informativo y hay que mantenerlo sincronizado a mano.
 
 ## Facturación (CFDI) — emisión real
 
@@ -168,6 +185,38 @@ marcado con `TODO` en ambas páginas.
 fotos y descripciones de ejemplo. El aviso amarillo y los comentarios en el
 HTML explican qué sustituir. Para las fotos, cambiar `<div class="team-avatar">`
 (iniciales sobre degradado) por `<img class="team-photo" …>`.
+
+## SEO y rendimiento
+
+Estado tras el pase de agosto 2026:
+
+- **Metadatos**: títulos y descriptions únicos y dentro de rango en las 15
+  páginas, canonical, hreflang bidireccional con `x-default`, Open Graph
+  completo (`og:site_name`, `og:locale`, `og:image` 1200x630 con dimensiones),
+  `twitter:card` y `robots: max-image-preview:large`.
+- **Datos estructurados** (20 bloques JSON-LD, todos validados):
+  `Organization` con dos `NailSalon` (geo, horarios, `hasMap`, `aggregateRating`),
+  `FAQPage` en servicios y facturación (ES y EN) y `BreadcrumbList` en las
+  12 páginas interiores.
+- **Imágenes**: todas en WebP (2.4 MB a 792 KB). Las dimensiones declaradas
+  coinciden con el archivo real, así que **CLS = 0**.
+- **Fuentes autoalojadas** en `src/fonts/` (`css/fonts.css`). Se quitó la
+  petición bloqueante a `fonts.googleapis.com`.
+
+Medido con Chrome, móvil 390px, CPU 4x lenta y 1.6 Mbps (mediana de 3 corridas):
+
+| Página | LCP | FCP | CLS |
+|---|---|---|---|
+| Inicio | ~3.1 s | ~1.5 s | 0 |
+| Servicios | ~2.3 s | ~1.1 s | 0 |
+
+> Se probó precargar las fuentes: mejora el LCP unos 100 ms pero empeora el FCP
+> entre 400 y 1000 ms, así que se dejó sin `preload` (solo `font-display: swap`).
+
+**Siguiente palanca de LCP**: las tres fuentes latin pesan ~207 KB (Fraunces
+variable normal e itálica, DM Sans variable). Pasar a instancias estáticas solo
+con los pesos usados bajaría bastante, pero el CSS usa pesos variables
+(380, 420, 450), así que hay que revisar el diseño después.
 
 ## Notas
 

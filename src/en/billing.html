@@ -3,19 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Invoicing (CFDI) — Lalolita Beauty · Mexico City</title>
-  <meta name="description" content="Request your Mexican tax invoice (CFDI 4.0) from Lalolita Beauty. Fill in your RFC and fiscal details and we'll email you the PDF and XML.">
+  <title>Invoicing (CFDI) | Lalolita Beauty Mexico City</title>
+  <meta name="description" content="Request your Mexican tax invoice (CFDI 4.0) from Lalolita Beauty. Enter your RFC and fiscal details and we email you the PDF and XML.">
 
-  <meta property="og:title" content="Invoicing (CFDI) — Lalolita Beauty">
+  <meta property="og:title" content="Invoicing (CFDI) | Lalolita Beauty">
   <meta property="og:description" content="Request your tax invoice online.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="%SITE_URL%/en/billing.html">
   <meta property="og:image" content="%SITE_URL%/img/og-v2.jpg">
+  <meta property="og:site_name" content="Lalolita Beauty">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_MX">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="theme-color" content="#fdf6fa">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=DM+Sans:opsz,wght@9..40,300..600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/fonts.css">
   <link rel="canonical" href="%SITE_URL%/en/billing.html">
   <link rel="alternate" hreflang="es" href="%SITE_URL%/facturacion.html">
   <link rel="alternate" hreflang="en" href="%SITE_URL%/en/billing.html">
@@ -24,13 +29,81 @@
   <link rel="icon" href="../favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="../icon.png">
   <link rel="manifest" href="../site.webmanifest">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a CFDI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The CFDI (Comprobante Fiscal Digital por Internet) is Mexico's official electronic invoice, validated by the SAT tax authority. You need one if you want to deduct the service as a business expense. If you're a tourist or don't file taxes in Mexico, you don't need it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Constancia de Situación Fiscal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It's the document the SAT issues with your current fiscal details: RFC, name or company name, tax regime and postcode. You download it from the SAT portal and share it with us on WhatsApp so we can enter everything exactly as registered."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do you need my postcode?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Since CFDI version 4.0, the SAT checks that the name, RFC and fiscal postcode match its records exactly. If anything differs, the invoice is rejected."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually the same day or the next business day. You'll get the PDF and XML at the email address you give us."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "I lost my ticket, can I still get an invoice?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Message us on WhatsApp with the approximate date, the amount and the service. We'll check the records at that location and confirm."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "%SITE_URL%/en/index.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Invoicing",
+        "item": "%SITE_URL%/en/billing.html"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header" data-header>
-    <a class="brand" href="index.html" aria-label="Lalolita Beauty — home">
-      <img src="../img/lalolita-logo.png" alt="" width="502" height="497">
+    <a class="brand" href="index.html" aria-label="Lalolita Beauty, home">
+      <img src="../img/lalolita-logo.webp" alt="" width="256" height="253">
       <span>Lalolita Beauty<small>CDMX</small></span>
     </a>
     <nav class="main-nav" aria-label="Main">
@@ -81,7 +154,7 @@
             <h3>How it works</h3>
             <ol class="steps" data-flow="wa">
               <li>Fill in the form with your fiscal details and the ticket information.</li>
-              <li>WhatsApp opens with your request — attach your Constancia de Situación Fiscal there.</li>
+              <li>WhatsApp opens with your request. Attach your Constancia de Situación Fiscal there.</li>
               <li>We email you the PDF and the XML.</li>
             </ol>
             <ol class="steps" data-flow="auto" hidden>
@@ -246,7 +319,7 @@
             <div class="faq-body"><p>Usually the same day or the next business day. You'll get the PDF and XML at the email address you give us.</p></div>
           </details>
           <details>
-            <summary>I lost my ticket — can I still get an invoice?</summary>
+            <summary>I lost my ticket, can I still get an invoice?</summary>
             <div class="faq-body"><p>Message us on WhatsApp with the approximate date, the amount and the service. We'll check the records at that location and confirm.</p></div>
           </details>
         </div>
@@ -258,7 +331,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a class="brand" href="index.html"><img src="../img/lalolita-logo.png" alt="" width="502" height="497"><span>Lalolita Beauty<small>CDMX</small></span></a>
+          <a class="brand" href="index.html"><img src="../img/lalolita-logo.webp" alt="" width="256" height="253"><span>Lalolita Beauty<small>CDMX</small></span></a>
           <p>Nail, hair, brow and makeup salon by Eddu Vázquez. San Rafael and Polanco, Mexico City. With dedication since 2021.</p>
         </div>
         <div class="footer-col">

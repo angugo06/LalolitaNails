@@ -9,7 +9,8 @@ const injectSite = (content) =>
     .toString()
     .split('%SITE_URL%').join(siteUrl)
     .split('%BASE%').join(basePath)
-    .split('%FACTURA_ENDPOINT%').join(facturaEndpoint);
+    .split('%FACTURA_ENDPOINT%').join(facturaEndpoint)
+    .split('%BUILD_DATE%').join(new Date().toISOString().slice(0, 10));
 
 module.exports = merge(common, {
   mode: 'production',
@@ -23,6 +24,7 @@ module.exports = merge(common, {
         { from: 'public/site.webmanifest', to: 'site.webmanifest', transform: injectSite },
         { from: 'src/img', to: 'img' },
         { from: 'src/css', to: 'css' },
+        { from: 'src/fonts', to: 'fonts' },
         {
           from: 'public',
           to: '.',

@@ -3,25 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lalolita Beauty — Salón de uñas y belleza en San Rafael y Polanco, CDMX</title>
-  <meta name="description" content="Salón de uñas, cabello, cejas y maquillaje en CDMX con dos sucursales: San Rafael y Polanco. Gelish, acrílicas, nail art, balayage y threading. Agenda tu cita.">
+  <title>Salón de uñas y belleza en CDMX | Lalolita Beauty</title>
+  <meta name="description" content="Uñas, cabello, cejas y maquillaje en San Rafael y Polanco, CDMX. Gelish, acrílicas, nail art y balayage. Agenda en línea con confirmación inmediata.">
 
   <meta property="og:title" content="Lalolita Beauty · San Rafael y Polanco, CDMX">
   <meta property="og:description" content="Uñas, cabello, cejas y maquillaje. Dos sucursales en la Ciudad de México.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="%SITE_URL%">
   <meta property="og:image" content="%SITE_URL%/img/og-v2.jpg">
-  <meta property="og:image:alt" content="Lalolita Beauty — salón de belleza en CDMX">
+  <meta property="og:image:alt" content="Lalolita Beauty, salón de belleza en CDMX">
   <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:site_name" content="Lalolita Beauty">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="theme-color" content="#fdf6fa">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=DM+Sans:opsz,wght@9..40,300..600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/fonts.css">
   <link rel="canonical" href="%SITE_URL%/">
   <link rel="alternate" hreflang="es" href="%SITE_URL%/">
   <link rel="alternate" hreflang="en" href="%SITE_URL%/en/index.html">
   <link rel="alternate" hreflang="x-default" href="%SITE_URL%/">
+  <link rel="preload" as="image" href="img/hero-hands.webp" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="icon.png">
@@ -44,8 +49,13 @@
     "subOrganization": [
       {
         "@type": "NailSalon",
-        "name": "Lalolita Beauty — San Rafael",
+        "name": "Lalolita Beauty San Rafael",
         "telephone": "+525568856070",
+        "geo": { "@type": "GeoCoordinates", "latitude": 19.437349, "longitude": -99.162505 },
+        "hasMap": "https://maps.google.com/?q=Guillermo+Prieto+46,+San+Rafael,+Cuauht%C3%A9moc,+06470+Ciudad+de+M%C3%A9xico",
+        "image": "%SITE_URL%/img/og-v2.jpg",
+        "currenciesAccepted": "MXN",
+        "paymentAccepted": "Efectivo, Transferencia, Tarjeta",
         "priceRange": "$",
         "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.4", "reviewCount": "96" },
         "address": {
@@ -63,8 +73,13 @@
       },
       {
         "@type": "NailSalon",
-        "name": "Lalolita Beauty — Polanco",
+        "name": "Lalolita Beauty Polanco",
         "telephone": "+525615156061",
+        "geo": { "@type": "GeoCoordinates", "latitude": 19.438727, "longitude": -99.19317 },
+        "hasMap": "https://maps.app.goo.gl/2MxKX6s7NwEUDShu5",
+        "image": "%SITE_URL%/img/og-v2.jpg",
+        "currenciesAccepted": "MXN",
+        "paymentAccepted": "Efectivo, Transferencia, Tarjeta",
         "priceRange": "$",
         "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "22" },
         "address": {
@@ -88,8 +103,8 @@
   <a class="skip-link" href="#main">Saltar al contenido</a>
 
   <header class="site-header" data-header>
-    <a class="brand" href="index.html" aria-label="Lalolita Beauty — inicio">
-      <img src="img/lalolita-logo.png" alt="" width="502" height="497">
+    <a class="brand" href="index.html" aria-label="Lalolita Beauty, inicio">
+      <img src="img/lalolita-logo.webp" alt="" width="256" height="253">
       <span>Lalolita Beauty<small>CDMX</small></span>
     </a>
     <nav class="main-nav" aria-label="Principal">
@@ -145,7 +160,7 @@
       </div>
       <div class="hero-visual">
         <div class="hero-frame parallax-img">
-          <img src="img/hero-hands.jpg" alt="Manos con manicure recién terminado en Lalolita Beauty" width="1600" height="1067" fetchpriority="high">
+          <img src="img/hero-hands.webp" alt="Manos con manicure recién terminado en Lalolita Beauty" width="1200" height="1804" fetchpriority="high">
         </div>
         <div class="hero-tag reveal">
           <strong>Nail art de autor</strong>
@@ -156,7 +171,7 @@
             <defs><path id="orbit-circle" d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0"/></defs>
             <text><textPath href="#orbit-circle">LALOLITA BEAUTY · CDMX · DESDE 2021 ·</textPath></text>
           </svg>
-          <img src="img/lalolita-logo.png" alt="" width="502" height="497">
+          <img src="img/lalolita-logo.webp" alt="" width="256" height="253">
         </div>
       </div>
     </section>
@@ -179,7 +194,7 @@
         </div>
         <div class="cats">
           <a class="cat-card tilt reveal" href="servicios.html#g-unas">
-            <img src="img/nails-pink.jpg" alt="Manicure rosa con esmalte de brillos" loading="lazy" width="1600" height="1068">
+            <img src="img/nails-pink.webp" alt="Manicure rosa con esmalte de brillos" loading="lazy" width="1200" height="801">
             <span class="cat-go" aria-hidden="true">→</span>
             <div class="cat-card-body">
               <span class="cat-index">01</span>
@@ -188,7 +203,7 @@
             </div>
           </a>
           <a class="cat-card tilt reveal" href="servicios.html#g-cabello" style="--reveal-delay:.08s">
-            <img src="img/hair-blowout.jpg" alt="Estilista secando el cabello de una clienta" loading="lazy" width="1600" height="1068">
+            <img src="img/hair-blowout.webp" alt="Estilista secando el cabello de una clienta" loading="lazy" width="1200" height="801">
             <span class="cat-go" aria-hidden="true">→</span>
             <div class="cat-card-body">
               <span class="cat-index">02</span>
@@ -197,7 +212,7 @@
             </div>
           </a>
           <a class="cat-card tilt reveal" href="servicios.html#g-cejas" style="--reveal-delay:.16s">
-            <img src="img/makeup-application.jpg" alt="Detalle de maquillaje profesional en rostro" loading="lazy" width="1600" height="1067">
+            <img src="img/makeup-application.webp" alt="Detalle de maquillaje profesional en rostro" loading="lazy" width="1200" height="800">
             <span class="cat-go" aria-hidden="true">→</span>
             <div class="cat-card-body">
               <span class="cat-index">03</span>
@@ -206,7 +221,7 @@
             </div>
           </a>
           <a class="cat-card tilt reveal" href="servicios.html#g-maquillaje" style="--reveal-delay:.24s">
-            <img src="img/nails-art-red.jpg" alt="Nail art rojo con letras pintadas a mano" loading="lazy" width="1600" height="1067">
+            <img src="img/nails-art-red.webp" alt="Nail art rojo con letras pintadas a mano" loading="lazy" width="1200" height="800">
             <span class="cat-go" aria-hidden="true">→</span>
             <div class="cat-card-body">
               <span class="cat-index">04</span>
@@ -292,10 +307,10 @@
       <div class="container duo">
         <div class="duo-media reveal">
           <div class="frame parallax-img">
-            <img src="img/salon-interior.jpg" alt="Interior cálido y luminoso del salón Lalolita Beauty" loading="lazy" width="1600" height="1067">
+            <img src="img/salon-interior.webp" alt="Interior cálido y luminoso del salón Lalolita Beauty" loading="lazy" width="1200" height="804">
           </div>
           <div class="frame-detail">
-            <img src="img/manicure-detail.jpg" alt="Artista de uñas trabajando un manicure" loading="lazy" width="1200" height="1800">
+            <img src="img/manicure-detail.webp" alt="Artista de uñas trabajando un manicure" loading="lazy" width="1200" height="1800">
           </div>
         </div>
         <div class="duo-copy reveal">
@@ -341,13 +356,13 @@
         <h2 id="gallery-title">Hecho a mano, <em>todos los días.</em></h2>
       </div>
       <div class="gallery" data-gallery tabindex="0" aria-label="Galería de trabajos, desliza horizontalmente">
-        <figure><img src="img/nails-dark.jpg" alt="Uñas efecto carey en tonos oscuros" loading="lazy" width="1338" height="2000"><figcaption>Efecto carey</figcaption></figure>
-        <figure><img src="img/hair-blowout.jpg" alt="Blower con ondas suaves" loading="lazy" width="1600" height="1068"><figcaption>Blower & ondas</figcaption></figure>
-        <figure><img src="img/nails-art-red.jpg" alt="Nail art rojo con letras" loading="lazy" width="1600" height="1067"><figcaption>Nail art a mano</figcaption></figure>
-        <figure><img src="img/makeup-application.jpg" alt="Maquillaje profesional de ojos" loading="lazy" width="1600" height="1067"><figcaption>Maquillaje social</figcaption></figure>
-        <figure><img src="img/nails-pink.jpg" alt="Manicure rosa brillante" loading="lazy" width="1600" height="1068"><figcaption>Gelish con brillos</figcaption></figure>
-        <figure><img src="img/polish-hand.jpg" alt="Mano sosteniendo esmalte en gel" loading="lazy" width="1200" height="1800"><figcaption>Color a tu medida</figcaption></figure>
-        <figure><img src="img/salon-space.jpg" alt="Estaciones de estilismo del salón" loading="lazy" width="1600" height="1122"><figcaption>El estudio</figcaption></figure>
+        <figure><img src="img/nails-dark.webp" alt="Uñas efecto carey en tonos oscuros" loading="lazy" width="1200" height="1800"><figcaption>Efecto carey</figcaption></figure>
+        <figure><img src="img/hair-blowout.webp" alt="Blower con ondas suaves" loading="lazy" width="1200" height="801"><figcaption>Blower & ondas</figcaption></figure>
+        <figure><img src="img/nails-art-red.webp" alt="Nail art rojo con letras" loading="lazy" width="1200" height="800"><figcaption>Nail art a mano</figcaption></figure>
+        <figure><img src="img/makeup-application.webp" alt="Maquillaje profesional de ojos" loading="lazy" width="1200" height="800"><figcaption>Maquillaje social</figcaption></figure>
+        <figure><img src="img/nails-pink.webp" alt="Manicure rosa brillante" loading="lazy" width="1200" height="801"><figcaption>Gelish con brillos</figcaption></figure>
+        <figure><img src="img/polish-hand.webp" alt="Mano sosteniendo esmalte en gel" loading="lazy" width="1200" height="800"><figcaption>Color a tu medida</figcaption></figure>
+        <figure><img src="img/salon-space.webp" alt="Estaciones de estilismo del salón" loading="lazy" width="1200" height="833"><figcaption>El estudio</figcaption></figure>
       </div>
       <p class="gallery-hint" aria-hidden="true">← Arrastra para explorar →</p>
     </section>
@@ -421,7 +436,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a class="brand" href="index.html"><img src="img/lalolita-logo.png" alt="" width="502" height="497"><span>Lalolita Beauty<small>CDMX</small></span></a>
+          <a class="brand" href="index.html"><img src="img/lalolita-logo.webp" alt="" width="256" height="253"><span>Lalolita Beauty<small>CDMX</small></span></a>
           <p>Salón de uñas, cabello, cejas y maquillaje por Eddu Vázquez. San Rafael y Polanco, CDMX. Con dedicación desde 2021.</p>
         </div>
         <div class="footer-col">

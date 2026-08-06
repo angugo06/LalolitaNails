@@ -134,7 +134,7 @@ export default {
         {
           quantity: 1,
           product: {
-            description: `Servicios de belleza — ticket ${String(body.folio).trim()} (${sucursal})`,
+            description: `Servicios de belleza, ticket ${String(body.folio).trim()} (${sucursal})`,
             product_key: env.PRODUCT_KEY || "90121800",
             unit_key: env.UNIT_KEY || "E48",
             price: v.monto,

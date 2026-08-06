@@ -2307,6 +2307,98 @@ body.menu-open .header-actions .btn-ink:hover {
   from { scale: 0; }
 }
 
+/* ---------- 18a. Calendario embebido (GoHighLevel) ---------- */
+.booking-embed {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) * 1.5);
+  padding: clamp(0.4rem, 1.2vw, 0.9rem);
+  box-shadow: 0 32px 64px -42px rgba(50, 38, 56, 0.45);
+  overflow: hidden;
+  /* el script de GHL ajusta la altura; esto evita el salto inicial */
+  min-height: 46rem;
+}
+
+.booking-embed iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: var(--radius);
+}
+
+@media (max-width: 52rem) {
+  .booking-embed { min-height: 54rem; }
+}
+
+/* Aviso destacado (p. ej. "el calendario está en español") */
+.callout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem 1.2rem;
+  align-items: start;
+  padding: clamp(1.2rem, 2.5vw, 1.6rem) clamp(1.2rem, 2.5vw, 1.8rem);
+  margin-bottom: 1.6rem;
+  border: 1px solid rgba(225, 77, 159, 0.35);
+  border-left: 4px solid var(--cherry);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--cream-2) 60%, var(--white));
+}
+
+.callout .callout-icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--cherry);
+  color: var(--white);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.callout h2 {
+  font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
+}
+
+.callout p {
+  color: var(--ink-2);
+  font-size: 1rem;
+  max-width: 46rem;
+}
+
+.callout-actions {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 40rem) {
+  .callout { grid-template-columns: 1fr; }
+  .callout .callout-icon { display: none; }
+  .callout-actions { grid-column: 1; }
+  .callout-actions .btn { flex: 1 1 100%; }
+}
+
+/* tarjetas de contexto debajo del calendario */
+.booking-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+@media (max-width: 64rem) {
+  .booking-info-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 40rem) {
+  .booking-info-grid { grid-template-columns: 1fr; }
+}
+
 /* ---------- 18b. Facturación (CFDI) ---------- */
 .form-section {
   border: 0;

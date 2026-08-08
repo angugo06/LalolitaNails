@@ -1600,7 +1600,25 @@ body.menu-open .header-actions .btn-ink:hover {
   translate: 0.4rem 0;
 }
 
-.svc-item h3 {
+.svc-subhead {
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cherry);
+  margin: 2.2rem 0 0.2rem;
+  padding: 0 0.8rem;
+}
+
+.svc-subhead:first-of-type {
+  margin-top: 1.4rem;
+}
+
+.svc-item h4 {
+  font-family: var(--font-display);
+  font-weight: 450;
+  line-height: 1.2;
   font-size: 1.22rem;
   display: flex;
   flex-wrap: wrap;
@@ -1608,7 +1626,7 @@ body.menu-open .header-actions .btn-ink:hover {
   gap: 0.7rem;
 }
 
-.svc-item h3 .tag {
+.svc-item h4 .tag {
   font-family: var(--font-body);
   font-size: 0.66rem;
   font-weight: 600;
@@ -1631,9 +1649,11 @@ body.menu-open .header-actions .btn-ink:hover {
   grid-row: 1 / 3;
   grid-column: 2;
   text-align: right;
-  display: grid;
-  align-content: center;
-  gap: 0.15rem;
+  align-self: center;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 0.45rem;
 }
 
 .svc-price b {
@@ -2776,7 +2796,8 @@ body.menu-open .header-actions .btn-ink:hover {
     text-align: left;
     display: flex;
     align-items: baseline;
-    gap: 0.8rem;
+    justify-content: flex-start;
+    gap: 0.45rem;
     margin-top: 0.4rem;
   }
 }

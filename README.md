@@ -51,6 +51,7 @@ Contexto para quien tome el proyecto después, incluido un modelo de IA:
 │   ├── llms.txt               # Resumen del negocio para modelos de lenguaje
 │   ├── sitemap.xml            # 18 URLs con hreflang y lastmod
 │   ├── site.webmanifest, favicon.ico, icon.png, .nojekyll
+├── tools/menu.js              # Generador del menú de servicios (ES/EN + JSON-LD)
 ├── worker/factura.js          # Cloudflare Worker que timbra el CFDI
 ├── site.config.js             # ← dominio, endpoint y píxel
 ├── wrangler.toml              # Despliegue del Worker
@@ -170,7 +171,42 @@ Las reservas caen directo en el CRM de GHL y disparan sus automatizaciones.
 - El widget está en español. En la página en inglés se avisa y se ofrece
   WhatsApp para atender en inglés.
 - Servicios y precios se administran **en GHL**, no en este repo. El menú de
-  `servicios.html` es informativo y hay que mantenerlo sincronizado a mano.
+  `servicios.html` es informativo y hay que mantenerlo sincronizado a mano
+  (ver «Menú de servicios» más abajo).
+
+## Menú de servicios
+
+Los 49 servicios y sus precios son los que el salón publica en Google Maps.
+**No se editan a mano en el HTML.** Viven en un solo archivo:
+
+```
+tools/menu.js      # fuente única: nombre ES/EN, precio, «desde», categoría, descripción
+npm run menu       # regenera servicios.html y en/services.html
+```
+
+El script reescribe, en las dos páginas a la vez:
+
+1. Los bloques `.svc-group` visibles, con sus subtítulos (`.svc-subhead`).
+2. El `OfferCatalog` en JSON-LD, con precios en MXN.
+3. La nota de precios al pie del menú.
+
+Es idempotente: se puede correr las veces que haga falta. Los anclajes de
+categoría cambian por idioma (`#g-unas` en español, `#g-nails` en inglés) porque
+la home enlaza a ellos, así que están declarados como `id` e `idEn` en el script.
+
+Detalles que importan:
+
+- **No publicamos duraciones.** El menú del salón no las trae y las de GHL solo
+  las conocemos para un servicio. Un «45 min» inventado es peor que nada.
+- **«Desde» significa precio inicial**, y solo lo llevan los servicios donde el
+  salón lo marcó así. En el JSON-LD eso se traduce a `priceSpecification.minPrice`
+  en vez de `price`.
+- El menú lleva la leyenda «precios sujetos a cambio sin previo aviso», que es
+  lo que dice el original.
+- **Falta por confirmar con el salón:** si el maquillaje de novia sigue en el
+  catálogo (aparece en la historia de `nosotros.html` pero no en el menú), y los
+  métodos de pago exactos (el JSON-LD dice efectivo, transferencia y tarjeta;
+  no está verificado).
 
 ## Facturación (CFDI) — emisión real
 
@@ -309,12 +345,14 @@ los citan. Lo que se hizo para que puedan hacerlo bien:
 | `Organization` + `WebSite` | ambas home | Identidad, logo, idiomas, redes y perfil de Google Maps |
 | `NailSalon` x2 | home y sucursales | Cada sucursal con geo, horarios, teléfono y calificación |
 | `FAQPage` | servicios y facturación | Respuestas que la IA puede citar directo |
-| `OfferCatalog` | servicios | Los 25 servicios con nombre, descripción y categoría |
+| `OfferCatalog` | servicios | Los 49 servicios con nombre, categoría y precio |
 | `BreadcrumbList` | 16 páginas interiores | Jerarquía del sitio |
 
-  El `OfferCatalog` **no incluye precios** a propósito: cambian seguido y un
-  precio viejo en los datos estructurados es peor que ninguno. Los precios viven
-  solo en el HTML visible.
+  El `OfferCatalog` **sí incluye precios** desde que tenemos el menú real del
+  salón. Los precios fijos van en `price`; los de tipo «desde» van en
+  `priceSpecification.minPrice`, que es lo semánticamente correcto para un
+  precio inicial. Todo en `MXN`. Si los precios cambian y nadie actualiza el
+  repo, este bloque miente: ver «Menú de servicios».
 
 - Las FAQ están redactadas como pregunta y respuesta directa, que es el formato
   que mejor extraen los modelos.
@@ -413,7 +451,8 @@ Para no repetir el trabajo:
 
 - La paleta sale del logo: rosa `#e14d9f`, perla `#fdf6fa`, lila `#a88bd4`,
   ciruela oscuro `#322638`. Todos los tokens están en `src/css/style.css` (`:root`).
-- Los precios del menú son orientativos («desde»); confirmar con el salón.
+- Los precios del menú son los reales publicados por el salón (Google Maps).
+  Solo los marcados «desde» son precio inicial. Ver «Menú de servicios».
 - Redes: Instagram/TikTok `@lalolita_nails`, Facebook `lalolitanails`
   (y la página de Polanco), AgendaPro `lalolita-nails/79723`.
 - Las imágenes grandes (logo 339 KB, algunas fotos ~300 KB) se pueden comprimir

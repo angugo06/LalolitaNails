@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Services &amp; prices | Lalolita Beauty Mexico City</title>
-  <meta name="description" content="Lalolita Beauty menu and prices: manicure, gel, acrylics, nail art, pedicure, cuts, balayage, brow threading and makeup in San Rafael and Polanco.">
+  <meta name="description" content="Lalolita Beauty prices in Mexico City: manicure $220, gel manicure $420, sculpted nails $670, spa pedicure $400, haircut $700, balayage from $2,900, brow threading $500 and social makeup $2,000. San Rafael and Polanco.">
 
   <meta property="og:title" content="Services | Lalolita Beauty">
   <meta property="og:description" content="Nails, hair, brows and makeup in San Rafael and Polanco, Mexico City.">
@@ -45,10 +45,18 @@
       },
       {
         "@type": "Question",
-        "name": "Is removal included?",
+        "name": "How much is a manicure at Lalolita Beauty?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. If you're coming in for a new nail service, removing your previous gel or acrylic is on us."
+          "text": "A plain manicure is $220 Mexican pesos and $420 with gel colour. A spa pedicure is $400, or $600 with gel. Sculpted nails in acrylic, tip or polygel are $670 with up to two gel shades and length #1 to #3. Nail art is charged separately, from $120."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is removal charged separately?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, removal is a separate service: $90 Mexican pesos for gel or rubber and $150 for acrylic or polygel. Let us know when you book so we can set aside the time."
         }
       },
       {
@@ -110,15 +118,17 @@
   {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
-    "name": "Lalolita Beauty services",
+    "name": "Lalolita Beauty services and prices",
     "inLanguage": "en",
+    "numberOfItems": 49,
     "itemListElement": [
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Classic manicure",
-          "description": "Cleanup, cuticle work, shaping and regular polish. The basics, done well.",
+          "name": "Manicure",
           "category": "Nails",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -126,15 +136,18 @@
           "areaServed": {
             "@type": "City",
             "name": "Ciudad de México"
-          }
-        }
+          },
+          "description": "Cleanup, cuticle work, shaping and a natural finish."
+        },
+        "price": "220"
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
           "name": "Gel manicure",
-          "description": "Semi-permanent colour with a mirror shine that holds for two to three weeks.",
           "category": "Nails",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -142,79 +155,56 @@
           "areaServed": {
             "@type": "City",
             "name": "Ciudad de México"
-          }
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Russian manicure",
-          "description": "Dry cuticle work with millimetre precision for an editorial finish.",
-          "category": "Nails",
-          "provider": {
-            "@id": "%SITE_URL%/#organization"
           },
-          "areaServed": {
-            "@type": "City",
-            "name": "Ciudad de México"
-          }
-        }
+          "description": "Manicure finished with semi-permanent gel colour."
+        },
+        "price": "420"
       },
       {
         "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Sculpted acrylic nails",
-          "description": "Structure, length and shape made to measure: almond, coffin, square or stiletto.",
-          "category": "Nails",
-          "provider": {
-            "@id": "%SITE_URL%/#organization"
-          },
-          "areaServed": {
-            "@type": "City",
-            "name": "Ciudad de México"
-          }
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Acrylic overlay / rubber base",
-          "description": "Reinforcement over your natural nail so it grows out strong, no extensions.",
-          "category": "Nails",
-          "provider": {
-            "@id": "%SITE_URL%/#organization"
-          },
-          "areaServed": {
-            "@type": "City",
-            "name": "Ciudad de México"
-          }
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Nail art &amp; freehand design",
-          "description": "From minimal lines to micro-landscapes: rhinestones, 3D, aura effect, colour French and more.",
-          "category": "Nails",
-          "provider": {
-            "@id": "%SITE_URL%/#organization"
-          },
-          "areaServed": {
-            "@type": "City",
-            "name": "Ciudad de México"
-          }
-        }
-      },
-      {
-        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
           "name": "Spa pedicure",
-          "description": "Exfoliation, hydration, massage and polish. A break for your feet.",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          },
+          "description": "Exfoliation, hydration and massage."
+        },
+        "price": "400"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Spa pedicure with gel",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          },
+          "description": "The full spa ritual with long-lasting gel colour."
+        },
+        "price": "600"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Gel, up to 2 shades",
           "category": "Nails",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -223,14 +213,54 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
-        }
+        },
+        "price": "240"
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Gel pedicure",
-          "description": "The full spa ritual with a long-lasting semi-permanent finish.",
+          "name": "Rubber base (up to 2 gel shades)",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          },
+          "description": "Flexible reinforcement over your natural nail."
+        },
+        "price": "460"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Sculpted nails (acrylic, tip or polygel)",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          },
+          "description": "Up to 2 gel shades, length #1 to #3."
+        },
+        "price": "670"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Acrylic or polygel on natural nail",
           "category": "Nails",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -239,14 +269,16 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
-        }
+        },
+        "price": "470"
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Acrylic or gel removal",
-          "description": "Careful removal that protects your natural nail. Free with any new service.",
+          "name": "Acrylic pedicure (acripie)",
           "category": "Nails",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -255,14 +287,16 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
-        }
+        },
+        "price": "570"
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Paraffin for hands or feet",
-          "description": "A warm paraffin bath for deep hydration. The perfect add-on.",
+          "name": "Extra length in acrylic or polygel",
           "category": "Nails",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -271,14 +305,311 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
+        },
+        "price": "100"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Rubber fill",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "410"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Acrylic or polygel fill (1 shade)",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "510"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Gel or rubber removal",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "90"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Acrylic or polygel removal",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "150"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Single nail replacement",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 70,
+          "priceCurrency": "MXN",
+          "valueAddedTaxIncluded": true
         }
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Women's haircut",
-          "description": "A cut tailored to your hair type and the way you actually live.",
+          "name": "Nail patch",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "40"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Nail art designs",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 120,
+          "priceCurrency": "MXN",
+          "valueAddedTaxIncluded": true
+        }
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "French finish",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 150,
+          "priceCurrency": "MXN",
+          "valueAddedTaxIncluded": true
+        }
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Effects, per nail",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 50,
+          "priceCurrency": "MXN",
+          "valueAddedTaxIncluded": true
+        }
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Swarovski crystals",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 100,
+          "priceCurrency": "MXN",
+          "valueAddedTaxIncluded": true
+        }
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Charms and cuts (each)",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "50"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Jelly Spa +",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "150"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Calcium or vitamin treatment",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "150"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Regular polish",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "150"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Additional regular polish",
+          "category": "Nails",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "75"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Haircut",
           "category": "Hair",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -287,14 +618,16 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
-        }
+        },
+        "price": "700"
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Cut + wash and blow-dry",
-          "description": "The full experience: wash with massage, cut and final styling.",
+          "name": "Half-up hairstyle",
           "category": "Hair",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -303,14 +636,21 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 750,
+          "priceCurrency": "MXN",
+          "valueAddedTaxIncluded": true
         }
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Blowout",
-          "description": "Waves, a polished straight finish or salon volume for any occasion.",
+          "name": "Soft waves styling",
           "category": "Hair",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -319,14 +659,16 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
-        }
+        },
+        "price": "650"
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Event hairstyling",
-          "description": "Updos, half-updos and red-carpet waves that hold all night.",
+          "name": "Colour (short or medium hair)",
           "category": "Hair",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -335,14 +677,21 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 1800,
+          "priceCurrency": "MXN",
+          "valueAddedTaxIncluded": true
         }
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Root touch-up",
-          "description": "Regrowth colour with tone matching.",
+          "name": "Colour (long hair)",
           "category": "Hair",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -351,14 +700,21 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 2200,
+          "priceCurrency": "MXN",
+          "valueAddedTaxIncluded": true
         }
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "All-over colour",
-          "description": "Full colour from root to tip with products that look after the hair fibre.",
+          "name": "Maintenance: root touch-up, toner and hydrating treatment",
           "category": "Hair",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -367,14 +723,16 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
-        }
+        },
+        "price": "1800"
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Balayage / highlights",
-          "description": "Freehand lightening with a custom toner. Includes a prior consultation.",
+          "name": "Balayage, highlights or babylights",
           "category": "Hair",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -383,14 +741,21 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 2900,
+          "priceCurrency": "MXN",
+          "valueAddedTaxIncluded": true
         }
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Hydrating treatment",
-          "description": "Deep repair for processed, dry or frizz-prone hair.",
+          "name": "Moroccan treatment",
           "category": "Hair",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -399,31 +764,149 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 2000,
+          "priceCurrency": "MXN",
+          "valueAddedTaxIncluded": true
         }
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Tailoring (personalised)",
+          "category": "Hair",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "800"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Butter (shine and softness)",
+          "category": "Hair",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "600"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Ampoules",
+          "category": "Hair",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "300"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Shampoo and conditioner",
+          "category": "Hair",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "150"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Express straightening",
+          "category": "Hair",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "280"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Express blow-dry",
+          "category": "Hair",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "280"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
           "name": "Brow design with thread",
-          "description": "Threading: the most precise, skin-friendly technique, shaped to suit your face.",
-          "category": "Brows &amp; lashes",
+          "category": "Brows and waxing",
           "provider": {
             "@id": "%SITE_URL%/#organization"
           },
           "areaServed": {
             "@type": "City",
             "name": "Ciudad de México"
-          }
-        }
+          },
+          "description": "Threading: the most precise and skin-friendly technique."
+        },
+        "price": "500"
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Facial threading",
-          "description": "Upper lip, cheeks or full face, without irritation.",
-          "category": "Brows &amp; lashes",
+          "name": "Brow design with wax",
+          "category": "Brows and waxing",
           "provider": {
             "@id": "%SITE_URL%/#organization"
           },
@@ -431,15 +914,17 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
-        }
+        },
+        "price": "400"
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Brow tint or henna",
-          "description": "Colour and visual density for up to four weeks.",
-          "category": "Brows &amp; lashes",
+          "name": "Brow lamination",
+          "category": "Brows and waxing",
           "provider": {
             "@id": "%SITE_URL%/#organization"
           },
@@ -447,15 +932,17 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
-        }
+        },
+        "price": "440"
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Lash lift",
-          "description": "Natural curl and an open gaze, with no extensions and no mascara.",
-          "category": "Brows &amp; lashes",
+          "name": "Brow design, lamination and henna",
+          "category": "Brows and waxing",
           "provider": {
             "@id": "%SITE_URL%/#organization"
           },
@@ -463,14 +950,88 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
-        }
+        },
+        "price": "1000"
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Brow henna",
+          "category": "Brows and waxing",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "400"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Lash lifting",
+          "category": "Brows and waxing",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "450"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Upper lip waxing",
+          "category": "Brows and waxing",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "250"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Full face waxing",
+          "category": "Brows and waxing",
+          "provider": {
+            "@id": "%SITE_URL%/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Ciudad de México"
+          }
+        },
+        "price": "650"
+      },
+      {
+        "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
           "name": "Social makeup",
-          "description": "For parties, graduations or photo shoots. Luminous skin, long wear.",
           "category": "Makeup",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -478,15 +1039,18 @@
           "areaServed": {
             "@type": "City",
             "name": "Ciudad de México"
-          }
-        }
+          },
+          "description": "For events, parties and photo shoots."
+        },
+        "price": "2000"
       },
       {
         "@type": "Offer",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/InStock",
         "itemOffered": {
           "@type": "Service",
-          "name": "Makeup + hairstyling",
-          "description": "The full pairing so you arrive ready for any event.",
+          "name": "Express makeup",
           "category": "Makeup",
           "provider": {
             "@id": "%SITE_URL%/#organization"
@@ -495,23 +1059,8 @@
             "@type": "City",
             "name": "Ciudad de México"
           }
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Bridal makeup",
-          "description": "Includes a trial run, a look plan and long-wear makeup on the big day.",
-          "category": "Makeup",
-          "provider": {
-            "@id": "%SITE_URL%/#organization"
-          },
-          "areaServed": {
-            "@type": "City",
-            "name": "Ciudad de México"
-          }
-        }
+        },
+        "price": "900"
       }
     ]
   }
@@ -563,7 +1112,7 @@
     <section class="page-hero container">
       <p class="eyebrow">Our menu</p>
       <h1>Services from <em>head to toe.</em></h1>
-      <p class="lede">Nails, hair, brows and makeup under one roof, at both locations. Prices are "from" figures in Mexican pesos; we confirm your exact quote before we start, with no surprises.</p>
+      <p class="lede">Nails, hair, brows and makeup under one roof, at both locations. This is the full menu with prices in Mexican pesos; we always confirm your total before we start, with no surprises.</p>
     </section>
 
     <div class="container">
@@ -571,7 +1120,7 @@
         <button class="filter-btn" type="button" aria-pressed="true" data-filter="all">All</button>
         <button class="filter-btn" type="button" aria-pressed="false" data-filter="unas">Nails</button>
         <button class="filter-btn" type="button" aria-pressed="false" data-filter="cabello">Hair</button>
-        <button class="filter-btn" type="button" aria-pressed="false" data-filter="cejas">Brows &amp; lashes</button>
+        <button class="filter-btn" type="button" aria-pressed="false" data-filter="cejas">Brows &amp; waxing</button>
         <button class="filter-btn" type="button" aria-pressed="false" data-filter="maquillaje">Makeup</button>
       </div>
 
@@ -580,55 +1129,115 @@
           <h2 id="g-nails">Nails</h2>
           <span>Our specialty</span>
         </div>
+        <h3 class="svc-subhead">Manicure and pedicure</h3>
         <article class="svc-item reveal">
-          <h3>Classic manicure</h3>
-          <p>Cleanup, cuticle work, shaping and regular polish. The basics, done well.</p>
-          <div class="svc-price"><b>from $180</b><span>45 min</span></div>
+          <h4>Manicure</h4>
+          <p>Cleanup, cuticle work, shaping and a natural finish.</p>
+          <div class="svc-price"><b>$220</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Gel manicure <span class="tag">Favourite</span></h3>
-          <p>Semi-permanent colour with a mirror shine that holds for two to three weeks.</p>
-          <div class="svc-price"><b>from $320</b><span>60 min</span></div>
+          <h4>Gel manicure</h4>
+          <p>Manicure finished with semi-permanent gel colour.</p>
+          <div class="svc-price"><b>$420</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Russian manicure</h3>
-          <p>Dry cuticle work with millimetre precision for an editorial finish.</p>
-          <div class="svc-price"><b>from $380</b><span>75 min</span></div>
+          <h4>Spa pedicure</h4>
+          <p>Exfoliation, hydration and massage.</p>
+          <div class="svc-price"><b>$400</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Sculpted acrylic nails <span class="tag">Popular</span></h3>
-          <p>Structure, length and shape made to measure: almond, coffin, square or stiletto.</p>
-          <div class="svc-price"><b>from $550</b><span>120 min</span></div>
+          <h4>Spa pedicure with gel</h4>
+          <p>The full spa ritual with long-lasting gel colour.</p>
+          <div class="svc-price"><b>$600</b></div>
+        </article>
+        <h3 class="svc-subhead">Gel, rubber and sculpted nails</h3>
+        <article class="svc-item reveal">
+          <h4>Gel, up to 2 shades</h4>
+          <div class="svc-price"><b>$240</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Acrylic overlay / rubber base</h3>
-          <p>Reinforcement over your natural nail so it grows out strong, no extensions.</p>
-          <div class="svc-price"><b>from $450</b><span>90 min</span></div>
+          <h4>Rubber base (up to 2 gel shades)</h4>
+          <p>Flexible reinforcement over your natural nail.</p>
+          <div class="svc-price"><b>$460</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Nail art &amp; freehand design <span class="tag">House signature</span></h3>
-          <p>From minimal lines to micro-landscapes: rhinestones, 3D, aura effect, colour French and more.</p>
-          <div class="svc-price"><b>from $30</b><span>per nail</span></div>
+          <h4>Sculpted nails (acrylic, tip or polygel) <span class="tag">Popular</span></h4>
+          <p>Up to 2 gel shades, length #1 to #3.</p>
+          <div class="svc-price"><b>$670</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Spa pedicure</h3>
-          <p>Exfoliation, hydration, massage and polish. A break for your feet.</p>
-          <div class="svc-price"><b>from $350</b><span>75 min</span></div>
+          <h4>Acrylic or polygel on natural nail</h4>
+          <div class="svc-price"><b>$470</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Gel pedicure</h3>
-          <p>The full spa ritual with a long-lasting semi-permanent finish.</p>
-          <div class="svc-price"><b>from $420</b><span>90 min</span></div>
+          <h4>Acrylic pedicure (acripie)</h4>
+          <div class="svc-price"><b>$570</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Acrylic or gel removal</h3>
-          <p>Careful removal that protects your natural nail. Free with any new service.</p>
-          <div class="svc-price"><b>from $100</b><span>30 min</span></div>
+          <h4>Extra length in acrylic or polygel</h4>
+          <div class="svc-price"><b>$100</b></div>
+        </article>
+        <h3 class="svc-subhead">Fills and removals</h3>
+        <article class="svc-item reveal">
+          <h4>Rubber fill</h4>
+          <div class="svc-price"><b>$410</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Paraffin for hands or feet</h3>
-          <p>A warm paraffin bath for deep hydration. The perfect add-on.</p>
-          <div class="svc-price"><b>from $150</b><span>20 min</span></div>
+          <h4>Acrylic or polygel fill (1 shade)</h4>
+          <div class="svc-price"><b>$510</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Gel or rubber removal</h4>
+          <div class="svc-price"><b>$90</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Acrylic or polygel removal</h4>
+          <div class="svc-price"><b>$150</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Single nail replacement</h4>
+          <div class="svc-price"><span>from</span><b>$70</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Nail patch</h4>
+          <div class="svc-price"><b>$40</b></div>
+        </article>
+        <h3 class="svc-subhead">Nail art and extras</h3>
+        <article class="svc-item reveal">
+          <h4>Nail art designs <span class="tag">House signature</span></h4>
+          <div class="svc-price"><span>from</span><b>$120</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>French finish</h4>
+          <div class="svc-price"><span>from</span><b>$150</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Effects, per nail</h4>
+          <div class="svc-price"><span>from</span><b>$50</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Swarovski crystals</h4>
+          <div class="svc-price"><span>from</span><b>$100</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Charms and cuts (each)</h4>
+          <div class="svc-price"><b>$50</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Jelly Spa +</h4>
+          <div class="svc-price"><b>$150</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Calcium or vitamin treatment</h4>
+          <div class="svc-price"><b>$150</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Regular polish</h4>
+          <div class="svc-price"><b>$150</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Additional regular polish</h4>
+          <div class="svc-price"><b>$75</b></div>
         </article>
       </section>
 
@@ -637,72 +1246,105 @@
           <h2 id="g-hair">Hair</h2>
           <span>Cut · Colour · Styling</span>
         </div>
+        <h3 class="svc-subhead">Cut, styling and colour</h3>
         <article class="svc-item reveal">
-          <h3>Women's haircut</h3>
-          <p>A cut tailored to your hair type and the way you actually live.</p>
-          <div class="svc-price"><b>from $250</b><span>45 min</span></div>
+          <h4>Haircut</h4>
+          <div class="svc-price"><b>$700</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Cut + wash and blow-dry</h3>
-          <p>The full experience: wash with massage, cut and final styling.</p>
-          <div class="svc-price"><b>from $350</b><span>75 min</span></div>
+          <h4>Half-up hairstyle</h4>
+          <div class="svc-price"><span>from</span><b>$750</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Blowout</h3>
-          <p>Waves, a polished straight finish or salon volume for any occasion.</p>
-          <div class="svc-price"><b>from $300</b><span>45 min</span></div>
+          <h4>Soft waves styling</h4>
+          <div class="svc-price"><b>$650</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Event hairstyling</h3>
-          <p>Updos, half-updos and red-carpet waves that hold all night.</p>
-          <div class="svc-price"><b>from $450</b><span>60 min</span></div>
+          <h4>Colour (short or medium hair)</h4>
+          <div class="svc-price"><span>from</span><b>$1,800</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Root touch-up</h3>
-          <p>Regrowth colour with tone matching.</p>
-          <div class="svc-price"><b>from $850</b><span>120 min</span></div>
+          <h4>Colour (long hair)</h4>
+          <div class="svc-price"><span>from</span><b>$2,200</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>All-over colour</h3>
-          <p>Full colour from root to tip with products that look after the hair fibre.</p>
-          <div class="svc-price"><b>from $1,100</b><span>150 min</span></div>
+          <h4>Maintenance: root touch-up, toner and hydrating treatment</h4>
+          <div class="svc-price"><b>$1,800</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Balayage / highlights <span class="tag">Trending</span></h3>
-          <p>Freehand lightening with a custom toner. Includes a prior consultation.</p>
-          <div class="svc-price"><b>from $1,800</b><span>3–4 h</span></div>
+          <h4>Balayage, highlights or babylights <span class="tag">Trending</span></h4>
+          <div class="svc-price"><span>from</span><b>$2,900</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Hydrating treatment</h3>
-          <p>Deep repair for processed, dry or frizz-prone hair.</p>
-          <div class="svc-price"><b>from $600</b><span>60 min</span></div>
+          <h4>Moroccan treatment</h4>
+          <div class="svc-price"><span>from</span><b>$2,000</b></div>
+        </article>
+        <h3 class="svc-subhead">Davines treatments</h3>
+        <article class="svc-item reveal">
+          <h4>Tailoring (personalised)</h4>
+          <div class="svc-price"><b>$800</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Butter (shine and softness)</h4>
+          <div class="svc-price"><b>$600</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Ampoules</h4>
+          <div class="svc-price"><b>$300</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Shampoo and conditioner</h4>
+          <div class="svc-price"><b>$150</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Express straightening</h4>
+          <div class="svc-price"><b>$280</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Express blow-dry</h4>
+          <div class="svc-price"><b>$280</b></div>
         </article>
       </section>
 
       <section class="svc-group" data-cat="cejas" aria-labelledby="g-brows">
         <div class="svc-group-head reveal">
-          <h2 id="g-brows">Brows &amp; lashes</h2>
+          <h2 id="g-brows">Brows and waxing</h2>
           <span>The frame of your face</span>
         </div>
+        <h3 class="svc-subhead">Brow design</h3>
         <article class="svc-item reveal">
-          <h3>Brow design with thread <span class="tag">Specialty</span></h3>
-          <p>Threading: the most precise, skin-friendly technique, shaped to suit your face.</p>
-          <div class="svc-price"><b>from $150</b><span>20 min</span></div>
+          <h4>Brow design with thread <span class="tag">Specialty</span></h4>
+          <p>Threading: the most precise and skin-friendly technique.</p>
+          <div class="svc-price"><b>$500</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Facial threading</h3>
-          <p>Upper lip, cheeks or full face, without irritation.</p>
-          <div class="svc-price"><b>from $80</b><span>15 min</span></div>
+          <h4>Brow design with wax</h4>
+          <div class="svc-price"><b>$400</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Brow tint or henna</h3>
-          <p>Colour and visual density for up to four weeks.</p>
-          <div class="svc-price"><b>from $250</b><span>40 min</span></div>
+          <h4>Brow lamination</h4>
+          <div class="svc-price"><b>$440</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Lash lift</h3>
-          <p>Natural curl and an open gaze, with no extensions and no mascara.</p>
-          <div class="svc-price"><b>from $450</b><span>60 min</span></div>
+          <h4>Brow design, lamination and henna</h4>
+          <div class="svc-price"><b>$1,000</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Brow henna</h4>
+          <div class="svc-price"><b>$400</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Lash lifting</h4>
+          <div class="svc-price"><b>$450</b></div>
+        </article>
+        <h3 class="svc-subhead">Facial waxing</h3>
+        <article class="svc-item reveal">
+          <h4>Upper lip waxing</h4>
+          <div class="svc-price"><b>$250</b></div>
+        </article>
+        <article class="svc-item reveal">
+          <h4>Full face waxing</h4>
+          <div class="svc-price"><b>$650</b></div>
         </article>
       </section>
 
@@ -712,23 +1354,17 @@
           <span>Time to shine</span>
         </div>
         <article class="svc-item reveal">
-          <h3>Social makeup</h3>
-          <p>For parties, graduations or photo shoots. Luminous skin, long wear.</p>
-          <div class="svc-price"><b>from $650</b><span>60 min</span></div>
+          <h4>Social makeup</h4>
+          <p>For events, parties and photo shoots.</p>
+          <div class="svc-price"><b>$2,000</b></div>
         </article>
         <article class="svc-item reveal">
-          <h3>Makeup + hairstyling</h3>
-          <p>The full pairing so you arrive ready for any event.</p>
-          <div class="svc-price"><b>from $1,000</b><span>2 h</span></div>
-        </article>
-        <article class="svc-item reveal">
-          <h3>Bridal makeup <span class="tag">Brides</span></h3>
-          <p>Includes a trial run, a look plan and long-wear makeup on the big day.</p>
-          <div class="svc-price"><b>from $2,500</b><span>trial included</span></div>
+          <h4>Express makeup</h4>
+          <div class="svc-price"><b>$900</b></div>
         </article>
       </section>
 
-      <p class="price-note reveal">"From" prices are indicative and vary with length, condition and design complexity. We confirm the exact price before starting your service. We accept cash and bank transfer.</p>
+      <p class="price-note reveal">Prices in Mexican pesos. Services marked <strong>from</strong> have a starting price: the final amount depends on length, hair volume, technique, design or the work involved, and we always confirm it before we start. Prices may change without notice. We accept cash and bank transfer.</p>
     </div>
 
     <section class="section">
@@ -743,8 +1379,12 @@
             <div class="faq-body"><p>Online, from our <a href="book.html">booking page</a>: you pick the location, the service, who looks after you and the time, with live availability and instant confirmation. The calendar is in Spanish, so if you would rather book in English just message us on WhatsApp at <a href="https://wa.me/525568856070" target="_blank" rel="noopener">55 6885 6070</a> (San Rafael) or <a href="https://wa.me/525615156061" target="_blank" rel="noopener">56 1515 6061</a> (Polanco) and we will set it up for you. Saturdays fill up fast, so book a few days ahead.</p></div>
           </details>
           <details>
-            <summary>Is removal included?</summary>
-            <div class="faq-body"><p>Yes. If you're coming in for a new nail service, removing your previous gel or acrylic is on us.</p></div>
+            <summary>How much is a manicure at Lalolita Beauty?</summary>
+            <div class="faq-body"><p>A plain manicure is <strong>$220</strong> Mexican pesos and <strong>$420</strong> with gel colour. A spa pedicure is <strong>$400</strong>, or <strong>$600</strong> with gel. Sculpted nails in acrylic, tip or polygel are <strong>$670</strong> with up to two gel shades and length #1 to #3. Nail art is charged separately, from $120.</p></div>
+          </details>
+          <details>
+            <summary>Is removal charged separately?</summary>
+            <div class="faq-body"><p>Yes, removal is a separate service: <strong>$90</strong> for gel or rubber and <strong>$150</strong> for acrylic or polygel. Let us know when you book so we can set aside the time.</p></div>
           </details>
           <details>
             <summary>How long will gel or acrylics last?</summary>

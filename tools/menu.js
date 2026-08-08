@@ -1,14 +1,14 @@
-/* Genera el menú de servicios (HTML ES/EN) y el OfferCatalog desde una sola
+/* tools/menu.js — genera el menú de servicios (HTML ES/EN) y el OfferCatalog desde una sola
    fuente de datos, para que las dos versiones no se desincronicen.
    Precios reales del salón (Google Maps). Sin duraciones: no las tenemos. */
 const fs = require("fs");
-process.chdir(__dirname + "/src");
+process.chdir(__dirname + "/../src");
 
 const M = (es, en, price, opts = {}) => ({ es, en, price, ...opts });
 
 const MENU = [
   {
-    cat: "unas", id: "g-unas",
+    cat: "unas", id: "g-unas", idEn: "g-nails",
     es: { title: "Uñas", kicker: "Nuestra especialidad" },
     en: { title: "Nails", kicker: "Our specialty" },
     groups: [
@@ -60,7 +60,7 @@ const MENU = [
     ],
   },
   {
-    cat: "cabello", id: "g-cabello",
+    cat: "cabello", id: "g-cabello", idEn: "g-hair",
     es: { title: "Cabello", kicker: "Corte · Color · Peinado" },
     en: { title: "Hair", kicker: "Cut · Colour · Styling" },
     groups: [
@@ -91,7 +91,7 @@ const MENU = [
     ],
   },
   {
-    cat: "cejas", id: "g-cejas",
+    cat: "cejas", id: "g-cejas", idEn: "g-brows",
     es: { title: "Cejas y depilación", kicker: "El marco de tu rostro" },
     en: { title: "Brows and waxing", kicker: "The frame of your face" },
     groups: [
@@ -116,7 +116,7 @@ const MENU = [
     ],
   },
   {
-    cat: "maquillaje", id: "g-maquillaje",
+    cat: "maquillaje", id: "g-maquillaje", idEn: "g-makeup",
     es: { title: "Maquillaje", kicker: "Para brillar" },
     en: { title: "Makeup", kicker: "Time to shine" },
     groups: [
@@ -139,6 +139,7 @@ function buildHtml(lang) {
   const fromLbl = L ? "from" : "desde";
   return MENU.map((cat) => {
     const head = L ? cat.en : cat.es;
+    const gid = L ? cat.idEn : cat.id;
     const groups = cat.groups.map((g, gi) => {
       const items = g.items.map((it) => {
         const name = L ? it.en : it.es;
@@ -155,9 +156,9 @@ function buildHtml(lang) {
       return sub + items;
     }).join("\n");
 
-    return `      <section class="svc-group" data-cat="${cat.cat}" aria-labelledby="${cat.id}">
+    return `      <section class="svc-group" data-cat="${cat.cat}" aria-labelledby="${gid}">
         <div class="svc-group-head reveal">
-          <h2 id="${cat.id}">${head.title}</h2>
+          <h2 id="${gid}">${head.title}</h2>
           <span>${head.kicker}</span>
         </div>
 ${groups}

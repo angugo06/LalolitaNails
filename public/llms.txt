@@ -1,9 +1,11 @@
 # Lalolita Beauty
 
 > Salón de belleza en la Ciudad de México con dos sucursales, San Rafael y
-> Polanco. Ofrece uñas (gelish, acrílicas, nail art, pedicure), cabello (corte,
-> color, balayage, peinado), diseño de cejas con hilo, lifting de pestañas y
-> maquillaje social y de novia. Atiende únicamente con cita previa. Fundado en
+> Polanco. Ofrece uñas (manicure, gel, rubber, acrílico y polygel, nail art,
+> pedicure spa), cabello (corte, color, balayage, peinado, tratamientos Davines),
+> diseño de cejas con hilo o cera, brow lamination, henna, lifting de pestañas,
+> depilación facial y maquillaje social y express. Atiende únicamente con cita
+> previa. El manicure cuesta $220 MXN y el manicure con gel $420. Fundado en
 > 2021 por Eddu Vázquez. El sitio está en español e inglés.
 
 Beauty salon in Mexico City with two locations, San Rafael and Polanco. Nails,
@@ -23,20 +25,87 @@ hair, brows and makeup, by appointment only. Founded in 2021 by Eddu Vázquez.
   domingo cerrado.
 - Instagram y TikTok: @lalolita_nails. Facebook: lalolitanails.
 
-## Servicios
+## Servicios y precios
 
-- Uñas: manicure clásico, manicure con gelish, manicure ruso, uñas acrílicas
-  esculturales, baño de acrílico o rubber, nail art y diseño a mano, pedicure
-  spa, pedicure con gelish, retiro y parafina.
-- Cabello: corte de dama, corte con lavado y secado, peinado o blower, peinado
-  de evento, tinte de raíz, tinte global, balayage o mechas y tratamiento
-  hidratante.
-- Cejas y mirada: diseño de cejas con hilo (threading), depilación facial con
-  hilo, tinte o henna de cejas y lifting de pestañas.
-- Maquillaje: social, maquillaje con peinado y maquillaje de novia con prueba.
+Precios en pesos mexicanos (MXN), tomados del menú publicado del salón. Los
+servicios marcados «desde» tienen precio inicial: el total depende del largo, la
+cantidad de cabello, la técnica, el diseño o el trabajo requerido, y se confirma
+antes de empezar. Precios sujetos a cambio sin previo aviso.
 
-Los precios publicados son precios «desde» en pesos mexicanos y se confirman en
-el salón antes de comenzar, según largo, estado y complejidad.
+### Uñas
+
+Manicure y pedicure:
+
+- Manicure: $220
+- Manicure con gel: $420
+- Pedicure spa: $400
+- Pedicure spa con gel: $600
+
+Gel, rubber y esculturales:
+
+- Gel hasta 2 tonos: $240
+- Rubber (hasta 2 tonos de gel): $460
+- Uñas esculturales (acrílico, tip o polygel), hasta 2 tonos de gel, largo #1 a #3: $670
+- Acrílico o polygel en uña natural: $470
+- Acripie: $570
+- Número extra de acrílico o polygel: $100
+
+Retoques y retiros:
+
+- Retoque de rubber: $410
+- Retoque de acrílico o polygel (1 tono): $510
+- Retiro de gel o rubber: $90
+- Retiro de acrílico o polygel: $150
+- Reposición de 1 uña: desde $70
+- Parche de uña: $40
+
+Diseño y extras:
+
+- Diseños: desde $120
+- Francés: desde $150
+- Efectos por uña: desde $50
+- Swarovski: desde $100
+- Cortes y dijes (cada uno): $50
+- Jelly Spa +: $150
+- Calcio o vitamina: $150
+- Esmaltado sencillo con barniz: $150
+- Esmaltado con barniz adicional: $75
+
+### Cabello
+
+- Corte de cabello: $700
+- Peinado semi-recogido: desde $750
+- Peinado en ondas suaves: $650
+- Tinte (cabello corto o medio): desde $1,800
+- Tinte (cabello largo): desde $2,200
+- Mantenimiento (retoque, matiz y tratamiento hidratante): $1,800
+- Balayage, mechas o babylights: desde $2,900
+- Tratamiento marroquí: desde $2,000
+
+Tratamientos Davines:
+
+- Tailoring (personalizado): $800
+- Butter (brillo y suavidad): $600
+- Ampolletas: $300
+- Shampoo y acondicionador: $150
+- Alisado express: $280
+- Secado express: $280
+
+### Cejas y depilación
+
+- Diseño de ceja con hilo (threading): $500
+- Diseño de ceja con cera: $400
+- Brow lamination: $440
+- Diseño, brow lamination y henna: $1,000
+- Henna: $400
+- Lifting de pestañas: $450
+- Depilación de bozo: $250
+- Depilación de rostro completo: $650
+
+### Maquillaje
+
+- Maquillaje social: $2,000
+- Maquillaje express: $900
 
 ## Cómo agendar
 
@@ -53,7 +122,7 @@ con RFC, razón social, régimen fiscal, código postal fiscal y uso del CFDI.
 ## Páginas
 
 - [Inicio](%SITE_URL%/index.html): resumen del salón, especialidades y sucursales.
-- [Servicios y precios](%SITE_URL%/servicios.html): menú completo con precios «desde» y preguntas frecuentes.
+- [Servicios y precios](%SITE_URL%/servicios.html): menú completo con precios en pesos y preguntas frecuentes.
 - [Nosotros](%SITE_URL%/nosotros.html): historia del salón desde 2021 y valores.
 - [Equipo](%SITE_URL%/equipo.html): quiénes atienden en cada sucursal.
 - [Sucursales y horarios](%SITE_URL%/ubicacion.html): direcciones, mapas, horarios y cómo llegar.

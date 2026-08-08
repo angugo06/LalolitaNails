@@ -1,0 +1,75 @@
+# Lalolita Beauty
+
+> Salón de belleza en la Ciudad de México con dos sucursales, San Rafael y
+> Polanco. Ofrece uñas (gelish, acrílicas, nail art, pedicure), cabello (corte,
+> color, balayage, peinado), diseño de cejas con hilo, lifting de pestañas y
+> maquillaje social y de novia. Atiende únicamente con cita previa. Fundado en
+> 2021 por Eddu Vázquez. El sitio está en español e inglés.
+
+Beauty salon in Mexico City with two locations, San Rafael and Polanco. Nails,
+hair, brows and makeup, by appointment only. Founded in 2021 by Eddu Vázquez.
+
+## Datos de contacto
+
+- Sucursal San Rafael: C. Guillermo Prieto 46, Col. San Rafael, Cuauhtémoc,
+  06470, Ciudad de México. Teléfono y WhatsApp: +52 55 6885 6070.
+  Coordenadas: 19.437349, -99.162505. Calificación en Google: 4.4 (96 reseñas).
+- Sucursal Polanco: Lago Tanganica 61, Col. Granada, Miguel Hidalgo, 11520,
+  Ciudad de México. Teléfono y WhatsApp: +52 56 1515 6061.
+  Coordenadas: 19.438727, -99.193170. Calificación en Google: 4.8 (22 reseñas).
+- Horario San Rafael: lunes a viernes 10:00 a 20:00, sábado 9:00 a 19:00,
+  domingo cerrado.
+- Horario Polanco: lunes a viernes 11:00 a 20:00, sábado 10:00 a 18:00,
+  domingo cerrado.
+- Instagram y TikTok: @lalolita_nails. Facebook: lalolitanails.
+
+## Servicios
+
+- Uñas: manicure clásico, manicure con gelish, manicure ruso, uñas acrílicas
+  esculturales, baño de acrílico o rubber, nail art y diseño a mano, pedicure
+  spa, pedicure con gelish, retiro y parafina.
+- Cabello: corte de dama, corte con lavado y secado, peinado o blower, peinado
+  de evento, tinte de raíz, tinte global, balayage o mechas y tratamiento
+  hidratante.
+- Cejas y mirada: diseño de cejas con hilo (threading), depilación facial con
+  hilo, tinte o henna de cejas y lifting de pestañas.
+- Maquillaje: social, maquillaje con peinado y maquillaje de novia con prueba.
+
+Los precios publicados son precios «desde» en pesos mexicanos y se confirman en
+el salón antes de comenzar, según largo, estado y complejidad.
+
+## Cómo agendar
+
+Las citas se agendan en línea desde la página de reservas, que muestra
+disponibilidad real y confirma al instante. El calendario está en español; para
+atención en inglés se puede escribir por WhatsApp a cualquiera de las dos
+sucursales. También se agenda por mensaje directo en Instagram.
+
+## Facturación
+
+El salón emite CFDI 4.0. La factura se solicita desde la página de facturación
+con RFC, razón social, régimen fiscal, código postal fiscal y uso del CFDI.
+
+## Páginas
+
+- [Inicio](%SITE_URL%/index.html): resumen del salón, especialidades y sucursales.
+- [Servicios y precios](%SITE_URL%/servicios.html): menú completo con precios «desde» y preguntas frecuentes.
+- [Nosotros](%SITE_URL%/nosotros.html): historia del salón desde 2021 y valores.
+- [Equipo](%SITE_URL%/equipo.html): quiénes atienden en cada sucursal.
+- [Sucursales y horarios](%SITE_URL%/ubicacion.html): direcciones, mapas, horarios y cómo llegar.
+- [Reservar](%SITE_URL%/reservar.html): calendario de citas en línea.
+- [Facturación CFDI](%SITE_URL%/facturacion.html): solicitud de factura.
+- [Aviso de Privacidad](%SITE_URL%/aviso-de-privacidad.html)
+- [Términos y Condiciones](%SITE_URL%/terminos.html)
+
+## English pages
+
+- [Home](%SITE_URL%/en/index.html)
+- [Services and prices](%SITE_URL%/en/services.html)
+- [About](%SITE_URL%/en/about.html)
+- [Team](%SITE_URL%/en/team.html)
+- [Locations and hours](%SITE_URL%/en/locations.html)
+- [Book](%SITE_URL%/en/book.html)
+- [Invoicing (CFDI)](%SITE_URL%/en/billing.html)
+- [Privacy Notice](%SITE_URL%/en/privacy.html)
+- [Terms and Conditions](%SITE_URL%/en/terms.html)

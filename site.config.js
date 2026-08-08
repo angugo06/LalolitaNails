@@ -21,9 +21,16 @@ const siteUrl = "https://angugo06.github.io/LalolitaNails";
  */
 const facturaEndpoint = "";
 
+/**
+ * ID del píxel de Meta. Vacío = no se carga ningún píxel.
+ * Solo se activa después de que la persona acepta en el banner de cookies.
+ */
+const metaPixelId = "";
+
 module.exports = {
   siteUrl,
   facturaEndpoint,
+  metaPixelId,
   // subcarpeta desde la que se sirve el sitio ("" si es la raíz del dominio)
   basePath: new URL(siteUrl).pathname.replace(/\/$/, ""),
 };

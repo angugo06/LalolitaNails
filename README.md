@@ -4,29 +4,75 @@ Sitio multipágina y bilingüe del salón **Lalolita Beauty** (San Rafael y Pola
 HTML/CSS/JS vanilla, sin frameworks ni dependencias en runtime. Webpack solo
 empaqueta el JS y copia archivos.
 
+**19 páginas** (9 en español, 9 en inglés, más el 404), sitio estático puro que
+se puede mover a cualquier hosting.
+
+## Decisiones de fondo
+
+Contexto para quien tome el proyecto después, incluido un modelo de IA:
+
+- **Sin framework a propósito.** El sitio es contenido, no una aplicación.
+  HTML estático carga más rápido, se indexa mejor, lo leen los rastreadores de
+  IA (que casi nunca ejecutan JS) y no se rompe con actualizaciones de
+  dependencias. El JS es progresivo: sin él, el sitio se lee completo.
+- **Todo lo dinámico vive fuera.** Las reservas están en GoHighLevel, la
+  facturación en un Cloudflare Worker y las reseñas en Google. El repo no
+  guarda datos de clientas ni secretos.
+- **Un solo lugar para la configuración.** `site.config.js` tiene el dominio,
+  el endpoint de facturación y el píxel de Meta. El build inyecta esos valores
+  con tokens (`%SITE_URL%`, `%BASE%`, `%FACTURA_ENDPOINT%`, `%META_PIXEL_ID%`,
+  `%BUILD_DATE%`), así que no hay URLs escritas a mano en el HTML.
+- **Español primero.** El negocio y la ley son mexicanos. El inglés es
+  traducción; en los documentos legales se dice explícitamente que prevalece
+  el español.
+
 ## Estructura
 
 ```
-├── src/                  # Código fuente del sitio
-│   ├── index.html        # Inicio (hero + probador de esmaltes)
-│   ├── servicios.html    # Menú de servicios con filtros y FAQ
-│   ├── nosotros.html     # Historia, línea de tiempo y valores
-│   ├── equipo.html       # Equipo (contenido provisional)
-│   ├── ubicacion.html    # Mapas, horarios y cómo llegar (2 sucursales)
-│   ├── reservar.html     # Formulario de reserva → WhatsApp
-│   ├── facturacion.html  # Solicitud de factura CFDI → WhatsApp
-│   ├── 404.html          # Página de error
-│   ├── en/               # Versión en inglés (mismas páginas)
-│   ├── css/style.css     # Sistema de diseño completo (tokens en :root)
-│   ├── js/app.js         # Interacciones (reveals, probador, formulario…)
-│   └── img/              # Fotografías y logo
-├── public/               # Estáticos copiados tal cual (favicon, icon.png,
-│                         # robots.txt, sitemap.xml, manifest, .nojekyll)
-├── site.config.js        # ← dominio del sitio (único lugar que cambiar)
-├── .github/workflows/    # Deploy automático a GitHub Pages
-├── dist/                 # Salida de build (lo que se publica) — generado
-└── webpack.*.js          # Build
+├── src/                       # Código fuente del sitio
+│   ├── index.html             # Inicio (hero, probador de esmaltes, reseñas)
+│   ├── servicios.html         # Menú con filtros por categoría y FAQ
+│   ├── nosotros.html          # Historia desde 2021 y valores
+│   ├── equipo.html            # Equipo (contenido provisional)
+│   ├── ubicacion.html         # Mapas, horarios y cómo llegar (2 sucursales)
+│   ├── reservar.html          # Calendario de GoHighLevel embebido
+│   ├── facturacion.html       # Solicitud o emisión de CFDI
+│   ├── aviso-de-privacidad.html
+│   ├── terminos.html
+│   ├── 404.html
+│   ├── en/                    # Las mismas 9 páginas en inglés
+│   ├── css/style.css          # Sistema de diseño (tokens en :root)
+│   ├── css/fonts.css          # @font-face de las fuentes autoalojadas
+│   ├── js/app.js              # Interacciones + cookies + formulario CFDI
+│   ├── fonts/                 # woff2 de Fraunces y DM Sans
+│   └── img/                   # Fotografías y logos (WebP)
+├── public/                    # Se copian tal cual a la raíz del sitio
+│   ├── robots.txt             # Permite explícitamente rastreadores de IA
+│   ├── llms.txt               # Resumen del negocio para modelos de lenguaje
+│   ├── sitemap.xml            # 18 URLs con hreflang y lastmod
+│   ├── site.webmanifest, favicon.ico, icon.png, .nojekyll
+├── worker/factura.js          # Cloudflare Worker que timbra el CFDI
+├── site.config.js             # ← dominio, endpoint y píxel
+├── wrangler.toml              # Despliegue del Worker
+├── DEPLOY.md                  # Guía de dominio y hosting, con pasos para el salón
+├── .github/workflows/         # Deploy automático a GitHub Pages
+├── dist/                      # Salida de build (lo que se publica) — generado
+└── webpack.*.js               # Build
 ```
+
+### Mapa de idiomas
+
+| Español | English |
+|---|---|
+| `index.html` | `en/index.html` |
+| `servicios.html` | `en/services.html` |
+| `nosotros.html` | `en/about.html` |
+| `equipo.html` | `en/team.html` |
+| `ubicacion.html` | `en/locations.html` |
+| `reservar.html` | `en/book.html` |
+| `facturacion.html` | `en/billing.html` |
+| `aviso-de-privacidad.html` | `en/privacy.html` |
+| `terminos.html` | `en/terms.html` |
 
 ## Comandos
 
@@ -186,6 +232,101 @@ fotos y descripciones de ejemplo. El aviso amarillo y los comentarios en el
 HTML explican qué sustituir. Para las fotos, cambiar `<div class="team-avatar">`
 (iniciales sobre degradado) por `<img class="team-photo" …>`.
 
+## Legal (privacidad, términos y cookies)
+
+| Documento | Español | English |
+|---|---|---|
+| Aviso de Privacidad integral | `aviso-de-privacidad.html` | `en/privacy.html` |
+| Términos y Condiciones | `terminos.html` | `en/terms.html` |
+
+- Redactados contra la **LFPDPPP publicada el 20 de marzo de 2025**. La autoridad
+  es la **Secretaría Anticorrupción y Buen Gobierno**; el INAI ya no existe y no
+  se menciona en ningún punto.
+- **Aviso simplificado** (`.privacy-inline`) en `reservar.html`, `facturacion.html`
+  y sus versiones en inglés. En facturación va **antes del botón de envío**,
+  junto con la casilla obligatoria de aceptación, sin premarcar.
+- Enlaces en el pie de las 18 páginas con footer, en los dos idiomas, más el
+  botón **Cookies** que reabre el banner.
+- Las versiones en inglés llevan una nota de que son traducción de cortesía y
+  que **prevalece el texto en español**.
+
+### Banner de cookies
+
+Implementado en `src/js/app.js`. El píxel de Meta **no se carga hasta que la
+persona acepta**; la decisión se guarda en `localStorage` (`lb-consent`) con
+fecha y se puede cambiar desde el pie. Incluye Consent Mode v2 en modo denegado
+por defecto, listo por si más adelante se agrega Google Analytics o Ads.
+
+Para activar el píxel: poner el ID en `site.config.js` → `metaPixelId`.
+Vacío significa que no se carga ningún píxel.
+
+### Consentimiento en el formulario de reservas
+
+> ⚠️ El formulario de reserva es el **iframe de GoHighLevel**, así que las
+> casillas de consentimiento **hay que configurarlas dentro de GHL**, no en este
+> repo. GHL ya trae una casilla de marketing («Confirmo que quiero recibir
+> contenido de esta empresa»). Falta:
+> 1. Añadir en GHL una casilla obligatoria de aceptación del Aviso de Privacidad
+>    con enlace a `/aviso-de-privacidad.html`.
+> 2. Verificar que **ninguna** venga premarcada.
+> 3. Guardar el consentimiento de marketing en un campo del contacto **con fecha**;
+>    eso es lo que hace defendibles las campañas de WhatsApp ante la ley y ante
+>    las políticas de Meta.
+
+### Datos que faltan (marcados con `.pending`, se ven resaltados en la página)
+
+Razón social, RFC, domicilio fiscal, correo de contacto para ARCO, tolerancia de
+retardo (propuesta: 15 min), formas de pago, plazo de facturación, política de
+menores de edad y condiciones de promociones y tarjetas de regalo.
+
+> **Estos documentos son un borrador técnico, no asesoría legal.** Antes de
+> publicarlos conviene que los revise un abogado o el contador del salón,
+> sobre todo los plazos fiscales y la política de cancelaciones.
+
+## Visibilidad en IA (ChatGPT, Gemini, Perplexity, Copilot)
+
+Los asistentes ya no leen el sitio como un buscador clásico: extraen hechos y
+los citan. Lo que se hizo para que puedan hacerlo bien:
+
+- **`llms.txt`** en la raíz, siguiendo la convención de llmstxt.org: resumen del
+  negocio en Markdown con direcciones, teléfonos, coordenadas, horarios,
+  calificaciones, catálogo de servicios, cómo agendar y el índice de páginas con
+  URLs absolutas. Es el archivo que conviene mantener al día primero, porque un
+  modelo puede responder solo con eso.
+- **`robots.txt` permite explícitamente** a GPTBot, OAI-SearchBot, ChatGPT-User,
+  ClaudeBot, Claude-User, Claude-SearchBot, PerplexityBot, Perplexity-User,
+  Google-Extended, Applebot-Extended, Bingbot, CCBot y meta-externalagent.
+  Están permitidos a propósito: el objetivo es aparecer cuando alguien pregunta
+  por un salón en la San Rafael o en Polanco.
+- **Contenido legible sin JavaScript.** Los rastreadores de IA rara vez ejecutan
+  JS. Cada página entrega entre 340 y 930 palabras en el HTML plano, y los datos
+  clave (direcciones, teléfonos, horarios, calificación, fundador) están en el
+  HTML de inicio sin depender de scripts.
+- **28 bloques JSON-LD**, todos validados:
+
+| Tipo | Dónde | Para qué |
+|---|---|---|
+| `Organization` + `WebSite` | ambas home | Identidad, logo, idiomas, redes y perfil de Google Maps |
+| `NailSalon` x2 | home y sucursales | Cada sucursal con geo, horarios, teléfono y calificación |
+| `FAQPage` | servicios y facturación | Respuestas que la IA puede citar directo |
+| `OfferCatalog` | servicios | Los 25 servicios con nombre, descripción y categoría |
+| `BreadcrumbList` | 16 páginas interiores | Jerarquía del sitio |
+
+  El `OfferCatalog` **no incluye precios** a propósito: cambian seguido y un
+  precio viejo en los datos estructurados es peor que ninguno. Los precios viven
+  solo en el HTML visible.
+
+- Las FAQ están redactadas como pregunta y respuesta directa, que es el formato
+  que mejor extraen los modelos.
+
+### Qué mantener al día para no perder visibilidad
+
+1. `public/llms.txt` cuando cambien horarios, teléfonos, sucursales o servicios.
+2. `aggregateRating` en las cuatro páginas que lo llevan, cuando cambien las
+   reseñas de Google.
+3. `sitemap.xml` al agregar páginas.
+4. El perfil de Google Business: pesa más que el sitio para búsquedas locales.
+
 ## SEO y rendimiento
 
 Estado tras el pase de agosto 2026:
@@ -217,6 +358,56 @@ Medido con Chrome, móvil 390px, CPU 4x lenta y 1.6 Mbps (mediana de 3 corridas)
 variable normal e itálica, DM Sans variable). Pasar a instancias estáticas solo
 con los pesos usados bajaría bastante, pero el CSS usa pesos variables
 (380, 420, 450), así que hay que revisar el diseño después.
+
+## Diseño
+
+La paleta sale del logo (burbuja tornasol con letras rosas). Todos los tokens
+están en `src/css/style.css` dentro de `:root`, así que un cambio de marca se
+hace ahí y se propaga:
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--cherry` | `#e14d9f` | Rosa principal: botones, acentos, itálicas |
+| `--cherry-deep` | `#bd2f7e` | Hover del rosa |
+| `--cream` | `#fdf6fa` | Fondo perla |
+| `--cream-2` | `#f7e7f1` | Fondo alterno |
+| `--ink` | `#322638` | Ciruela oscuro: texto y secciones oscuras |
+| `--gold` | `#a88bd4` | Lila de acentos y estrellas |
+| `--blush` | `#f9c6e0` | Rosa claro sobre fondo oscuro |
+
+Tipografías: **Fraunces** (display, variable, con itálica) y **DM Sans**
+(cuerpo), autoalojadas en `src/fonts/`.
+
+Piezas propias que conviene conocer antes de tocar el CSS:
+
+- **Probador de esmaltes** (inicio): SVG de una mano; el color se cambia con la
+  variable `--polish` en `.tryon-stage`. Las uñas son un `<path>` reutilizado
+  con `<use>`, así que la forma se edita en un solo lugar.
+- **Menú de pantalla completa**: el header queda por encima del overlay oscuro,
+  por eso `body.menu-open` invierte sus colores. Sin eso la marca y el botón de
+  cerrar desaparecen.
+- **El botón de menú tiene 3 `<span>`** (dos barras y la etiqueta para lectores
+  de pantalla). Las barras se seleccionan por posición, nunca con `:last-child`.
+- **`.pending`**: resalta en amarillo los datos que el salón todavía no da.
+  Buscar esa clase es la forma rápida de ver qué falta.
+- Todo respeta `prefers-reduced-motion`.
+
+## Cosas que ya se intentaron y no funcionaron
+
+Para no repetir el trabajo:
+
+- **Cursor personalizado**: se quitó, se veía mal y molestaba.
+- **Precargar las fuentes** (`rel=preload`): mejora el LCP unos 100 ms pero
+  empeora el FCP entre 400 y 1000 ms en móvil lento. Se dejó sin preload.
+- **Hospedar el sitio en GoHighLevel**: no permite subir un sitio estático con
+  esta estructura y tampoco resuelve la facturación. Se quedó como híbrido:
+  sitio estático + GHL solo para reservas y CRM.
+- **Calendario bilingüe**: GHL no lo permite. El widget queda en español y la
+  página en inglés ofrece WhatsApp con un aviso destacado.
+- **Traducir el calendario con el navegador**: imposible, es un iframe de otro
+  origen y la traducción automática no entra ahí.
+- **Reseñas de Google automáticas**: requieren la Places API con llave, que no
+  puede vivir en un sitio estático. Están escritas a mano.
 
 ## Notas
 

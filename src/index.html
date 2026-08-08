@@ -20,6 +20,7 @@
   <meta property="og:image:height" content="630">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="theme-color" content="#fdf6fa">
+  <meta name="lb-pixel-id" content="%META_PIXEL_ID%">
 
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="canonical" href="%SITE_URL%/">
@@ -40,11 +41,23 @@
     "description": "Salón de uñas, cabello, cejas y maquillaje en la Ciudad de México, con sucursales en San Rafael y Polanco.",
     "image": "%SITE_URL%/img/og-v2.jpg",
     "url": "%SITE_URL%",
+    "@id": "%SITE_URL%/#organization",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "%SITE_URL%/img/lalolita-logo.webp",
+      "width": 256,
+      "height": 253
+    },
     "founder": { "@type": "Person", "name": "Eddu Vázquez" },
+    "foundingDate": "2021",
+    "areaServed": { "@type": "City", "name": "Ciudad de México" },
+    "knowsLanguage": ["es-MX", "en"],
+    "slogan": "El arte de ser tú misma, hasta en tus manos.",
     "sameAs": [
       "https://www.instagram.com/lalolita_nails/",
       "https://www.facebook.com/lalolitanails/",
-      "https://www.tiktok.com/@lalolita_nails"
+      "https://www.tiktok.com/@lalolita_nails",
+      "https://maps.app.goo.gl/2MxKX6s7NwEUDShu5"
     ],
     "subOrganization": [
       {
@@ -96,6 +109,19 @@
         ]
       }
     ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "%SITE_URL%/#website",
+    "name": "Lalolita Beauty",
+    "url": "%SITE_URL%/",
+    "inLanguage": "es-MX",
+    "publisher": {
+      "@id": "%SITE_URL%/#organization"
+    }
   }
   </script>
 </head>
@@ -486,9 +512,12 @@
           </ul>
         </div>
       </div>
-      <div class="footer-mark" aria-hidden="true">Lalolita Beauty</div>
+      <div class="footer-mark">
+        <img src="img/footer-logo.webp" alt="Lalolita Beauty" width="720" height="360" loading="lazy" decoding="async">
+      </div>
       <div class="footer-base">
         <span>© 2026 Lalolita Beauty · Todos los derechos reservados</span>
+        <span class="footer-legal"><a href="aviso-de-privacidad.html">Aviso de Privacidad</a> · <a href="terminos.html">Términos y Condiciones</a> · <button type="button" class="linkish" data-cookie-settings>Cookies</button></span>
         <span>Hecho con cariño en la CDMX</span>
       </div>
     </div>

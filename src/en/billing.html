@@ -19,6 +19,7 @@
   <meta property="og:image:height" content="630">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="theme-color" content="#fdf6fa">
+  <meta name="lb-pixel-id" content="%META_PIXEL_ID%">
 
   <link rel="stylesheet" href="../css/fonts.css">
   <link rel="canonical" href="%SITE_URL%/en/billing.html">
@@ -282,6 +283,17 @@
             </label>
           </fieldset>
 
+          <div class="privacy-inline">
+            <p><strong>Short privacy notice.</strong> <span class="pending">[Legal name]</span>, based in Mexico City, is responsible for processing your data.</p>
+            <p>We process your <strong>identification, contact and tax data</strong> (RFC, legal name, tax regime, fiscal address and CFDI use) to issue your invoice and meet tax obligations. These purposes are necessary and do not require additional consent.</p>
+            <p>If you share <strong>sensitive health data</strong> (allergies or other conditions) when booking, we use it only to look after you during the service.</p>
+            <p>Sending promotions and publishing photos of your service are <strong>optional purposes</strong> that we only carry out with your consent, which you can withdraw at any time by replying BAJA on WhatsApp. See the full <a href="privacy.html">Privacy Notice</a>.</p>
+          </div>
+          <label class="consent">
+            <input type="checkbox" name="aceptaAviso" required>
+            <span>I have read and accept the <a href="privacy.html" target="_blank" rel="noopener">Privacy Notice</a>. <strong>(required)</strong></span>
+          </label>
+
           <button class="btn btn-cherry btn-lg magnetic" type="submit">Send request on WhatsApp <span class="arrow">→</span></button>
           <p class="form-note" data-flow="wa">Sending opens WhatsApp with your details ready. <strong>Attach your Constancia de Situación Fiscal</strong> there so the CFDI is issued without errors.</p>
           <p class="form-note" data-flow="auto" hidden>We issue your CFDI 4.0 on the spot and email it to you. Make sure your details match your Constancia de Situación Fiscal exactly.</p>
@@ -381,9 +393,12 @@
           </ul>
         </div>
       </div>
-      <div class="footer-mark" aria-hidden="true">Lalolita Beauty</div>
+      <div class="footer-mark">
+        <img src="../img/footer-logo.webp" alt="Lalolita Beauty" width="720" height="360" loading="lazy" decoding="async">
+      </div>
       <div class="footer-base">
         <span>© 2026 Lalolita Beauty · All rights reserved</span>
+        <span class="footer-legal"><a href="privacy.html">Privacy Notice</a> · <a href="terms.html">Terms &amp; Conditions</a> · <button type="button" class="linkish" data-cookie-settings>Cookies</button></span>
         <span>Made with love in Mexico City</span>
       </div>
     </div>

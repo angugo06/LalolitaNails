@@ -52,6 +52,96 @@ const T = {
   },
 }[LANG];
 
+/* ---------- Consentimiento de cookies ----------
+   El píxel de Meta NO se carga hasta que la persona acepta. La decisión se
+   guarda en localStorage y se puede cambiar desde el enlace del pie.        */
+const CONSENT_KEY = "lb-consent";
+const COOKIE_TXT = {
+  es: {
+    text: 'Usamos cookies propias para que el sitio funcione y, si lo aceptas, cookies de publicidad y medición. Consulta el <a href="aviso-de-privacidad.html">Aviso de Privacidad</a>.',
+    accept: "Aceptar todas",
+    reject: "Solo las esenciales",
+    label: "Aviso de cookies",
+  },
+  en: {
+    text: 'We use our own cookies to make the site work and, if you accept, advertising and measurement cookies. See our <a href="privacy.html">Privacy Notice</a>.',
+    accept: "Accept all",
+    reject: "Essential only",
+    label: "Cookie notice",
+  },
+};
+
+const readConsent = () => {
+  try { return JSON.parse(localStorage.getItem(CONSENT_KEY) || "null"); } catch { return null; }
+};
+
+const loadMetaPixel = () => {
+  const id = document.querySelector('meta[name="lb-pixel-id"]')?.content?.trim();
+  if (!id || window.fbq) return;
+  /* snippet oficial de Meta, solo tras el consentimiento */
+  !(function (f, b, e, v, n, t, s) {
+    if (f.fbq) return; n = f.fbq = function () {
+      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+    };
+    if (!f._fbq) f._fbq = n;
+    n.push = n; n.loaded = true; n.version = "2.0"; n.queue = [];
+    t = b.createElement(e); t.async = true; t.src = v;
+    s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+  })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+  window.fbq("init", id);
+  window.fbq("track", "PageView");
+};
+
+const applyConsent = (state) => {
+  /* Consent Mode v2, por si más adelante se agrega Google Analytics o Ads */
+  window.dataLayer = window.dataLayer || [];
+  const gtag = function () { window.dataLayer.push(arguments); };
+  gtag("consent", "update", {
+    ad_storage: state === "granted" ? "granted" : "denied",
+    ad_user_data: state === "granted" ? "granted" : "denied",
+    ad_personalization: state === "granted" ? "granted" : "denied",
+    analytics_storage: state === "granted" ? "granted" : "denied",
+  });
+  if (state === "granted") loadMetaPixel();
+};
+
+const saveConsent = (state) => {
+  try { localStorage.setItem(CONSENT_KEY, JSON.stringify({ state, date: new Date().toISOString() })); } catch {}
+  applyConsent(state);
+};
+
+const showCookieBanner = () => {
+  if (document.querySelector(".cookie-banner")) return;
+  const t = COOKIE_TXT[document.documentElement.lang.startsWith("en") ? "en" : "es"];
+  const el = document.createElement("aside");
+  el.className = "cookie-banner";
+  el.setAttribute("role", "dialog");
+  el.setAttribute("aria-live", "polite");
+  el.setAttribute("aria-label", t.label);
+  el.innerHTML =
+    `<p>${t.text}</p>` +
+    `<div class="cookie-actions">` +
+    `<button class="btn btn-ghost btn-sm" type="button" data-consent="denied">${t.reject}</button>` +
+    `<button class="btn btn-cherry btn-sm" type="button" data-consent="granted">${t.accept}</button>` +
+    `</div>`;
+  el.addEventListener("click", (e) => {
+    const choice = e.target.closest("[data-consent]")?.dataset.consent;
+    if (!choice) return;
+    saveConsent(choice);
+    el.remove();
+  });
+  document.body.append(el);
+};
+
+{
+  const stored = readConsent();
+  if (stored?.state) applyConsent(stored.state);
+  else showCookieBanner();
+  document.querySelectorAll("[data-cookie-settings]").forEach((b) =>
+    b.addEventListener("click", (e) => { e.preventDefault(); showCookieBanner(); })
+  );
+}
+
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const finePointer = window.matchMedia("(pointer: fine)").matches;
 

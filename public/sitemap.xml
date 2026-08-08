@@ -85,4 +85,28 @@
     <lastmod>%BUILD_DATE%</lastmod>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>%SITE_URL%/aviso-de-privacidad.html</loc>
+    <lastmod>%BUILD_DATE%</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="%SITE_URL%/aviso-de-privacidad.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="%SITE_URL%/en/privacy.html"/>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>%SITE_URL%/terminos.html</loc>
+    <lastmod>%BUILD_DATE%</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="%SITE_URL%/terminos.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="%SITE_URL%/en/terms.html"/>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>%SITE_URL%/en/privacy.html</loc>
+    <lastmod>%BUILD_DATE%</lastmod>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>%SITE_URL%/en/terms.html</loc>
+    <lastmod>%BUILD_DATE%</lastmod>
+    <priority>0.2</priority>
+  </url>
 </urlset>

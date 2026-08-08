@@ -19,6 +19,7 @@
   <meta property="og:image:height" content="630">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="theme-color" content="#fdf6fa">
+  <meta name="lb-pixel-id" content="%META_PIXEL_ID%">
 
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="canonical" href="%SITE_URL%/facturacion.html">
@@ -282,6 +283,17 @@
             </label>
           </fieldset>
 
+          <div class="privacy-inline">
+            <p><strong>Aviso de privacidad simplificado.</strong> <span class="pending">[Razón social]</span>, con domicilio en la Ciudad de México, es responsable del tratamiento de tus datos.</p>
+            <p>Tratamos tus <strong>datos de identificación, contacto y fiscales</strong> (RFC, razón social, régimen, domicilio fiscal y uso del CFDI) para emitir tu factura y cumplir obligaciones fiscales. Estas finalidades son necesarias y no requieren tu consentimiento adicional.</p>
+            <p>Si nos compartes <strong>datos sensibles de salud</strong> (alergias u otras condiciones) al agendar, los usamos solo para cuidarte durante el servicio.</p>
+            <p>Enviarte promociones y publicar fotos de tu servicio son <strong>finalidades voluntarias</strong> que solo hacemos con tu consentimiento, y puedes retirarlo cuando quieras respondiendo BAJA por WhatsApp. Consulta el <a href="aviso-de-privacidad.html">Aviso de Privacidad integral</a>.</p>
+          </div>
+          <label class="consent">
+            <input type="checkbox" name="aceptaAviso" required>
+            <span>He leído y acepto el <a href="aviso-de-privacidad.html" target="_blank" rel="noopener">Aviso de Privacidad</a>. <strong>(obligatorio)</strong></span>
+          </label>
+
           <button class="btn btn-cherry btn-lg magnetic" type="submit">Enviar solicitud por WhatsApp <span class="arrow">→</span></button>
           <p class="form-note" data-flow="wa">Al enviar se abre WhatsApp con tus datos listos. <strong>Adjunta ahí tu Constancia de Situación Fiscal</strong> para que el CFDI salga sin errores.</p>
           <p class="form-note" data-flow="auto" hidden>Emitimos tu CFDI 4.0 en el momento y te lo mandamos por correo. Verifica que tus datos coincidan con tu Constancia de Situación Fiscal.</p>
@@ -381,9 +393,12 @@
           </ul>
         </div>
       </div>
-      <div class="footer-mark" aria-hidden="true">Lalolita Beauty</div>
+      <div class="footer-mark">
+        <img src="img/footer-logo.webp" alt="Lalolita Beauty" width="720" height="360" loading="lazy" decoding="async">
+      </div>
       <div class="footer-base">
         <span>© 2026 Lalolita Beauty · Todos los derechos reservados</span>
+        <span class="footer-legal"><a href="aviso-de-privacidad.html">Aviso de Privacidad</a> · <a href="terminos.html">Términos y Condiciones</a> · <button type="button" class="linkish" data-cookie-settings>Cookies</button></span>
         <span>Hecho con cariño en la CDMX</span>
       </div>
     </div>

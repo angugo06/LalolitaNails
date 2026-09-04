@@ -2,7 +2,8 @@
    fuente de datos, para que las dos versiones no se desincronicen.
    Precios reales del salón (Google Maps). Sin duraciones: no las tenemos. */
 const fs = require("fs");
-process.chdir(__dirname + "/../src");
+const path = require("path");
+const src = path.resolve(__dirname, "../src");
 
 const M = (es, en, price, opts = {}) => ({ es, en, price, ...opts });
 
@@ -146,7 +147,7 @@ function buildHtml(lang) {
         const tag = L ? it.tagEn : it.tagEs;
         const desc = L ? it.desEn : it.desEs;
         return `        <article class="svc-item reveal">
-          <h4>${name}${tag ? ` <span class="tag">${tag}</span>` : ""}</h4>${desc ? `\n          <p>${desc}</p>` : ""}
+          <h${cat.groups.length > 1 ? 4 : 3}>${name}${tag ? ` <span class="tag">${tag}</span>` : ""}</h${cat.groups.length > 1 ? 4 : 3}>${desc ? `\n          <p>${desc}</p>` : ""}
           <div class="svc-price">${it.from ? `<span>${fromLbl}</span>` : ""}<b>${money(it.price)}</b></div>
         </article>`;
       }).join("\n");
@@ -176,7 +177,7 @@ function buildCatalog(lang) {
         const offer = {
           "@type": "Offer",
           priceCurrency: "MXN",
-          availability: "https://schema.org/InStock",
+          url: `%SITE_URL%/${L ? "en/services.html" : "servicios.html"}#${L ? cat.idEn : cat.id}`,
           itemOffered: {
             "@type": "Service",
             name: L ? it.en : it.es,
@@ -190,7 +191,6 @@ function buildCatalog(lang) {
             "@type": "PriceSpecification",
             minPrice: it.price,
             priceCurrency: "MXN",
-            valueAddedTaxIncluded: true,
           };
         } else {
           offer.price = String(it.price);
@@ -204,6 +204,7 @@ function buildCatalog(lang) {
   return {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
+    "@id": `%SITE_URL%/${L ? "en/services.html" : "servicios.html"}#catalog`,
     name: L ? "Lalolita Beauty services and prices" : "Servicios y precios de Lalolita Beauty",
     inLanguage: L ? "en" : "es-MX",
     numberOfItems: items.length,
@@ -212,12 +213,12 @@ function buildCatalog(lang) {
 }
 
 /* ---------- aplicar ---------- */
-for (const [file, lang] of [["servicios.html", "es"], ["en/services.html", "en"]]) {
-  let h = fs.readFileSync(file, "utf8");
+if (require.main === module) for (const [file, lang] of [["servicios.html", "es"], ["en/services.html", "en"]]) {
+  let h = fs.readFileSync(path.join(src, file), "utf8");
 
   const start = h.indexOf('      <section class="svc-group"');
   const end = h.indexOf('      <p class="price-note');
-  if (start < 0 || end < 0) { console.log("MISS marcadores en " + file); continue; }
+  if (start < 0 || end < 0) throw new Error("Missing menu markers in " + file);
   h = h.slice(0, start) + buildHtml(lang) + "\n\n" + h.slice(end);
 
   /* nota de precios */
@@ -235,7 +236,9 @@ for (const [file, lang] of [["servicios.html", "es"], ["en/services.html", "en"]
     h = h.replace(/\n<\/head>/, "\n" + block + "\n</head>");
   }
 
-  fs.writeFileSync(file, h);
+  fs.writeFileSync(path.join(src, file), h);
   const n = (h.match(/class="svc-item/g) || []).length;
   console.log(`${file}: ${n} servicios en HTML, ${cat.numberOfItems} en OfferCatalog`);
 }
+
+module.exports = { MENU, buildCatalog };

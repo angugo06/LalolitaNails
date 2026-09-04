@@ -52,6 +52,10 @@ const T = {
   },
 }[LANG];
 
+// Values from forms or external responses must never be interpreted as markup.
+const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (c) =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+
 /* ---------- Consentimiento de cookies ----------
    El píxel de Meta NO se carga hasta que la persona acepta. La decisión se
    guarda en localStorage y se puede cambiar desde el enlace del pie.        */
@@ -77,7 +81,7 @@ const readConsent = () => {
 
 const loadMetaPixel = () => {
   const id = document.querySelector('meta[name="lb-pixel-id"]')?.content?.trim();
-  if (!id || window.fbq) return;
+  if (!/^\d+$/.test(id) || window.fbq) return;
   /* snippet oficial de Meta, solo tras el consentimiento */
   !(function (f, b, e, v, n, t, s) {
     if (f.fbq) return; n = f.fbq = function () {
@@ -102,7 +106,12 @@ const applyConsent = (state) => {
     ad_personalization: state === "granted" ? "granted" : "denied",
     analytics_storage: state === "granted" ? "granted" : "denied",
   });
-  if (state === "granted") loadMetaPixel();
+  if (state === "granted") {
+    loadMetaPixel();
+    window.fbq?.("consent", "grant");
+  } else {
+    window.fbq?.("consent", "revoke");
+  }
 };
 
 const saveConsent = (state) => {
@@ -136,7 +145,7 @@ const showCookieBanner = () => {
 {
   const stored = readConsent();
   if (stored?.state) applyConsent(stored.state);
-  else showCookieBanner();
+  else if (/^\d+$/.test(document.querySelector('meta[name="lb-pixel-id"]')?.content || "")) showCookieBanner();
   document.querySelectorAll("[data-cookie-settings]").forEach((b) =>
     b.addEventListener("click", (e) => { e.preventDefault(); showCookieBanner(); })
   );
@@ -153,34 +162,59 @@ const syncHeader = () => {
   const y = window.scrollY;
   header?.classList.toggle("is-scrolled", y > 24);
   if (!document.body.classList.contains("menu-open")) {
-    header?.classList.toggle("is-hidden", y > 420 && y > lastScrollY);
+    header?.classList.toggle("is-hidden", y > 420 && y > lastScrollY && !header.contains(document.activeElement));
   }
   lastScrollY = y;
 };
 window.addEventListener("scroll", syncHeader, { passive: true });
 syncHeader();
+header?.addEventListener("focusin", () => header.classList.remove("is-hidden"));
 
 /* ---------- Fullscreen menu ---------- */
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const menuOverlay = document.querySelector("[data-menu-overlay]");
+const menuBackground = document.querySelectorAll("main, .site-footer");
 
 const setMenu = (open) => {
   menuToggle?.setAttribute("aria-expanded", String(open));
   menuOverlay?.classList.toggle("is-open", open);
   document.body.classList.toggle("menu-open", open);
-  if (open) header?.classList.remove("is-hidden");
+  menuBackground.forEach((el) => { el.inert = open; });
+  if (menuOverlay) menuOverlay.inert = !open;
+  if (open) {
+    header?.classList.remove("is-hidden");
+    menuOverlay?.querySelector("a")?.focus({ preventScroll: true });
+  } else {
+    menuToggle?.focus({ preventScroll: true });
+  }
 };
+if (menuOverlay) menuOverlay.inert = true;
 
 menuToggle?.addEventListener("click", () => {
   setMenu(menuToggle.getAttribute("aria-expanded") !== "true");
 });
 menuOverlay?.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && menuOverlay?.classList.contains("is-open")) setMenu(false);
+  if (!menuOverlay?.classList.contains("is-open")) return;
+  if (e.key === "Escape") setMenu(false);
+  if (e.key === "Tab") {
+    const focusable = [...document.querySelectorAll('.site-header a, .site-header button, .menu-overlay a')]
+      .filter((el) => el.getClientRects().length && getComputedStyle(el).visibility !== "hidden");
+    const first = focusable[0];
+    const last = focusable.at(-1);
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+  }
+});
+window.matchMedia("(min-width: 64.01rem)").addEventListener("change", (e) => {
+  if (e.matches && menuOverlay?.classList.contains("is-open")) {
+    setMenu(false);
+    header?.querySelector("a")?.focus();
+  }
 });
 
 /* ---------- Reveal on scroll ---------- */
-const revealObserver = new IntersectionObserver(
+const revealObserver = "IntersectionObserver" in window && !prefersReducedMotion ? new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -190,8 +224,11 @@ const revealObserver = new IntersectionObserver(
     });
   },
   { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
-);
-document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+) : null;
+document.querySelectorAll(".reveal").forEach((el) => {
+  if (revealObserver) { el.classList.add("reveal-ready"); revealObserver.observe(el); }
+  else el.classList.add("is-visible");
+});
 
 /* ---------- Magnetic buttons ---------- */
 if (finePointer && !prefersReducedMotion) {
@@ -224,29 +261,43 @@ if (finePointer && !prefersReducedMotion) {
   });
 }
 
-/* ---------- Polish try-on ---------- */
+/* ---------- Color studio ---------- */
 const tryonStage = document.querySelector("[data-tryon-stage]");
 if (tryonStage) {
-  const label = document.querySelector("[data-tryon-label]");
-  const swatches = document.querySelectorAll(".swatch");
+  const swatches = [...document.querySelectorAll(".swatch")];
+  const finishes = [...document.querySelectorAll(".finish-btn")];
+  let selectedShade = swatches.find((sw) => sw.getAttribute("aria-pressed") === "true") || swatches[0];
+  let selectedFinish = finishes.find((button) => button.getAttribute("aria-pressed") === "true") || finishes[0];
+  const renderLook = () => {
+    if (!selectedShade || !selectedFinish) return;
+    tryonStage.style.setProperty("--polish", selectedShade.dataset.polish);
+    tryonStage.dataset.finish = selectedFinish.dataset.finish;
+    swatches.forEach((sw) => sw.setAttribute("aria-pressed", String(sw === selectedShade)));
+    finishes.forEach((button) => button.setAttribute("aria-pressed", String(button === selectedFinish)));
+    document.querySelector("[data-shade-name]").textContent = selectedShade.dataset.name;
+    document.querySelector("[data-shade-description]").textContent = `${selectedShade.dataset.desc} · ${selectedFinish.textContent}`;
+    document.querySelector("[data-shade-chip]").style.backgroundColor = selectedShade.dataset.polish;
+    document.querySelector("[data-shade-number]").textContent = `${selectedShade.dataset.swatchNumber} — 08`;
+    document.querySelector("[data-nail-preview]").setAttribute("aria-label", LANG === "en"
+      ? `Three glossy nail samples in ${selectedShade.dataset.name}, ${selectedFinish.textContent} finish`
+      : `Tres muestras de uñas brillantes en ${selectedShade.dataset.name}, acabado ${selectedFinish.textContent}`);
+  };
   swatches.forEach((sw) => {
     sw.addEventListener("click", () => {
-      swatches.forEach((s) => s.setAttribute("aria-pressed", "false"));
-      sw.setAttribute("aria-pressed", "true");
-      tryonStage.style.setProperty("--polish", sw.dataset.polish);
-      if (label) {
-        label.innerHTML = `<strong>${sw.dataset.name}</strong><span>${sw.dataset.desc}</span>`;
-      }
-      tryonStage.classList.remove("is-swiped");
-      void tryonStage.offsetWidth; /* restart the shine animation */
-      tryonStage.classList.add("is-swiped");
+      selectedShade = sw;
+      renderLook();
     });
   });
+  finishes.forEach((button) => button.addEventListener("click", () => {
+    selectedFinish = button;
+    renderLook();
+  }));
+  renderLook();
 }
 
 /* ---------- Animated counters ---------- */
 const counters = document.querySelectorAll("[data-count]");
-if (counters.length) {
+if (counters.length && "IntersectionObserver" in window) {
   const countObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
@@ -271,45 +322,30 @@ if (counters.length) {
   counters.forEach((el) => countObserver.observe(el));
 }
 
-/* ---------- Testimonials rotator ---------- */
+/* ---------- Reader-controlled testimonials ---------- */
 const quoteStage = document.querySelector("[data-quotes]");
 if (quoteStage) {
   const items = Array.from(quoteStage.querySelectorAll(".quote-item"));
   const dotsWrap = document.querySelector("[data-quote-dots]");
-  let index = 0;
-  let timer = null;
 
   const dots = items.map((_, i) => {
     const b = document.createElement("button");
     b.type = "button";
-    b.setAttribute("role", "tab");
     b.setAttribute("aria-label", T.testimonial(i + 1));
-    b.addEventListener("click", () => { show(i); restart(); });
+    b.addEventListener("click", () => show(i));
     dotsWrap?.append(b);
     return b;
   });
 
   const show = (i) => {
-    index = i;
-    items.forEach((item, j) => item.classList.toggle("is-active", j === i));
-    dots.forEach((d, j) => d.setAttribute("aria-selected", String(j === i)));
+    items.forEach((item, j) => {
+      item.classList.toggle("is-active", j === i);
+      item.hidden = j !== i;
+    });
+    dots.forEach((d, j) => d.setAttribute("aria-pressed", String(j === i)));
   };
-
-  const restart = () => {
-    if (timer) clearInterval(timer);
-    if (!prefersReducedMotion) {
-      timer = setInterval(() => show((index + 1) % items.length), 6000);
-    }
-  };
-
-  quoteStage.addEventListener("pointerenter", () => timer && clearInterval(timer));
-  quoteStage.addEventListener("pointerleave", restart);
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) { if (timer) clearInterval(timer); } else restart();
-  });
 
   show(0);
-  restart();
 }
 
 /* ---------- Gallery drag-to-scroll ---------- */
@@ -342,29 +378,68 @@ if (gallery && finePointer) {
 const filterBar = document.querySelector("[data-filter-bar]");
 if (filterBar) {
   const buttons = filterBar.querySelectorAll(".filter-btn");
-  const groups = document.querySelectorAll(".svc-group");
+  const groups = [...document.querySelectorAll(".svc-group")];
+  const search = document.querySelector("[data-service-search]");
+  const status = document.querySelector("[data-service-status]");
+  const empty = document.querySelector("[data-service-empty]");
+  const normalize = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  let filter = "all";
+  const update = () => {
+    const query = normalize(search?.value || "");
+    let count = 0;
+    groups.forEach((group) => {
+      const categoryMatches = filter === "all" || group.dataset.cat === filter;
+      let visible = 0;
+      group.querySelectorAll(".svc-item").forEach((item) => {
+        item.hidden = !categoryMatches || !normalize(item.textContent).includes(query);
+        if (!item.hidden) { visible++; item.classList.add("is-visible"); }
+      });
+      group.hidden = visible === 0;
+      group.querySelectorAll(".svc-subhead").forEach((heading) => {
+        let next = heading.nextElementSibling;
+        let hasItems = false;
+        while (next?.classList.contains("svc-item")) { hasItems ||= !next.hidden; next = next.nextElementSibling; }
+        heading.hidden = !hasItems;
+      });
+      count += visible;
+    });
+    if (status) status.textContent = LANG === "en" ? `${count} ${count === 1 ? "service" : "services"} · Prices in MXN` : `${count} ${count === 1 ? "servicio" : "servicios"} · Precios en MXN`;
+    if (empty) empty.hidden = count > 0;
+    buttons.forEach((btn) => btn.setAttribute("aria-pressed", String(btn.dataset.filter === filter)));
+  };
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
-      const filter = btn.dataset.filter;
-      groups.forEach((group) => {
-        const match = filter === "all" || group.dataset.cat === filter;
-        group.classList.toggle("is-filtered-out", !match);
-        if (match) {
-          group.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
-        }
-      });
+      filter = btn.dataset.filter;
+      update();
     });
   });
-
-  /* Arriving via anchor (e.g. servicios.html#g-cabello): make sure reveals fire */
-  if (location.hash) {
-    document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
-  }
+  search?.addEventListener("input", update);
+  document.querySelector("[data-service-reset]")?.addEventListener("click", () => {
+    filter = "all";
+    if (search) search.value = "";
+    update();
+    search?.focus();
+  });
+  const revealAnchor = () => {
+    let id;
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+    const target = document.getElementById(id);
+    if (!target?.closest(".svc-group")) return;
+    filter = "all";
+    if (search) search.value = "";
+    update();
+    target.scrollIntoView({ block: "start", behavior: "instant" });
+  };
+  window.addEventListener("hashchange", revealAnchor);
+  update();
+  if (location.hash) revealAnchor();
 }
 
 /* ---------- Today highlight on every hours table (one per branch) ---------- */
-const today = String(new Date().getDay());
+const salonNow = new Date();
+const today = String(["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(
+  new Intl.DateTimeFormat("en-US", { timeZone: "America/Mexico_City", weekday: "short" }).format(salonNow)
+));
 document.querySelectorAll("[data-hours] .hours-row").forEach((row) => {
   const days = (row.dataset.day || "").split(/\s+/);
   row.classList.toggle("is-today", days.includes(today));
@@ -383,7 +458,7 @@ if (cfdiForm) {
     cfdiForm.querySelector("input[name='sucursal']:checked")?.dataset.wa || "525568856070";
 
   /* no se puede facturar un servicio futuro */
-  if (dateInput) dateInput.max = new Date().toISOString().split("T")[0];
+  if (dateInput) dateInput.max = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Mexico_City", year: "numeric", month: "2-digit", day: "2-digit" }).format(salonNow);
 
   rfc?.addEventListener("input", () => {
     rfc.value = rfc.value.toUpperCase().replace(/[^A-ZÑ&\d]/g, "");
@@ -471,9 +546,9 @@ if (cfdiForm) {
           if (success) {
             success.querySelector("h2").innerHTML = T.cfdiOkTitle;
             success.querySelector("p").innerHTML = T.cfdiOkBody(
-              body.uuid,
+              escapeHtml(body.uuid),
               body.emailed,
-              payload.correo
+              escapeHtml(payload.correo)
             );
             success.hidden = false;
             success.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -484,7 +559,7 @@ if (cfdiForm) {
         if (success) {
           success.querySelector("h2").innerHTML = T.cfdiFailTitle;
           success.querySelector("p").innerHTML =
-            `${body.error || "Error desconocido."} <a href="${waUrl}" target="_blank" rel="noopener">${T.cfdiFailWa}</a>`;
+            `${escapeHtml(body.error || (LANG === "en" ? "Unknown error." : "Error desconocido."))} <a href="${waUrl}" target="_blank" rel="noopener">${T.cfdiFailWa}</a>`;
           success.hidden = false;
         }
         if (submitBtn) {

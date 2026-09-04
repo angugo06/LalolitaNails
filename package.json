@@ -1,25 +1,31 @@
 {
-  "name": " ",
+  "name": "lalolita-beauty",
   "version": "0.0.1",
   "description": "",
   "private": true,
+  "engines": { "node": ">=22.15.0" },
   "keywords": [
     ""
   ],
   "license": "",
   "author": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run build && node tools/audit.js",
+    "prestart": "npm run generate",
     "start": "webpack serve --open --config webpack.config.dev.js",
+    "prebuild": "npm run generate",
     "build": "webpack --config webpack.config.prod.js",
+    "generate": "node tools/menu.js && node tools/seo.js",
+    "preview": "node tools/preview.js",
     "menu": "node tools/menu.js"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^11.0.0",
+    "copy-webpack-plugin": "^14.0.0",
     "html-webpack-plugin": "^5.6.0",
+    "htmlparser2": "^9.1.0",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4",
+    "webpack-dev-server": "^6.0.0",
     "webpack-merge": "^5.10.0"
   }
 }

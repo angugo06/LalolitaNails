@@ -99,7 +99,7 @@
   }
   </script>
 </head>
-<body>
+<body class="interior-page page-billing">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header" data-header>
@@ -143,9 +143,20 @@
 
   <main id="main">
     <section class="page-hero container">
-      <p class="eyebrow">Invoicing</p>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Invoicing</li></ol></nav>
+      <div class="page-hero-grid">
+        <div class="page-hero-copy">
+<p class="eyebrow">Invoicing</p>
       <h1>Request your <em>tax invoice (CFDI).</em></h1>
       <p class="lede">CFDI is Mexico's official electronic invoice. Fill in your fiscal details and the ticket information, and we'll email you the PDF and XML.</p>
+        </div>
+        <div class="page-art receipt-art" aria-hidden="true">
+          <span class="art-edition">LALOLITA BEAUTY / CFDI 4.0</span>
+          <strong>The little<br>details.</strong>
+          <div class="receipt-line"><span>YOUR RECEIPT</span><span>PDF + XML</span></div>
+          <div class="receipt-rule"></div><span class="receipt-signature">With care, Lalolita</span>
+        </div>
+      </div>
     </section>
 
     <section class="section container" style="padding-top:1rem;">
@@ -179,7 +190,8 @@
           </div>
         </aside>
 
-        <form class="booking-form reveal" data-cfdi-form data-endpoint="%FACTURA_ENDPOINT%" novalidate>
+        <noscript><div class="callout"><p>To request an invoice, enable JavaScript or contact your location on WhatsApp: <a href="https://wa.me/525568856070" target="_blank" rel="noopener">San Rafael</a> · <a href="https://wa.me/525615156061" target="_blank" rel="noopener">Polanco</a>.</p></div></noscript>
+        <form class="booking-form" data-cfdi-form data-endpoint="%FACTURA_ENDPOINT%" novalidate>
           <fieldset class="branch-picker" data-branch-picker>
             <legend>Where you were served</legend>
             <div class="branch-options">
@@ -313,7 +325,7 @@
           <p class="eyebrow">FAQ</p>
           <h2>About <em>invoicing.</em></h2>
         </div>
-        <div class="faq reveal">
+        <div class="faq">
           <details>
             <summary>What is a CFDI?</summary>
             <div class="faq-body"><p>The CFDI (Comprobante Fiscal Digital por Internet) is Mexico's official electronic invoice, validated by the SAT tax authority. You need one if you want to deduct the service as a business expense. If you're a tourist or don't file taxes in Mexico, you don't need it.</p></div>
@@ -347,7 +359,7 @@
           <p>Nail, hair, brow and makeup salon by Eddu Vázquez. San Rafael and Polanco, Mexico City. With dedication since 2021.</p>
         </div>
         <div class="footer-col">
-          <h4>Explore</h4>
+          <h2>Explore</h2>
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="services.html">Services</a></li>
@@ -359,7 +371,7 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Locations</h4>
+          <h2>Locations</h2>
           <ul>
             <li class="footer-branch">
               <strong>San Rafael</strong>
@@ -384,7 +396,7 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Follow us</h4>
+          <h2>Follow us</h2>
           <ul>
             <li><a href="https://www.instagram.com/lalolita_nails/" target="_blank" rel="noopener">Instagram</a></li>
             <li><a href="https://www.facebook.com/lalolitanails/" target="_blank" rel="noopener">Facebook</a></li>

@@ -15,10 +15,10 @@ hair, brows and makeup, by appointment only. Founded in 2021 by Eddu Vázquez.
 
 - Sucursal San Rafael: C. Guillermo Prieto 46, Col. San Rafael, Cuauhtémoc,
   06470, Ciudad de México. Teléfono y WhatsApp: +52 55 6885 6070.
-  Coordenadas: 19.437349, -99.162505. Calificación en Google: 4.4 (96 reseñas).
+  Coordenadas: 19.437349, -99.162505.
 - Sucursal Polanco: Lago Tanganica 61, Col. Granada, Miguel Hidalgo, 11520,
   Ciudad de México. Teléfono y WhatsApp: +52 56 1515 6061.
-  Coordenadas: 19.438727, -99.193170. Calificación en Google: 4.8 (22 reseñas).
+  Coordenadas: 19.438727, -99.193170.
 - Horario San Rafael: lunes a viernes 10:00 a 20:00, sábado 9:00 a 19:00,
   domingo cerrado.
 - Horario Polanco: lunes a viernes 11:00 a 20:00, sábado 10:00 a 18:00,
@@ -34,78 +34,64 @@ antes de empezar. Precios sujetos a cambio sin previo aviso.
 
 ### Uñas
 
-Manicure y pedicure:
-
-- Manicure: $220
-- Manicure con gel: $420
-- Pedicure spa: $400
-- Pedicure spa con gel: $600
-
-Gel, rubber y esculturales:
-
-- Gel hasta 2 tonos: $240
-- Rubber (hasta 2 tonos de gel): $460
-- Uñas esculturales (acrílico, tip o polygel), hasta 2 tonos de gel, largo #1 a #3: $670
-- Acrílico o polygel en uña natural: $470
-- Acripie: $570
-- Número extra de acrílico o polygel: $100
-
-Retoques y retiros:
-
-- Retoque de rubber: $410
-- Retoque de acrílico o polygel (1 tono): $510
-- Retiro de gel o rubber: $90
-- Retiro de acrílico o polygel: $150
-- Reposición de 1 uña: desde $70
-- Parche de uña: $40
-
-Diseño y extras:
-
-- Diseños: desde $120
-- Francés: desde $150
-- Efectos por uña: desde $50
-- Swarovski: desde $100
-- Cortes y dijes (cada uno): $50
-- Jelly Spa +: $150
-- Calcio o vitamina: $150
-- Esmaltado sencillo con barniz: $150
-- Esmaltado con barniz adicional: $75
+- Manicure: $220 MXN
+- Manicure con gel: $420 MXN
+- Pedicure spa: $400 MXN
+- Pedicure spa con gel: $600 MXN
+- Gel hasta 2 tonos: $240 MXN
+- Rubber (hasta 2 tonos de gel): $460 MXN
+- Uñas esculturales (acrílico, tip o polygel): $670 MXN
+- Acrílico o polygel en uña natural: $470 MXN
+- Acripie: $570 MXN
+- Número extra de acrílico o polygel: $100 MXN
+- Retoque de rubber: $410 MXN
+- Retoque de acrílico o polygel (1 tono): $510 MXN
+- Retiro de gel o rubber: $90 MXN
+- Retiro de acrílico o polygel: $150 MXN
+- Reposición de 1 uña: desde $70 MXN
+- Parche de uña: $40 MXN
+- Diseños: desde $120 MXN
+- Francés: desde $150 MXN
+- Efectos por uña: desde $50 MXN
+- Swarovski: desde $100 MXN
+- Cortes y dijes (cada uno): $50 MXN
+- Jelly Spa +: $150 MXN
+- Calcio o vitamina: $150 MXN
+- Esmaltado sencillo con barniz: $150 MXN
+- Esmaltado con barniz adicional: $75 MXN
 
 ### Cabello
 
-- Corte de cabello: $700
-- Peinado semi-recogido: desde $750
-- Peinado en ondas suaves: $650
-- Tinte (cabello corto o medio): desde $1,800
-- Tinte (cabello largo): desde $2,200
-- Mantenimiento (retoque, matiz y tratamiento hidratante): $1,800
-- Balayage, mechas o babylights: desde $2,900
-- Tratamiento marroquí: desde $2,000
-
-Tratamientos Davines:
-
-- Tailoring (personalizado): $800
-- Butter (brillo y suavidad): $600
-- Ampolletas: $300
-- Shampoo y acondicionador: $150
-- Alisado express: $280
-- Secado express: $280
+- Corte de cabello: $700 MXN
+- Peinado semi-recogido: desde $750 MXN
+- Peinado en ondas suaves: $650 MXN
+- Tinte (cabello corto o medio): desde $1,800 MXN
+- Tinte (cabello largo): desde $2,200 MXN
+- Mantenimiento: retoque, matiz y tratamiento hidratante: $1,800 MXN
+- Balayage, mechas o babylights: desde $2,900 MXN
+- Tratamiento marroquí: desde $2,000 MXN
+- Tailoring (personalizado): $800 MXN
+- Butter (brillo y suavidad): $600 MXN
+- Ampolletas: $300 MXN
+- Shampoo y acondicionador: $150 MXN
+- Alisado express: $280 MXN
+- Secado express: $280 MXN
 
 ### Cejas y depilación
 
-- Diseño de ceja con hilo (threading): $500
-- Diseño de ceja con cera: $400
-- Brow lamination: $440
-- Diseño, brow lamination y henna: $1,000
-- Henna: $400
-- Lifting de pestañas: $450
-- Depilación de bozo: $250
-- Depilación de rostro completo: $650
+- Diseño de ceja con hilo: $500 MXN
+- Diseño de ceja con cera: $400 MXN
+- Brow lamination: $440 MXN
+- Diseño, brow lamination y henna: $1,000 MXN
+- Henna: $400 MXN
+- Lifting: $450 MXN
+- Depilación de bozo: $250 MXN
+- Depilación de rostro completo: $650 MXN
 
 ### Maquillaje
 
-- Maquillaje social: $2,000
-- Maquillaje express: $900
+- Maquillaje social: $2,000 MXN
+- Maquillaje express: $900 MXN
 
 ## Cómo agendar
 
@@ -121,15 +107,13 @@ con RFC, razón social, régimen fiscal, código postal fiscal y uso del CFDI.
 
 ## Páginas
 
-- [Inicio](%SITE_URL%/index.html): resumen del salón, especialidades y sucursales.
+- [Inicio](%SITE_URL%/): resumen del salón, especialidades y sucursales.
 - [Servicios y precios](%SITE_URL%/servicios.html): menú completo con precios en pesos y preguntas frecuentes.
 - [Nosotros](%SITE_URL%/nosotros.html): historia del salón desde 2021 y valores.
-- [Equipo](%SITE_URL%/equipo.html): quiénes atienden en cada sucursal.
+- [Equipo](%SITE_URL%/equipo.html): especialidades del equipo y cómo elegir profesional al reservar.
 - [Sucursales y horarios](%SITE_URL%/ubicacion.html): direcciones, mapas, horarios y cómo llegar.
 - [Reservar](%SITE_URL%/reservar.html): calendario de citas en línea.
 - [Facturación CFDI](%SITE_URL%/facturacion.html): solicitud de factura.
-- [Aviso de Privacidad](%SITE_URL%/aviso-de-privacidad.html)
-- [Términos y Condiciones](%SITE_URL%/terminos.html)
 
 ## English pages
 
@@ -140,5 +124,3 @@ con RFC, razón social, régimen fiscal, código postal fiscal y uso del CFDI.
 - [Locations and hours](%SITE_URL%/en/locations.html)
 - [Book](%SITE_URL%/en/book.html)
 - [Invoicing (CFDI)](%SITE_URL%/en/billing.html)
-- [Privacy Notice](%SITE_URL%/en/privacy.html)
-- [Terms and Conditions](%SITE_URL%/en/terms.html)

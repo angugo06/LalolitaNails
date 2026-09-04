@@ -99,7 +99,7 @@
   }
   </script>
 </head>
-<body>
+<body class="interior-page page-billing">
   <a class="skip-link" href="#main">Saltar al contenido</a>
 
   <header class="site-header" data-header>
@@ -143,9 +143,20 @@
 
   <main id="main">
     <section class="page-hero container">
-      <p class="eyebrow">Facturación</p>
+      <nav class="breadcrumbs" aria-label="Ruta de navegación"><ol><li><a href="index.html">Inicio</a></li><li aria-current="page">Facturación</li></ol></nav>
+      <div class="page-hero-grid">
+        <div class="page-hero-copy">
+<p class="eyebrow">Facturación</p>
       <h1>Solicita tu <em>factura (CFDI).</em></h1>
       <p class="lede">Llena tus datos fiscales y los del ticket. Te enviamos el CFDI 4.0 en PDF y XML al correo que nos indiques.</p>
+        </div>
+        <div class="page-art receipt-art" aria-hidden="true">
+          <span class="art-edition">LALOLITA BEAUTY / CFDI 4.0</span>
+          <strong>Todo en<br>su lugar.</strong>
+          <div class="receipt-line"><span>TU COMPROBANTE</span><span>PDF + XML</span></div>
+          <div class="receipt-rule"></div><span class="receipt-signature">Con cariño, Lalolita</span>
+        </div>
+      </div>
     </section>
 
     <section class="section container" style="padding-top:1rem;">
@@ -179,7 +190,8 @@
           </div>
         </aside>
 
-        <form class="booking-form reveal" data-cfdi-form data-endpoint="%FACTURA_ENDPOINT%" novalidate>
+        <noscript><div class="callout"><p>Para solicitar tu factura, activa JavaScript o contacta a tu sucursal por WhatsApp: <a href="https://wa.me/525568856070" target="_blank" rel="noopener">San Rafael</a> · <a href="https://wa.me/525615156061" target="_blank" rel="noopener">Polanco</a>.</p></div></noscript>
+        <form class="booking-form" data-cfdi-form data-endpoint="%FACTURA_ENDPOINT%" novalidate>
           <fieldset class="branch-picker" data-branch-picker>
             <legend>Sucursal donde te atendimos</legend>
             <div class="branch-options">
@@ -313,7 +325,7 @@
           <p class="eyebrow">Dudas frecuentes</p>
           <h2>Sobre la <em>facturación.</em></h2>
         </div>
-        <div class="faq reveal">
+        <div class="faq">
           <details>
             <summary>¿Qué es la Constancia de Situación Fiscal?</summary>
             <div class="faq-body"><p>Es el documento que emite el SAT con tus datos fiscales actualizados: RFC, nombre o razón social, régimen y código postal. La descargas desde el portal del SAT y nos la compartes por WhatsApp para capturar todo tal cual.</p></div>
@@ -347,7 +359,7 @@
           <p>Salón de uñas, cabello, cejas y maquillaje por Eddu Vázquez. San Rafael y Polanco, CDMX. Con dedicación desde 2021.</p>
         </div>
         <div class="footer-col">
-          <h4>Explora</h4>
+          <h2>Explora</h2>
           <ul>
             <li><a href="index.html">Inicio</a></li>
             <li><a href="servicios.html">Servicios</a></li>
@@ -359,7 +371,7 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Sucursales</h4>
+          <h2>Sucursales</h2>
           <ul>
             <li class="footer-branch">
               <strong>San Rafael</strong>
@@ -384,7 +396,7 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Síguenos</h4>
+          <h2>Síguenos</h2>
           <ul>
             <li><a href="https://www.instagram.com/lalolita_nails/" target="_blank" rel="noopener">Instagram</a></li>
             <li><a href="https://www.facebook.com/lalolitanails/" target="_blank" rel="noopener">Facebook</a></li>

@@ -12,16 +12,15 @@ se puede mover a cualquier hosting.
 Contexto para quien tome el proyecto después, incluido un modelo de IA:
 
 - **Sin framework a propósito.** El sitio es contenido, no una aplicación.
-  HTML estático carga más rápido, se indexa mejor, lo leen los rastreadores de
-  IA (que casi nunca ejecutan JS) y no se rompe con actualizaciones de
-  dependencias. El JS es progresivo: sin él, el sitio se lee completo.
+  El HTML estático entrega el contenido sin depender de ejecutar JavaScript.
+  El JS añade interacciones: sin él, el contenido y la navegación siguen disponibles.
 - **Todo lo dinámico vive fuera.** Las reservas están en GoHighLevel, la
   facturación en un Cloudflare Worker y las reseñas en Google. El repo no
   guarda datos de clientas ni secretos.
 - **Un solo lugar para la configuración.** `site.config.js` tiene el dominio,
   el endpoint de facturación y el píxel de Meta. El build inyecta esos valores
-  con tokens (`%SITE_URL%`, `%BASE%`, `%FACTURA_ENDPOINT%`, `%META_PIXEL_ID%`,
-  `%BUILD_DATE%`), así que no hay URLs escritas a mano en el HTML.
+  con tokens (`%SITE_URL%`, `%BASE%`, `%FACTURA_ENDPOINT%`, `%META_PIXEL_ID%`),
+  para mantener consistente el dominio en los metadatos y archivos de descubrimiento.
 - **Español primero.** El negocio y la ley son mexicanos. El inglés es
   traducción; en los documentos legales se dice explícitamente que prevalece
   el español.
@@ -33,7 +32,7 @@ Contexto para quien tome el proyecto después, incluido un modelo de IA:
 │   ├── index.html             # Inicio (hero, probador de esmaltes, reseñas)
 │   ├── servicios.html         # Menú con filtros por categoría y FAQ
 │   ├── nosotros.html          # Historia desde 2021 y valores
-│   ├── equipo.html            # Equipo (contenido provisional)
+│   ├── equipo.html            # Especialidades del equipo y cómo reservar
 │   ├── ubicacion.html         # Mapas, horarios y cómo llegar (2 sucursales)
 │   ├── reservar.html          # Calendario de GoHighLevel embebido
 │   ├── facturacion.html       # Solicitud o emisión de CFDI
@@ -49,7 +48,7 @@ Contexto para quien tome el proyecto después, incluido un modelo de IA:
 ├── public/                    # Se copian tal cual a la raíz del sitio
 │   ├── robots.txt             # Permite explícitamente rastreadores de IA
 │   ├── llms.txt               # Resumen del negocio para modelos de lenguaje
-│   ├── sitemap.xml            # 18 URLs con hreflang y lastmod
+│   ├── sitemap.xml            # 14 URLs indexables con hreflang recíproco
 │   ├── site.webmanifest, favicon.ico, icon.png, .nojekyll
 ├── tools/menu.js              # Generador del menú de servicios (ES/EN + JSON-LD)
 ├── worker/factura.js          # Cloudflare Worker que timbra el CFDI
@@ -77,9 +76,13 @@ Contexto para quien tome el proyecto después, incluido un modelo de IA:
 
 ## Comandos
 
+Requiere Node.js 22.15 o posterior. CI usa Node.js 24.
+
 ```bash
 npm start        # servidor de desarrollo con recarga en vivo
-npm run build    # build de producción en dist/
+npm run build    # genera contenido y build de producción en dist/
+npm test         # build + auditoría de las 19 páginas
+npm run preview  # vista previa en http://127.0.0.1:4174/LalolitaNails/
 ```
 
 ## Despliegue — GitHub Pages
@@ -107,8 +110,8 @@ El build inyecta ese valor en los `canonical`, `hreflang`, Open Graph, el
 sitemap, robots.txt y el JSON-LD mediante los tokens `%SITE_URL%` y `%BASE%`.
 No hay URLs del dominio escritas a mano en el HTML.
 
-> En `npm start` los tokens no se reemplazan (se ven literales en el `<head>`);
-> solo afecta al 404 local, no a la navegación normal.
+Tanto desarrollo como producción reemplazan los tokens. Desarrollo sirve desde `/`;
+producción respeta `basePath`. `npm test` valida el HTML final antes del despliegue.
 
 ## Sucursales
 
@@ -145,8 +148,9 @@ WhatsApp, el formato de fecha y los avisos del formulario.
 
 ## Reseñas de Google
 
-Las calificaciones están escritas a mano (home y `ubicacion.html`, más el
-`aggregateRating` del JSON-LD). Hay que actualizarlas cuando cambien.
+Las calificaciones visibles están escritas a mano (home y `ubicacion.html`).
+Hay que verificarlas con los perfiles de Google antes de publicar. Se retiró
+`aggregateRating` del JSON-LD y las cifras de `llms.txt`; no son datos actualizados automáticamente.
 Para automatizarlas haría falta la **Google Places API**: la key no puede ir en
 el HTML, así que necesitaría una función serverless o un proxy — algo que
 GitHub Pages no ofrece por ser hosting estático.
@@ -263,10 +267,10 @@ marcado con `TODO` en ambas páginas.
 
 ## Equipo
 
-`equipo.html` / `en/team.html` están con **contenido provisional**: nombres,
-fotos y descripciones de ejemplo. El aviso amarillo y los comentarios en el
-HTML explican qué sustituir. Para las fotos, cambiar `<div class="team-avatar">`
-(iniciales sobre degradado) por `<img class="team-photo" …>`.
+`equipo.html` / `en/team.html` presentan las especialidades del equipo y el
+fundador ya identificado en el contenido del sitio. Se retiraron los perfiles
+de personas ficticias. Los nombres y biografías reales se pueden añadir cuando
+los confirme el salón; por ahora el calendario permite consultar profesionales.
 
 ## Legal (privacidad, términos y cookies)
 
@@ -319,83 +323,54 @@ menores de edad y condiciones de promociones y tarjetas de regalo.
 > publicarlos conviene que los revise un abogado o el contador del salón,
 > sobre todo los plazos fiscales y la política de cancelaciones.
 
-## Visibilidad en IA (ChatGPT, Gemini, Perplexity, Copilot)
+## SEO y visibilidad en buscadores e IA
 
-Los asistentes ya no leen el sitio como un buscador clásico: extraen hechos y
-los citan. Lo que se hizo para que puedan hacerlo bien:
+El contenido está disponible en HTML sin JavaScript. `tools/seo.js` genera el
+sitemap desde los canonical/hreflang y la política de indexación de cada página,
+y mantiene las FAQ estructuradas iguales a sus respuestas visibles. El menú,
+catálogo JSON-LD, tarjetas de precios de inicio y lista de servicios en
+`llms.txt` usan `tools/menu.js` como fuente de precios.
 
-- **`llms.txt`** en la raíz, siguiendo la convención de llmstxt.org: resumen del
-  negocio en Markdown con direcciones, teléfonos, coordenadas, horarios,
-  calificaciones, catálogo de servicios, cómo agendar y el índice de páginas con
-  URLs absolutas. Es el archivo que conviene mantener al día primero, porque un
-  modelo puede responder solo con eso.
-- **`robots.txt` permite explícitamente** a GPTBot, OAI-SearchBot, ChatGPT-User,
-  ClaudeBot, Claude-User, Claude-SearchBot, PerplexityBot, Perplexity-User,
-  Google-Extended, Applebot-Extended, Bingbot, CCBot y meta-externalagent.
-  Están permitidos a propósito: el objetivo es aparecer cuando alguien pregunta
-  por un salón en la San Rafael o en Polanco.
-- **Contenido legible sin JavaScript.** Los rastreadores de IA rara vez ejecutan
-  JS. Cada página entrega entre 340 y 930 palabras en el HTML plano, y los datos
-  clave (direcciones, teléfonos, horarios, calificación, fundador) están en el
-  HTML de inicio sin depender de scripts.
-- **28 bloques JSON-LD**, todos validados:
+- 19 páginas auditadas, 14 indexables, 28 bloques JSON-LD válidos.
+- Los cuatro documentos legales siguen accesibles pero llevan `noindex, follow`
+  mientras contengan datos sin confirmar. El 404 también lleva `noindex`.
+- Hreflang recíproco ES/EN y `x-default` tanto en HTML como en el sitemap.
+- Se omite `lastmod`: la fecha del build no demuestra que cambió cada página.
+- Las sucursales comparten identificadores estables en ambos idiomas y se
+  conectan con la organización y el catálogo. No se publican en el esquema
+  métodos de pago sin confirmar ni calificaciones copiadas como datos vigentes.
+- `llms.txt` es una ayuda complementaria; no garantiza inclusión o citas.
+  Google indica que las bases de SEO siguen siendo relevantes para sus funciones
+  de IA, sin archivos o marcado especial obligatorio:
+  [guía oficial](https://developers.google.com/search/docs/appearance/ai-features).
+- En GitHub Pages de proyecto, `/LalolitaNails/robots.txt` no controla el rastreo:
+  el archivo debe vivir en la raíz del host. El 4 de septiembre de 2026,
+  `https://angugo06.github.io/robots.txt` respondió 404. Corregir en el repositorio
+  de usuario o al migrar a un dominio propio. Un 404 no bloquea el rastreo.
 
-| Tipo | Dónde | Para qué |
-|---|---|---|
-| `Organization` + `WebSite` | ambas home | Identidad, logo, idiomas, redes y perfil de Google Maps |
-| `NailSalon` x2 | home y sucursales | Cada sucursal con geo, horarios, teléfono y calificación |
-| `FAQPage` | servicios y facturación | Respuestas que la IA puede citar directo |
-| `OfferCatalog` | servicios | Los 49 servicios con nombre, categoría y precio |
-| `BreadcrumbList` | 16 páginas interiores | Jerarquía del sitio |
+### Mantenimiento
 
-  El `OfferCatalog` **sí incluye precios** desde que tenemos el menú real del
-  salón. Los precios fijos van en `price`; los de tipo «desde» van en
-  `priceSpecification.minPrice`, que es lo semánticamente correcto para un
-  precio inicial. Todo en `MXN`. Si los precios cambian y nadie actualiza el
-  repo, este bloque miente: ver «Menú de servicios».
+1. Actualizar precios en `tools/menu.js`; el build regenera los menús ES/EN,
+   OfferCatalog, tarjetas destacadas y listado de `llms.txt`.
+2. Revisar también las menciones de precios en textos editoriales, metadatos,
+   preguntas frecuentes y calendario de GoHighLevel cuando cambien tarifas.
+3. Mantener direcciones, teléfonos y horarios iguales en el sitio, `llms.txt`,
+   los perfiles de Google y el calendario. Ver discrepancia de teléfono en
+   [AUDIT.md](AUDIT.md).
+4. Completar los datos legales; después retirar `noindex` de esos cuatro HTML.
+   El sitemap los volverá a incluir automáticamente.
+5. Ejecutar `npm test`. El despliegue de GitHub Actions exige esta validación.
 
-- Las FAQ están redactadas como pregunta y respuesta directa, que es el formato
-  que mejor extraen los modelos.
+### Rendimiento y comprobación
 
-### Qué mantener al día para no perder visibilidad
+Se conservan las fuentes locales y las imágenes actuales. Se retiraron las
+transiciones de entrada de página y el movimiento continuo decorativo, y los
+contenidos no quedan ocultos si falla JavaScript. Las imágenes de ejemplo y su
+texto alternativo quedaron fuera del alcance por instrucción del usuario.
 
-1. `public/llms.txt` cuando cambien horarios, teléfonos, sucursales o servicios.
-2. `aggregateRating` en las cuatro páginas que lo llevan, cuando cambien las
-   reseñas de Google.
-3. `sitemap.xml` al agregar páginas.
-4. El perfil de Google Business: pesa más que el sitio para búsquedas locales.
-
-## SEO y rendimiento
-
-Estado tras el pase de agosto 2026:
-
-- **Metadatos**: títulos y descriptions únicos y dentro de rango en las 15
-  páginas, canonical, hreflang bidireccional con `x-default`, Open Graph
-  completo (`og:site_name`, `og:locale`, `og:image` 1200x630 con dimensiones),
-  `twitter:card` y `robots: max-image-preview:large`.
-- **Datos estructurados** (20 bloques JSON-LD, todos validados):
-  `Organization` con dos `NailSalon` (geo, horarios, `hasMap`, `aggregateRating`),
-  `FAQPage` en servicios y facturación (ES y EN) y `BreadcrumbList` en las
-  12 páginas interiores.
-- **Imágenes**: todas en WebP (2.4 MB a 792 KB). Las dimensiones declaradas
-  coinciden con el archivo real, así que **CLS = 0**.
-- **Fuentes autoalojadas** en `src/fonts/` (`css/fonts.css`). Se quitó la
-  petición bloqueante a `fonts.googleapis.com`.
-
-Medido con Chrome, móvil 390px, CPU 4x lenta y 1.6 Mbps (mediana de 3 corridas):
-
-| Página | LCP | FCP | CLS |
-|---|---|---|---|
-| Inicio | ~3.1 s | ~1.5 s | 0 |
-| Servicios | ~2.3 s | ~1.1 s | 0 |
-
-> Se probó precargar las fuentes: mejora el LCP unos 100 ms pero empeora el FCP
-> entre 400 y 1000 ms, así que se dejó sin `preload` (solo `font-display: swap`).
-
-**Siguiente palanca de LCP**: las tres fuentes latin pesan ~207 KB (Fraunces
-variable normal e itálica, DM Sans variable). Pasar a instancias estáticas solo
-con los pesos usados bajaría bastante, pero el CSS usa pesos variables
-(380, 420, 450), así que hay que revisar el diseño después.
+No se midieron nuevos Core Web Vitals de campo ni Lighthouse en esta auditoría.
+Las mediciones antiguas no deben presentarse como resultados del sitio modificado.
+Cobertura, verificaciones y pendientes: [AUDIT.md](AUDIT.md).
 
 ## Diseño
 
@@ -405,8 +380,8 @@ hace ahí y se propaga:
 
 | Token | Valor | Uso |
 |---|---|---|
-| `--cherry` | `#e14d9f` | Rosa principal: botones, acentos, itálicas |
-| `--cherry-deep` | `#bd2f7e` | Hover del rosa |
+| `--cherry` | `#ad286f` | Rosa principal: botones, acentos, itálicas |
+| `--cherry-deep` | `#8b1f59` | Hover del rosa |
 | `--cream` | `#fdf6fa` | Fondo perla |
 | `--cream-2` | `#f7e7f1` | Fondo alterno |
 | `--ink` | `#322638` | Ciruela oscuro: texto y secciones oscuras |
@@ -418,9 +393,14 @@ Tipografías: **Fraunces** (display, variable, con itálica) y **DM Sans**
 
 Piezas propias que conviene conocer antes de tocar el CSS:
 
-- **Probador de esmaltes** (inicio): SVG de una mano; el color se cambia con la
-  variable `--polish` en `.tryon-stage`. Las uñas son un `<path>` reutilizado
-  con `<use>`, así que la forma se edita en un solo lugar.
+- **Color studio** (inicio): tres muestras de uñas dibujadas en CSS, con ocho
+  tonos y acabados liso, French y aura. `--polish` y `data-finish` en
+  `.tryon-stage` controlan la vista; `app.js` sincroniza botones y etiquetas.
+- **Páginas interiores**: `.interior-page` comparte la dirección visual y
+  `.page-services`, `.page-about`, `.page-team`, `.page-locations`, `.page-book`,
+  `.page-billing`, `.page-privacy` y `.page-terms` delimitan cada composición.
+  Los estilos están agrupados al final de `style.css`, antes de reduced motion.
+  Los formularios y FAQ largos no usan `.reveal`, para que siempre sean visibles.
 - **Menú de pantalla completa**: el header queda por encima del overlay oscuro,
   por eso `body.menu-open` invierte sus colores. Sin eso la marca y el botón de
   cerrar desaparecen.

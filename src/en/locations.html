@@ -37,7 +37,10 @@
       "@context": "https://schema.org",
       "@type": "NailSalon",
       "name": "Lalolita Beauty San Rafael",
-      "branchOf": { "@type": "Organization", "name": "Lalolita Beauty" },
+        "@id": "%SITE_URL%/#san-rafael",
+        "parentOrganization": { "@id": "%SITE_URL%/#organization" },
+        "hasOfferCatalog": { "@id": "%SITE_URL%/servicios.html#catalog" },
+      "branchOf": { "@id": "%SITE_URL%/#organization" },
       "url": "%SITE_URL%/en/locations.html#san-rafael",
       "telephone": "+525568856070",
         "geo": { "@type": "GeoCoordinates", "latitude": 19.437349, "longitude": -99.162505 },
@@ -45,8 +48,7 @@
         "image": "%SITE_URL%/img/og-v2.jpg",
         "priceRange": "$$",
         "currenciesAccepted": "MXN",
-        "paymentAccepted": "Efectivo, Transferencia, Tarjeta",
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.4", "reviewCount": "96" },
+
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "C. Guillermo Prieto 46, San Rafael",
@@ -64,7 +66,10 @@
       "@context": "https://schema.org",
       "@type": "NailSalon",
       "name": "Lalolita Beauty Polanco",
-      "branchOf": { "@type": "Organization", "name": "Lalolita Beauty" },
+        "@id": "%SITE_URL%/#polanco",
+        "parentOrganization": { "@id": "%SITE_URL%/#organization" },
+        "hasOfferCatalog": { "@id": "%SITE_URL%/servicios.html#catalog" },
+      "branchOf": { "@id": "%SITE_URL%/#organization" },
       "url": "%SITE_URL%/en/locations.html#polanco",
       "telephone": "+525615156061",
         "geo": { "@type": "GeoCoordinates", "latitude": 19.438727, "longitude": -99.19317 },
@@ -72,8 +77,7 @@
         "image": "%SITE_URL%/img/og-v2.jpg",
         "priceRange": "$$",
         "currenciesAccepted": "MXN",
-        "paymentAccepted": "Efectivo, Transferencia, Tarjeta",
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "22" },
+
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Lago Tanganica 61, Granada",
@@ -110,7 +114,7 @@
   }
   </script>
 </head>
-<body>
+<body class="interior-page page-locations">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header" data-header>
@@ -154,12 +158,22 @@
 
   <main id="main">
     <section class="page-hero container">
-      <p class="eyebrow">Find us</p>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Locations</li></ol></nav>
+      <div class="page-hero-grid">
+        <div class="page-hero-copy">
+<p class="eyebrow">Find us</p>
       <h1>Two locations <em>across the city.</em></h1>
       <p class="lede">Our original home in San Rafael and our new salon in Polanco (Granada). Same technique, same care, two neighbourhoods to find us in.</p>
       <div class="branch-jump">
         <a class="btn btn-ghost btn-sm" href="#san-rafael">San Rafael</a>
         <a class="btn btn-ghost btn-sm" href="#polanco">Polanco <span class="badge-new">New</span></a>
+      </div>
+        </div>
+        <div class="page-art address-art" aria-hidden="true">
+          <span class="art-edition">TWO LITTLE CORNERS OF CDMX</span>
+          <div class="address-slip"><span>01 / OUR FIRST HOME</span><strong>San Rafael</strong><small>Guillermo Prieto 46</small><i>↗</i></div>
+          <div class="address-slip"><span>02 / OUR NEW CHAPTER</span><strong>Polanco</strong><small>Lago Tanganica 61</small><i>↗</i></div>
+        </div>
       </div>
     </section>
 
@@ -319,7 +333,7 @@
           <p>Nail, hair, brow and makeup salon by Eddu Vázquez. San Rafael and Polanco, Mexico City. With dedication since 2021.</p>
         </div>
         <div class="footer-col">
-          <h4>Explore</h4>
+          <h2>Explore</h2>
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="services.html">Services</a></li>
@@ -331,7 +345,7 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Locations</h4>
+          <h2>Locations</h2>
           <ul>
             <li class="footer-branch">
               <strong>San Rafael</strong>
@@ -356,7 +370,7 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Follow us</h4>
+          <h2>Follow us</h2>
           <ul>
             <li><a href="https://www.instagram.com/lalolita_nails/" target="_blank" rel="noopener">Instagram</a></li>
             <li><a href="https://www.facebook.com/lalolitanails/" target="_blank" rel="noopener">Facebook</a></li>

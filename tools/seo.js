@@ -37,6 +37,7 @@ for (const file of files) {
 fs.writeFileSync(path.join(root, "public/sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${entries.join("\n")}\n</urlset>\n`);
 
 const llmsPath = path.join(root, "public/llms.txt");
+if (fs.existsSync(llmsPath)) {
 let llms = fs.readFileSync(llmsPath, "utf8");
 const menuText = MENU.map((category) => `### ${category.es.title}\n\n` + category.groups.map((group) =>
   group.items.map((item) => `- ${item.es}: ${item.from ? "desde " : ""}$${item.price.toLocaleString("en-US")} MXN`).join("\n")
@@ -47,6 +48,7 @@ llms = llms.replace("%SITE_URL%/index.html", "%SITE_URL%/");
 llms = llms.replace(/^- \[(Aviso de Privacidad|Términos y Condiciones|Privacy Notice|Terms and Conditions)\].*\n/gm, "");
 llms = llms.replace("quiénes atienden en cada sucursal.", "especialidades del equipo y cómo elegir profesional al reservar.");
 fs.writeFileSync(llmsPath, llms);
+}
 
 const featured = [MENU[0].groups[0].items[0], MENU[0].groups[0].items[1], MENU[0].groups[0].items[2]];
 for (const lang of ["es", "en"]) {
@@ -57,11 +59,11 @@ for (const lang of ["es", "en"]) {
   const cards = featured.map((item, i) => `<a class="featured-service" href="${menu}"><span class="featured-index">0${i+1}</span><span><strong>${en ? item.en : item.es}</strong><span class="featured-detail">${en ? "View service menu" : "Ver en el menú"} ↗</span></span><span class="featured-price">$${item.price}<small>MXN</small></span></a>`).join("\n        ");
   const section = `    <!-- FEATURED-SERVICES:START -->
     <section class="featured-services container" aria-labelledby="featured-title">
-      <div class="featured-heading"><div><p class="eyebrow">${en ? "A little time for you" : "Un ratito para ti"}</p><h2 id="featured-title">${en ? "Start with your <em>hands.</em>" : "Empieza por tus <em>manos.</em>"}</h2></div><p>${en ? "Explore the menu before you book. Prices in Mexican pesos." : "Conoce el menú antes de agendar. Precios en pesos mexicanos."}</p></div>
+      <div class="featured-heading"><div><p class="eyebrow">${en ? "A little time for you" : "Un ratito para ti"}</p><h2 id="featured-title">${en ? "Start with your <em>hands.</em>" : "Empieza por tus <em>manos.</em>"}</h2></div><p>${en ? "Explore the sample menu. Example prices in Mexican pesos." : "Explora el menú de muestra. Precios de ejemplo en pesos mexicanos."}</p></div>
       <div class="featured-grid">
         ${cards}
       </div>
-      <p class="featured-note">${en ? "Prices may change. Removal and designs are charged separately; see the full menu." : "Precios sujetos a cambio. El retiro y los diseños se cobran por separado; consulta el menú completo."}</p>
+      <p class="featured-note">${en ? "Sample menu and prices to personalise before publishing." : "Menú y precios de ejemplo para personalizar antes de publicar."}</p>
     </section>
     <!-- FEATURED-SERVICES:END -->`;
   if (!html.includes("<!-- FEATURED-SERVICES:START -->")) throw new Error(`Missing featured marker: ${file}`);

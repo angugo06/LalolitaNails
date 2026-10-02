@@ -205,7 +205,7 @@ function buildCatalog(lang) {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
     "@id": `%SITE_URL%/${L ? "en/services.html" : "servicios.html"}#catalog`,
-    name: L ? "Lalolita Beauty services and prices" : "Servicios y precios de Lalolita Beauty",
+    name: L ? "Beauty Studio services and prices" : "Servicios y precios de Beauty Studio",
     inLanguage: L ? "en" : "es-MX",
     numberOfItems: items.length,
     itemListElement: items,
@@ -223,8 +223,8 @@ if (require.main === module) for (const [file, lang] of [["servicios.html", "es"
 
   /* nota de precios */
   const note = lang === "en"
-    ? `      <p class="price-note reveal">Prices in Mexican pesos. Services marked <strong>from</strong> have a starting price: the final amount depends on length, hair volume, technique, design or the work involved, and we always confirm it before we start. Prices may change without notice. We accept cash and bank transfer.</p>`
-    : `      <p class="price-note reveal">Precios en pesos mexicanos. Los servicios marcados con <strong>desde</strong> tienen un precio inicial: el final depende del largo, la cantidad de cabello, la técnica, el diseño o el trabajo requerido, y siempre te lo confirmamos antes de empezar. Precios sujetos a cambio sin previo aviso. Aceptamos efectivo y transferencia.</p>`;
+    ? `      <p class="price-note reveal">Sample prices in Mexican pesos. Services marked <strong>from</strong> show a starting price. Replace this menu with the new salon's services, prices and payment options before publishing.</p>`
+    : `      <p class="price-note reveal">Precios de muestra en pesos mexicanos. Los servicios marcados con <strong>desde</strong> muestran un precio inicial. Actualiza el menú, los precios y las formas de pago del nuevo salón antes de publicar.</p>`;
   h = h.replace(/      <p class="price-note reveal">[\s\S]*?<\/p>/, note);
 
   /* catálogo estructurado */

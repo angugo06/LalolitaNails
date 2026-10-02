@@ -8,12 +8,12 @@
 #
 # La URL que imprime el deploy se pega en site.config.js → facturaEndpoint
 
-name = "lalolita-factura"
+name = "beauty-studio-factura"
 main = "worker/factura.js"
 compatibility_date = "2026-07-01"
 
 [vars]
-ALLOWED_ORIGIN = "https://angugo06.github.io"
+ALLOWED_ORIGIN = "https://example.com"
 MAX_AMOUNT = "20000"
 # ClaveProdServ / ClaveUnidad del SAT — confirmar con el contador del salón
 PRODUCT_KEY = "90121800"   # Servicios de belleza

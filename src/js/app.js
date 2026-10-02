@@ -1,4 +1,4 @@
-/* Lalolita Beauty — interactions */
+/* Beauty Studio — interactions */
 document.documentElement.classList.remove("no-js");
 
 /* Idioma actual (es por defecto); las cadenas del formulario dependen de esto */
@@ -6,9 +6,9 @@ const LANG = document.documentElement.lang.startsWith("en") ? "en" : "es";
 const T = {
   es: {
     locale: "es-MX",
-    testimonial: (n) => `Testimonio ${n}`,
+    testimonial: (n) => `Frase ${n}`,
     rfcInvalid: "Revisa el RFC: 13 caracteres para persona física, 12 para moral.",
-    cfdiTitle: (branch) => `Solicitud de factura (CFDI) - Lalolita Beauty ${branch}`,
+    cfdiTitle: (branch) => `Solicitud de factura (CFDI) - Beauty Studio ${branch}`,
     cfdiLabels: {
       fecha: "Fecha del servicio", folio: "Ticket", monto: "Monto",
       formaPago: "Forma de pago", rfc: "RFC", razonSocial: "Razon social",
@@ -26,12 +26,13 @@ const T = {
         : " Guarda este folio: te enviaremos el PDF y el XML en breve."),
     cfdiFailTitle: "No pudimos timbrarla",
     cfdiFailWa: "Enviar por WhatsApp",
+    cfdiUnavailable: "Facturación por configurar. El nuevo salón debe conectar su proveedor antes de recibir solicitudes.",
   },
   en: {
     locale: "en-US",
-    testimonial: (n) => `Testimonial ${n}`,
+    testimonial: (n) => `Quote ${n}`,
     rfcInvalid: "Check the RFC: 13 characters for individuals, 12 for companies.",
-    cfdiTitle: (branch) => `Invoice request (CFDI) - Lalolita Beauty ${branch}`,
+    cfdiTitle: (branch) => `Invoice request (CFDI) - Beauty Studio ${branch}`,
     cfdiLabels: {
       fecha: "Service date", folio: "Ticket", monto: "Amount",
       formaPago: "Payment method", rfc: "RFC", razonSocial: "Legal name",
@@ -49,6 +50,7 @@ const T = {
         : " Keep this folio: we'll email the PDF and XML shortly."),
     cfdiFailTitle: "We couldn't issue it",
     cfdiFailWa: "Send on WhatsApp",
+    cfdiUnavailable: "Invoicing is not configured. The new studio must connect its provider before receiving requests.",
   },
 }[LANG];
 
@@ -59,7 +61,7 @@ const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (c) =>
 /* ---------- Consentimiento de cookies ----------
    El píxel de Meta NO se carga hasta que la persona acepta. La decisión se
    guarda en localStorage y se puede cambiar desde el enlace del pie.        */
-const CONSENT_KEY = "lb-consent";
+const CONSENT_KEY = "studio-consent";
 const COOKIE_TXT = {
   es: {
     text: 'Usamos cookies propias para que el sitio funcione y, si lo aceptas, cookies de publicidad y medición. Consulta el <a href="aviso-de-privacidad.html">Aviso de Privacidad</a>.',
@@ -454,8 +456,7 @@ if (cfdiForm) {
   const rfcHint = cfdiForm.querySelector("[data-rfc-hint]");
   const dateInput = cfdiForm.querySelector("[data-cfdi-date]");
   const success = cfdiForm.querySelector("[data-cfdi-success]");
-  const branchNumber = () =>
-    cfdiForm.querySelector("input[name='sucursal']:checked")?.dataset.wa || "525568856070";
+  const branchNumber = () => cfdiForm.querySelector("input[name='sucursal']:checked")?.dataset.wa || "";
 
   /* no se puede facturar un servicio futuro */
   if (dateInput) dateInput.max = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Mexico_City", year: "numeric", month: "2-digit", day: "2-digit" }).format(salonNow);
@@ -472,6 +473,12 @@ if (cfdiForm) {
   const rawEndpoint = cfdiForm.dataset.endpoint || "";
   const endpoint = rawEndpoint.startsWith("http") ? rawEndpoint : "";
   const submitBtn = cfdiForm.querySelector("button[type='submit']");
+  const hasPhone = [...cfdiForm.querySelectorAll("input[data-wa]")].some((input) => /^\d{8,15}$/.test(input.dataset.wa || ""));
+  if (!endpoint && !hasPhone) {
+    if (submitBtn) submitBtn.disabled = true;
+    const note = cfdiForm.querySelector('[data-flow="wa"]');
+    if (note) note.textContent = T.cfdiUnavailable;
+  }
 
   /* La copy de la página describe el flujo real: timbrado o solicitud */
   document.querySelectorAll('[data-flow="wa"]').forEach((el) => (el.hidden = Boolean(endpoint)));
@@ -512,10 +519,12 @@ if (cfdiForm) {
       T.cfdiFooter,
     ].filter((line) => line !== null).join("\n");
 
-    const waUrl = `https://wa.me/${branchNumber()}?text=${encodeURIComponent(message)}`;
+    const number = branchNumber();
+    const waUrl = /^\d{8,15}$/.test(number) ? `https://wa.me/${number}?text=${encodeURIComponent(message)}` : "";
 
     /* Sin endpoint configurado: comportamiento anterior (solicitud) */
     if (!endpoint) {
+      if (!waUrl) return;
       if (success) {
         const fallback = success.querySelector("[data-wa-fallback]");
         if (fallback) fallback.href = waUrl;
@@ -559,7 +568,7 @@ if (cfdiForm) {
         if (success) {
           success.querySelector("h2").innerHTML = T.cfdiFailTitle;
           success.querySelector("p").innerHTML =
-            `${escapeHtml(body.error || (LANG === "en" ? "Unknown error." : "Error desconocido."))} <a href="${waUrl}" target="_blank" rel="noopener">${T.cfdiFailWa}</a>`;
+            `${escapeHtml(body.error || (LANG === "en" ? "Unknown error." : "Error desconocido."))}${waUrl ? ` <a href="${waUrl}" target="_blank" rel="noopener">${T.cfdiFailWa}</a>` : ""}`;
           success.hidden = false;
         }
         if (submitBtn) {
@@ -570,8 +579,9 @@ if (cfdiForm) {
       .catch(() => {
         if (success) {
           success.querySelector("h2").innerHTML = T.cfdiFailTitle;
-          success.querySelector("p").innerHTML =
-            `<a href="${waUrl}" target="_blank" rel="noopener">${T.cfdiFailWa}</a>`;
+          success.querySelector("p").innerHTML = waUrl
+            ? `<a href="${waUrl}" target="_blank" rel="noopener">${T.cfdiFailWa}</a>`
+            : T.cfdiFailTitle;
           success.hidden = false;
         }
         if (submitBtn) {

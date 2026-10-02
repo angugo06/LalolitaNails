@@ -9,7 +9,7 @@
  *
  * Secretos / variables (wrangler.toml + `wrangler secret put`):
  *   FACTURAPI_KEY    secreto   sk_test_… (pruebas) o sk_live_… (producción)
- *   ALLOWED_ORIGIN   var       https://angugo06.github.io
+ *   ALLOWED_ORIGIN   var       new salon's HTTPS origin
  *   MAX_AMOUNT       var       tope de seguridad por factura (MXN)
  *   PRODUCT_KEY      var       ClaveProdServ del SAT (servicios de belleza)
  *   UNIT_KEY         var       ClaveUnidad del SAT

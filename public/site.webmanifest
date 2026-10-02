@@ -1,15 +1,10 @@
 {
-  "short_name": "Lalolita",
-  "name": "Lalolita Beauty · San Rafael, CDMX",
-  "icons": [
-    {
-      "src": "icon.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    }
-  ],
-  "start_url": "./",
+  "short_name": "Beauty Studio",
+  "name": "Beauty Studio · Nail and beauty salon template",
+  "start_url": "%BASE%/",
+  "scope": "%BASE%/",
+  "display": "standalone",
   "background_color": "#fdf6fa",
-  "theme_color": "#fdf6fa",
-  "scope": "./"
+  "theme_color": "#322638",
+  "icons": [{ "src": "%BASE%/icon.png", "sizes": "192x192", "type": "image/png" }]
 }

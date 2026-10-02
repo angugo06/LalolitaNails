@@ -1,6 +1,6 @@
 /* ==========================================================================
-   LALOLITA BEAUTY — Design System
-   Uñas · Cabello · Cejas · Maquillaje — San Rafael, CDMX
+   BEAUTY STUDIO — Design System
+   Uñas · Cabello · Cejas · Maquillaje
    ========================================================================== */
 
 /* ---------- 1. Tokens ---------- */
@@ -2267,6 +2267,25 @@ body.menu-open .header-actions .btn-ink:hover {
   border-radius: var(--radius);
 }
 
+.embed-placeholder {
+  min-height: inherit;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: clamp(2rem, 6vw, 5rem);
+  text-align: center;
+  color: var(--ink-soft);
+  background: radial-gradient(circle at 25% 25%, var(--blush), transparent 44%), var(--cream-2);
+  border-radius: var(--radius);
+}
+.embed-placeholder span { font-size: 2rem; color: var(--cherry); }
+.embed-placeholder strong { font: italic 350 clamp(1.7rem, 3vw, 2.6rem)/1.1 var(--font-display); color: var(--ink); }
+.embed-placeholder p { max-width: 28rem; margin: 0; }
+.map-wrap .embed-placeholder { height: 100%; min-height: 19rem; }
+
 @media (max-width: 52rem) {
   .booking-embed { min-height: 54rem; }
 }
@@ -3025,7 +3044,7 @@ html.no-js .finish-options, html.no-js .studio-step { display: none; }
 .page-locations .branch-rating { flex-wrap: wrap; }
 .page-locations .map-wrap { aspect-ratio: 1.5; min-height: 19rem; min-width: 0; width: 100%; border-radius: .25rem 3rem .25rem .25rem; box-shadow: none; }
 .page-locations .info-cards { grid-column: 1 / -1; margin-top: 0 !important; gap: 0; background: var(--cream-2); border-radius: .3rem .3rem 2rem .3rem; }
-.page-locations #polanco .info-cards { background: #e7e0ef; }
+.page-locations #studio-02 .info-cards { background: #e7e0ef; }
 .page-locations .info-card { border: 0; border-radius: 0; background: none; padding: 1.8rem; min-width: 0; }
 .page-locations .info-card + .info-card { border-left: 1px solid var(--line); }
 .page-locations .info-card h3 { font-size: 1.3rem; }

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-label="Beauty Studio">
+  <defs><radialGradient id="pearl" cx="38%" cy="24%" r="80%"><stop stop-color="#fff"/><stop offset=".5" stop-color="#fff2f9"/><stop offset=".8" stop-color="#d7f5ee"/><stop offset="1" stop-color="#d4b4e3"/></radialGradient></defs>
+  <rect x="17" y="15" width="686" height="330" rx="164" fill="url(#pearl)" stroke="#bcebe2" stroke-width="5"/>
+  <ellipse cx="217" cy="72" rx="151" ry="33" fill="#fff" opacity=".56" transform="rotate(-10 217 72)"/>
+  <text x="360" y="172" fill="#b5327d" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="79" letter-spacing="-2">Beauty</text>
+  <text x="360" y="266" fill="#b5327d" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="96" letter-spacing="-2">Studio</text>
+</svg>
